@@ -8,16 +8,16 @@ export const TESTIMONIALS: Testimonial[] = [
       en: "In 3 months, I went from A2 to B2. I had tried Duolingo, online courses, nothing really worked. Here, I spoke from the first week and it changed everything.",
     },
     name: "Karim M.",
-    role: { fr: "Ingénieur, Casablanca", en: "Engineer, Casablanca" },
+    role: { fr: "Ingénieur, Bujumbura", en: "Engineer, Bujumbura" },
   },
   {
     initials: "SA",
     quote: {
       fr: "J'avais honte de parler anglais en réunion. Après 7 semaines avec ListenMethod, j'ai animé ma première présentation en anglais devant 50 personnes. Incroyable.",
-      en: "I was ashamed to speak English in meetings. After 7 weeks with ListenMethod, I ran my first English presentation in front of 50 people. Incredible.",
+      en: "I was ashamed to speak English in meetings. After 7 weeks with LangListening, I ran my first English presentation in front of 50 people. Incredible.",
     },
     name: "Sophie A.",
-    role: { fr: "Manager, Paris", en: "Manager, Paris" },
+    role: { fr: "Manager, Goma/DRC", en: "Manager, Goma/DRC" },
   },
   {
     initials: "DF",
@@ -26,13 +26,13 @@ export const TESTIMONIALS: Testimonial[] = [
       en: "The trainers are extraordinarily patient and engaged. The listening method allowed me to understand Netflix in English without subtitles in 60 days.",
     },
     name: "David F.",
-    role: { fr: "Étudiant, Montréal", en: "Student, Montreal" },
+    role: { fr: "Étudiant, Cameroun", en: "Student, Cameroon" },
   },
 ];
 
 export const PLANS: Plan[] = [
   {
-    name: { fr: "1 month", en: "1 month" },
+    name: { fr: "1 mois", en: "1 month" },
     price: { fr: "99 $", en: "99 $" },
     featured: true,
     tag: { fr: "Populaire", en: "Popular" },
@@ -50,6 +50,10 @@ export const PLANS: Plan[] = [
         en: "20 hours of calls with the trainer",
       },
       {
+        fr: "Premier niveau",
+        en: "First level",
+      },
+      {
         fr: "Votre disponibilite est prise en compte",
         en: "Your availability is taken into account",
       },
@@ -61,7 +65,7 @@ export const PLANS: Plan[] = [
     ],
   },
   {
-    name: { fr: "3 months", en: "3 months" },
+    name: { fr: "3 mois", en: "3 months" },
     price: { fr: "237 $ (save 20%)", en: "237 $ (save 20%)" },
     desc: {
       fr: "Pour ceux qui veulent atteindre l'objectif des 90 jours",
@@ -75,6 +79,10 @@ export const PLANS: Plan[] = [
       {
         fr: "20h d'appels avec le formateur",
         en: "20 hours of calls with the trainer",
+      },
+      {
+        fr: "3 niveaux",
+        en: "3 levels",
       },
       {
         fr: "Votre disponibilite est prise en compte",

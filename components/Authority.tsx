@@ -56,8 +56,8 @@ export default function Authority() {
           </h2>
           <p className="text-gray-500 text-sm leading-relaxed mb-6">
             {t(
-              "LangListening n'est pas une application. C'est une approche humaine, fondée sur la recherche en linguistique : écoute intensive + répétition guidée + conversation réelle. Comme un enfant qui apprend à parler — mais en accéléré.",
-              "LangListening is not an app. It's a human approach, grounded in linguistic research: intensive listening + guided repetition + real conversation. Like a child learning to speak — but accelerated.",
+              "LangListening n'est pas une application. C'est une approche humaine, fondée sur la recherche en linguistique : écoute intensive + répétition guidée + conversation réelle. Comme un enfant qui apprend à parler — mais en accéléré. Nous avons cinq niveaux et chaque niveau prend juste 1 mois",
+              "LangListening is not an app. It's a human approach, grounded in linguistic research: intensive listening + guided repetition + real conversation. Like a child learning to speak — but accelerated. We have five levels and every level take just 1 month",
             )}
           </p>
 
@@ -74,7 +74,7 @@ export default function Authority() {
           </div>
 
           <a
-            href="#contact"
+            href="#pricing"
             className="inline-block bg-[#c9a84c] text-black font-semibold px-8 py-3.5 rounded text-sm tracking-wide hover:bg-[#e8c96a] hover:-translate-y-0.5 transition-all duration-200"
           >
             {t("Commencer ma transformation", "Start my transformation")}

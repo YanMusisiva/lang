@@ -91,8 +91,8 @@ export default function Hero() {
           }}
         >
           {t(
-            "Notre méthode d'écoute active et de conversation avec de vrais formateurs vous aide à développer votre grammaire, vocabulaire et prononciation — naturellement, sans stress.",
-            "Our active listening and real conversation method helps you build grammar, vocabulary and pronunciation — naturally, stress-free.",
+            "Notre méthode d'écoute active et de conversation avec de vrais formateurs vous aide à développer votre grammaire, vocabulaire et prononciation — naturellement, sans stress. Nous avons cinq niveaux et chaque niveau prend juste 1 mois",
+            "Our active listening and real conversation method helps you build grammar, vocabulary and pronunciation — naturally, stress-free. We have five levels and every level takes just 1 month",
           )}
         </p>
 

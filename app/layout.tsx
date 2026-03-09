@@ -19,7 +19,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ListenMethod – Parlez anglais couramment en 90 jours",
+  title: "LangListening – Parlez anglais couramment en 90 jours",
   description:
     "Apprenez à parler anglais avec la méthode d'écoute active et de conversation humaine. Résultats garantis en 7 semaines.",
 };

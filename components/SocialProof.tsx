@@ -40,8 +40,8 @@ export default function SocialProof() {
           }}
         >
           {t(
-            "Plus de 3 500 étudiants ont transformé leur anglais",
-            "Over 3,500 students transformed their English",
+            "Plus de 100 étudiants ont transformé leur anglais",
+            "Over 100 students transformed their English",
           )}
         </h2>
 
