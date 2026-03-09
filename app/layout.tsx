@@ -1,39 +1,38 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { LangProvider } from "../context/LangContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmSans = DM_Sans({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-dm-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "ListenMethod - Parler anglais",
-  description: "Parler l'anglais rapidement",
+  title: "ListenMethod – Parlez anglais couramment en 90 jours",
+  description:
+    "Apprenez à parler anglais avec la méthode d'écoute active et de conversation humaine. Résultats garantis en 7 semaines.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <head>
-        <meta
-          name="google-site-verification"
-          content="yM8uv0TXDO21p5vj5KHRXwUHJWiuIN25IucmFOlwMPs"
-        />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="fr" className={`${cormorant.variable} ${dmSans.variable}`}>
+      <body className="font-sans antialiased">
+        <LangProvider>{children}</LangProvider>
       </body>
     </html>
   );
