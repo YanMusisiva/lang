@@ -34,8 +34,8 @@ export default function LeadMagnet() {
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             {t(
-              "Apprenez le programme complet gratuitement dans 1 semaine dans un groupe whatsapp",
-              "Learn the full program for free in 1 week in a whatsapp group ",
+              "Apprenez le programme complet GRATUITEMENT dans 1 semaine dans un groupe whatsapp",
+              "Learn the full program for FREE in 1 week in a whatsapp group ",
             )}
           </h2>
           <p className="text-gray-500 text-sm">

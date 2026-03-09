@@ -105,7 +105,7 @@ export default function Hero() {
           }}
         >
           <a
-            href="#contact"
+            href="https://wa.me/256787531919"
             className="bg-[#c9a84c] text-black font-semibold px-9 py-4 rounded text-base tracking-wide hover:bg-[#e8c96a] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(201,168,76,0.3)] transition-all duration-200"
           >
             {t("Discuter avec un formateur", "Talk to a trainer")}
