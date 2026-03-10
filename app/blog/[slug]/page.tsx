@@ -123,7 +123,7 @@ function ArticleContent({ slug }: { slug: string }) {
         {/* Author */}
         <div className="mt-16 border-t border-white/5 pt-8 flex items-center gap-4">
           <div className="w-10 h-10 bg-[#22c55e]/10 border border-[#22c55e]/20 flex items-center justify-center">
-            <span className="text-[#e8c96a] font-mono text-xs">N</span>
+            <span className="text-[#e8c96a] font-mono text-xs">L</span>
           </div>
           <div>
             <p className="text-white text-sm font-medium">
