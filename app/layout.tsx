@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "../context/LangContext";
+import { BlogProvider } from "../context/BlogContext";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -32,7 +33,9 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased">
-        <LangProvider>{children}</LangProvider>
+        <LangProvider>
+          <BlogProvider>{children}</BlogProvider>
+        </LangProvider>
       </body>
     </html>
   );

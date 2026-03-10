@@ -4,11 +4,14 @@ import { useState } from "react";
 import { useLang } from "@/context/LangContext";
 
 const NAV_LINKS = [
+  { href: "/", fr: "Accueil", en: "Home" },
+
   { href: "#presentation", fr: "Présentation", en: "About" },
   { href: "#value", fr: "Avantages", en: "Benefits" },
   { href: "#proof", fr: "Témoignages", en: "Testimonials" },
   { href: "#pricing", fr: "Tarifs", en: "Pricing" },
   { href: "#contact", fr: "Contact", en: "Contact" },
+  { href: "/blog", fr: "Blog", en: "Blog" },
 ];
 
 export default function Navbar() {
@@ -50,11 +53,17 @@ export default function Navbar() {
             >
               {lang === "fr" ? "EN" : "FR"}
             </button>
+            {/* <a
+              href="/"
+              className="border border-white/20 text-white/80 px-4 py-1.5 rounded text-sm font-medium tracking-wide hover:bg-white/10 transition-colors duration-200"
+            >
+              {t("Accueil", "Home")}
+            </a> */}
             <a
-              href="#Pricing"
+              href="/test"
               className="bg-[#c9a84c] text-black font-semibold px-5 py-2 rounded text-sm tracking-wide hover:bg-[#e8c96a] transition-colors duration-200"
             >
-              {t("Commencer", "Get Started")}
+              {t("Passer un Test", "Start a Test")}
             </a>
           </div>
 
@@ -102,11 +111,11 @@ export default function Navbar() {
               {lang === "fr" ? "EN" : "FR"}
             </button>
             <a
-              href="#Pricing"
+              href="/test"
               onClick={() => setMenuOpen(false)}
               className="bg-[#c9a84c] text-black font-semibold px-6 py-2.5 rounded text-sm hover:bg-[#e8c96a] transition-colors"
             >
-              {t("Commencer", "Get Started")}
+              {t("Passer un test", "Start a Test")}
             </a>
           </div>
         </div>

@@ -21,8 +21,8 @@ export default function ValueSection() {
         }}
       >
         {t(
-          "6 raisons pour lesquelles LangListening fonctionne",
-          "6 reasons why LangListening works",
+          "3 raisons pour lesquelles LangListening fonctionne",
+          "3 reasons why LangListening works",
         )}
       </h2>
 

@@ -101,7 +101,7 @@ export default function Pricing() {
                 </a>
               ) : (
                 <a
-                  href="#contact"
+                  href="https://wa.me/256787531919"
                   className="block w-full border border-black/15 text-black font-semibold py-3.5 rounded text-sm hover:border-[#c9a84c] hover:text-[#9a7a2e] transition-all"
                 >
                   {t(`Choisir ${plan.name.fr}`, `Choose ${plan.name.en}`)}

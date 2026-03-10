@@ -77,8 +77,8 @@ export const PLANS: Plan[] = [
         en: "90 days of natural learning",
       },
       {
-        fr: "20h d'appels avec le formateur",
-        en: "20 hours of calls with the trainer",
+        fr: "60h d'appels avec le formateur",
+        en: "60 hours of calls with the trainer",
       },
       {
         fr: "3 niveaux",

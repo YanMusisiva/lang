@@ -6,7 +6,7 @@ import SocialProof from "../components/SocialProof";
 import Authority from "../components/Authority";
 import Pricing from "../components/Pricing";
 import Guarantee from "../components/Guarantee";
-
+import VideoSection from "@/components/VideoSection";
 import Footer from "../components/Footer";
 
 export default function Page() {
@@ -16,6 +16,7 @@ export default function Page() {
       <div className="pt-16">
         <Hero />
         <LeadMagnet />
+        <VideoSection />
         <ValueSection />
         <SocialProof />
         <Authority />

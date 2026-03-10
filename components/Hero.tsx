@@ -40,7 +40,7 @@ export default function Hero() {
         />
       ))}
 
-      <div className="relative z-10 max-w-4xl mx-auto px-8 py-20 text-center w-full">
+      <div className="relative z-10 max-w-4xl mx-auto px-8 py-12 text-center w-full">
         {/* Badge */}
         <div
           className="inline-block border border-[#c9a84c]/50 text-[#e8c96a] px-5 py-1.5 rounded-full text-xs font-bold tracking-[0.15em] uppercase mb-8"
@@ -92,7 +92,7 @@ export default function Hero() {
         >
           {t(
             "Notre méthode d'écoute active et de conversation avec de vrais formateurs vous aide à développer votre grammaire, vocabulaire et prononciation — naturellement, sans stress. Nous avons cinq niveaux et chaque niveau prend juste 1 mois",
-            "Our active listening and real conversation method helps you build grammar, vocabulary and pronunciation — naturally, stress-free. We have five levels and every level takes just 1 month",
+            "Our active listening and real conversation method helps you build grammar, vocabulary and pronunciation — naturally, stress-free.",
           )}
         </p>
 
@@ -105,10 +105,10 @@ export default function Hero() {
           }}
         >
           <a
-            href="https://wa.me/256787531919"
+            href="/test"
             className="bg-[#c9a84c] text-black font-semibold px-9 py-4 rounded text-base tracking-wide hover:bg-[#e8c96a] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(201,168,76,0.3)] transition-all duration-200"
           >
-            {t("Discuter avec un formateur", "Talk to a trainer")}
+            {t("Passer un test", "Start a test")}
           </a>
           <a
             href="#presentation"

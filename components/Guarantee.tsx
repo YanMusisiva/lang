@@ -4,7 +4,7 @@ import { useLang } from "@/context/LangContext";
 import RevealWrapper from "./RevealWrapper";
 
 const PILLS = [
-  { fr: "Remboursement 14 jours", en: "14-day refund" },
+  { fr: "Remboursement 10 jours", en: "10-day refund" },
   { fr: "Aucun engagement", en: "No commitment" },
   { fr: "Zéro spam", en: "Zero spam" },
   { fr: "Annulation facile", en: "Easy cancellation" },
@@ -31,19 +31,19 @@ export default function Guarantee() {
           >
             {t(
               "Satisfaction garantie ou remboursé",
-              "Satisfaction guaranteed or money back"
+              "Satisfaction guaranteed or money back",
             )}
           </h2>
           <p className="text-gray-500 text-sm leading-relaxed mb-2">
             {t(
-              "Si après 14 jours vous ne constatez aucun progrès, nous vous remboursons intégralement. Sans question, sans délai.",
-              "If after 14 days you see no progress, we will fully refund you. No questions, no delays."
+              "Si après 10 jours, de pratique régulière, vous sentez que le programme ne vous aide pas à progresser, vous pouvez demander un remboursement.",
+              "If after 10 days of consistent practice you feel that the program is not helping you improve, you can request a refund.",
             )}
           </p>
           <p className="text-gray-500 text-sm mb-8">
             {t(
               "Votre confiance est notre priorité. Nous n'envoyons jamais de spam.",
-              "Your trust is our priority. We never send spam."
+              "Your trust is our priority. We never send spam.",
             )}
           </p>
 
