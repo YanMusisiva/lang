@@ -6,33 +6,33 @@ import { useLang } from "@/context/LangContext";
 
 const VIDEOS = [
   {
-    src: "/videos/lesson1.mp4",
+    src: "/videos/video2.mp4",
     titleFr: "Introduction à la méthode",
     titleEn: "Introduction to the method",
     descFr: "Découvrez comment fonctionne notre méthode d'écoute.",
     descEn: "Discover how our listening method works.",
   },
   {
-    src: "/videos/lesson2.mp4",
+    src: "/videos/video3.mp4",
     titleFr: "Pourquoi l'écoute est essentielle",
     titleEn: "Why listening is essential",
     descFr: "Comprenez pourquoi l'écoute accélère l'apprentissage.",
     descEn: "Understand why listening accelerates learning.",
   },
-  {
-    src: "/videos/lesson3.mp4",
-    titleFr: "Comment pratiquer chaque jour",
-    titleEn: "How to practice every day",
-    descFr: "Une routine simple pour progresser rapidement.",
-    descEn: "A simple routine to progress quickly.",
-  },
-  {
-    src: "/videos/lesson4.mp4",
-    titleFr: "Résultats des étudiants",
-    titleEn: "Student results",
-    descFr: "Voyez les progrès obtenus avec la méthode.",
-    descEn: "See the progress achieved with the method.",
-  },
+  //   {
+  //     src: "/videos/lesson3.mp4",
+  //     titleFr: "Comment pratiquer chaque jour",
+  //     titleEn: "How to practice every day",
+  //     descFr: "Une routine simple pour progresser rapidement.",
+  //     descEn: "A simple routine to progress quickly.",
+  //   },
+  //   {
+  //     src: "/videos/lesson4.mp4",
+  //     titleFr: "Résultats des étudiants",
+  //     titleEn: "Student results",
+  //     descFr: "Voyez les progrès obtenus avec la méthode.",
+  //     descEn: "See the progress achieved with the method.",
+  //   },
 ];
 
 export default function VideoSection() {

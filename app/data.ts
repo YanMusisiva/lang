@@ -2,31 +2,31 @@ import type { Testimonial, Plan, BulletCard } from "@/types/";
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    initials: "KM",
+    initials: "M",
     quote: {
-      fr: "En 3 mois, je suis passé de A2 à B2. J'avais essayé Duolingo, des cours en ligne, rien ne fonctionnait vraiment. Ici, j'ai parlé dès la première semaine et ça a tout changé.",
-      en: "In 3 months, I went from A2 to B2. I had tried Duolingo, online courses, nothing really worked. Here, I spoke from the first week and it changed everything.",
+      fr: "Les audios que vous envoyez sont essentiels pour nous, ils font toute la différence dans notre apprentissage.",
+      en: "The audios you send are crucial for us, they make all the difference in our learning.",
     },
-    name: "Karim M.",
-    role: { fr: "Ingénieur, Bujumbura", en: "Engineer, Bujumbura" },
+    name: "Milka",
+    role: { fr: "Étudiante", en: "Student" },
   },
   {
-    initials: "SA",
+    initials: "F",
     quote: {
-      fr: "J'avais honte de parler anglais en réunion. Après 7 semaines avec ListenMethod, j'ai animé ma première présentation en anglais devant 50 personnes. Incroyable.",
-      en: "I was ashamed to speak English in meetings. After 7 weeks with LangListening, I ran my first English presentation in front of 50 people. Incredible.",
+      fr: "J’adore votre méthode d’apprentissage ! Elle m’aide vraiment à parler anglais avec confiance.",
+      en: "I love your learning method! It truly helps me speak English with confidence.",
     },
-    name: "Sophie A.",
-    role: { fr: "Manager, Goma/DRC", en: "Manager, Goma/DRC" },
+    name: "Francis",
+    role: { fr: "Voyageur", en: "Traveler" },
   },
   {
-    initials: "DF",
+    initials: "A",
     quote: {
-      fr: "Les formateurs sont extraordinairement patients et engagés. La méthode d'écoute m'a permis de comprendre Netflix en anglais sans sous-titres en 60 jours.",
-      en: "The trainers are extraordinarily patient and engaged. The listening method allowed me to understand Netflix in English without subtitles in 60 days.",
+      fr: "Les audios sont vraiment cools et rendent l’apprentissage super agréable !",
+      en: "The audios are really cool and make learning super fun!",
     },
-    name: "David F.",
-    role: { fr: "Étudiant, Cameroun", en: "Student, Cameroon" },
+    name: "Ali",
+    role: { fr: "Enseignant", en: "Teacher" },
   },
 ];
 
@@ -101,67 +101,34 @@ export const BULLETS: BulletCard[] = [
   {
     num: "01",
     title: {
-      fr: "Mémorisez 200 mots en 7 jours",
-      en: "Memorize 200 words in 7 days",
+      fr: "Habituez votre oreille à l’anglais réel",
+      en: "Train your ear to real English",
     },
     desc: {
-      fr: "Grâce à des phrases contextuelles répétées chaque jour, votre cerveau mémorise naturellement sans effort de mémorisation forcée.",
-      en: "Through contextual phrases repeated daily, your brain memorizes naturally without forced memorization effort.",
+      fr: "Vous écoutez l'anglais sous plusieurs tonalités et accents afin d'habituer votre cerveau aux sons réels de la langue. Grâce à la répétition guidée et à plus de 20 heures d'appels de pratique avec des formateurs, vous développez naturellement compréhension et fluidité. Avec cette combinaison, il devient extrêmement difficile de rester bloqué à l'oral.",
+      en: "You listen to English in multiple tones and accents to train your brain to recognize real language sounds. Through guided repetition and more than 20 hours of live practice calls with trainers, you naturally build comprehension and speaking fluency. With this combination, remaining unable to speak becomes extremely unlikely.",
     },
   },
   {
     num: "02",
     title: {
-      fr: "Comprenez les films sans sous-titres",
-      en: "Understand films without subtitles",
+      fr: "Progressez en 5 niveaux en seulement 30 jours chacun",
+      en: "Advance through 5 levels in just 30 days each",
     },
     desc: {
-      fr: "30 minutes d'écoute active par jour entraîne votre oreille à capter la vitesse, l'accent et les expressions idiomatiques réelles.",
-      en: "30 minutes of active listening per day trains your ear to catch real speed, accents and idiomatic expressions.",
+      fr: "Notre programme est structuré en 5 niveaux : les 3 premiers niveaux sur 90 jours vous permettent de parler anglais couramment, tandis que les 2 niveaux suivants vous aident à améliorer lecture et écriture et à vous préparer à la grammaire avancée ainsi qu'aux examens comme IELTS ou TOEFL. Chaque niveau est conçu pour progresser rapidement grâce à l'écoute active et aux exercices pratiques.",
+      en: "Our program is structured in 5 levels: the first 3 levels over 90 days help you speak English fluently, while the last 2 levels improve your reading and writing and prepare you for advanced grammar and exams like IELTS or TOEFL. Each level is designed for rapid progress through active listening and practical exercises.",
     },
   },
   {
     num: "03",
     title: {
-      fr: "Évitez les 5 erreurs de grammaire",
-      en: "Avoid the 5 grammar mistakes",
+      fr: "Apprenez avec de vraies personnes, pas seulement des apps ou de l’IA",
+      en: "Learn with real people, not just apps or AI",
     },
     desc: {
-      fr: "90% des étudiants font les mêmes erreurs. Nos formateurs les corrigent naturellement en conversation, sans cours théoriques ennuyeux.",
-      en: "90% of students make the same mistakes. Our trainers correct them naturally in conversation, without boring theoretical lessons.",
-    },
-  },
-  {
-    num: "04",
-    title: {
-      fr: "Parlez sans bloquer ni chercher vos mots",
-      en: "Speak without blocking or searching for words",
-    },
-    desc: {
-      fr: "Les 280 phrases anticipées vous donnent les outils pour répondre à presque toutes les situations du quotidien avec aisance.",
-      en: "The 280 anticipated phrases give you tools to handle almost any daily situation with ease.",
-    },
-  },
-  {
-    num: "05",
-    title: {
-      fr: "Progressez dès la première semaine",
-      en: "Progress from the first week",
-    },
-    desc: {
-      fr: "Contrairement aux cours classiques, vous pratiquez la vraie conversation dès le début. Pas d'attente de 6 mois pour « être prêt ».",
-      en: 'Unlike traditional courses, you practice real conversation from the start. No waiting 6 months to "be ready".',
-    },
-  },
-  {
-    num: "06",
-    title: {
-      fr: "Avec de vraies personnes, pas une IA",
-      en: "With real people, not AI",
-    },
-    desc: {
-      fr: "Chaque session est avec un formateur humain qualifié qui adapte son enseignement à votre niveau et vos objectifs personnels.",
-      en: "Each session is with a qualified human trainer who adapts teaching to your level and personal goals.",
+      fr: "Contrairement aux applications ou à l’intelligence artificielle, nos formateurs humains qualifiés s’adaptent à votre niveau, corrigent vos erreurs en temps réel et vous poussent à parler naturellement. Cette interaction humaine garantit que vous progressez plus vite et que vous développez une vraie aisance à l’oral, impossible à obtenir uniquement avec des programmes automatiques.",
+      en: "Unlike apps or AI, our qualified human trainers adapt to your level, correct your mistakes in real time, and guide you to speak naturally. This human interaction ensures faster progress and genuine speaking fluency—something that automated programs alone cannot provide.",
     },
   },
 ];
