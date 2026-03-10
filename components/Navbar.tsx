@@ -24,7 +24,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-8 h-16">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             className="font-serif text-2xl font-bold text-[#e8c96a] tracking-wider"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >

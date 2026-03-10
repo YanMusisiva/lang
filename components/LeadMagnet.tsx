@@ -17,7 +17,10 @@ export default function LeadMagnet() {
   };
 
   return (
-    <section className="bg-[#fdf6e3] border-y border-[#c9a84c]/30 py-16 px-8">
+    <section
+      id="leadmagnet"
+      className="bg-[#fdf6e3] border-y border-[#c9a84c]/30 py-16 px-8"
+    >
       <div className="max-w-5xl mx-auto flex flex-wrap items-center gap-12 justify-center">
         {/* Icon */}
         <div className="w-20 h-20 bg-[#0a0a0a] rounded-2xl flex items-center justify-center text-4xl shrink-0">

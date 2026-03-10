@@ -20,7 +20,7 @@ function ArticleContent({ slug }: { slug: string }) {
           </p>
           <Link
             href="/blog"
-            className="text-[#22c55e] font-mono text-sm hover:underline"
+            className="text-[#e8c96a] font-mono text-sm hover:underline"
           >
             {t("blog.back")}
           </Link>
@@ -80,14 +80,14 @@ function ArticleContent({ slug }: { slug: string }) {
       <article className="max-w-3xl mx-auto px-6 pt-36 pb-28">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 font-mono text-[11px] text-white/30 hover:text-[#22c55e] uppercase tracking-widest mb-12 transition-colors"
+          className="inline-flex items-center gap-2 font-mono text-[11px] text-white/30 hover:text-[#e8c96a] uppercase tracking-widest mb-12 transition-colors"
         >
           {t("blog.back")}
         </Link>
 
         {/* Meta */}
         <div className="flex items-center gap-4 mb-6">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-[#22c55e] bg-[#22c55e]/10 border border-[#22c55e]/20 px-2.5 py-1">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-[#e8c96a] bg-[#22c55e]/10 border border-[#22c55e]/20 px-2.5 py-1">
             {t(article.category.fr, article.category.en)}
           </span>
           <span className="font-mono text-[10px] text-white/20">
@@ -123,31 +123,32 @@ function ArticleContent({ slug }: { slug: string }) {
         {/* Author */}
         <div className="mt-16 border-t border-white/5 pt-8 flex items-center gap-4">
           <div className="w-10 h-10 bg-[#22c55e]/10 border border-[#22c55e]/20 flex items-center justify-center">
-            <span className="text-[#22c55e] font-mono text-xs">N</span>
+            <span className="text-[#e8c96a] font-mono text-xs">N</span>
           </div>
           <div>
             <p className="text-white text-sm font-medium">
               {t(article.author.fr, article.author.en)}
             </p>
-            <p className="font-mono text-[10px] text-white/30">
-              Nexus Growth Team
-            </p>
+            <p className="font-mono text-[10px] text-white/30">LangListening</p>
           </div>
         </div>
 
         {/* CTA */}
         <div className="mt-16 bg-[#0a0a0a] border border-white/8 p-8 text-center">
           <p className="font-display text-2xl font-bold text-white mb-3">
-            Prêt à accélérer votre croissance ?
+            {t("Prêt à utiliser notre méthode?", "Ready to use our method ?")}
           </p>
           <p className="text-white/40 text-sm mb-6">
-            Obtenez votre audit gratuit — sans engagement.
+            {t(
+              "Rejoignez nos étudiants gratuitement",
+              "Join our students for free",
+            )}
           </p>
           <Link
-            href="/#offer"
-            className="inline-block btn-primary px-8 py-3 text-sm uppercase tracking-widest"
+            href="/#leadmagnet"
+            className="inline-block btn-primary px-8 py-3 text-sm uppercase tracking-widest text-[#e8c96a]"
           >
-            Obtenir mon audit gratuit
+            {t("Essayer nos cours gratuits", "Try our free courses")}
           </Link>
         </div>
       </article>
