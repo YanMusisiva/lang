@@ -111,10 +111,10 @@ export default function Hero() {
             {t("Passer un test", "Start a test")}
           </a>
           <a
-            href="#presentation"
+            href="https://wa.me/243981984788?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20s'il%20vous%20pla%C3%AEt%3F"
             className="border border-white/25 text-white font-light px-9 py-4 rounded text-base hover:border-[#e8c96a] hover:text-[#e8c96a] transition-all duration-200"
           >
-            {t("Découvrir la méthode", "Discover the method")}
+            {t("Parler avec un formateur", "Talk to a tutor")}
           </a>
         </div>
 

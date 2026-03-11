@@ -93,7 +93,7 @@ export default function Pricing() {
               {/* CTA */}
               {plan.featured ? (
                 <a
-                  href="https://wa.me/256787531919"
+                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20formation1mois.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20s'il%20vous%20pla%C3%AEt%3F"
                   className="block w-full bg-[#c9a84c] text-black font-semibold py-3.5 rounded text-sm tracking-wide hover:bg-[#e8c96a] transition-colors"
                   target="_blank"
                 >
@@ -101,7 +101,7 @@ export default function Pricing() {
                 </a>
               ) : (
                 <a
-                  href="https://wa.me/256787531919"
+                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20formation3mois.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20s'il%20vous%20pla%C3%AEt%3F"
                   className="block w-full border border-black/15 text-black font-semibold py-3.5 rounded text-sm hover:border-[#c9a84c] hover:text-[#9a7a2e] transition-all"
                 >
                   {t(`Choisir ${plan.name.fr}`, `Choose ${plan.name.en}`)}
