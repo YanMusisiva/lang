@@ -13,19 +13,19 @@ const VIDEOS = [
     descEn: "Discover how our listening method works.",
   },
   {
-    src: "/videos/video3.mp4",
+    src: "/videos/video1.mp4",
     titleFr: "Pourquoi l'écoute est essentielle",
     titleEn: "Why listening is essential",
     descFr: "Comprenez pourquoi l'écoute accélère l'apprentissage.",
     descEn: "Understand why listening accelerates learning.",
   },
-  //   {
-  //     src: "/videos/lesson3.mp4",
-  //     titleFr: "Comment pratiquer chaque jour",
-  //     titleEn: "How to practice every day",
-  //     descFr: "Une routine simple pour progresser rapidement.",
-  //     descEn: "A simple routine to progress quickly.",
-  //   },
+  {
+    src: "/videos/video3.mp4",
+    titleFr: "Comment pratiquer chaque jour",
+    titleEn: "How to practice every day",
+    descFr: "Une routine simple pour progresser rapidement.",
+    descEn: "A simple routine to progress quickly.",
+  },
   //   {
   //     src: "/videos/lesson4.mp4",
   //     titleFr: "Résultats des étudiants",
@@ -74,7 +74,7 @@ export default function VideoSection() {
 
         {/* horizontal scroll */}
 
-        <div className="flex gap-8 overflow-x-auto pb-6 scrollbar-hide">
+        <div className="flex gap-8 overflow-x-auto custom-scrollbar pb-6 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
           {VIDEOS.map((video, i) => (
             <div key={i} className="min-w-[420px] max-w-[420px] flex-shrink-0">
               <VideoPlayer
