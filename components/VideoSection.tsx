@@ -19,13 +19,13 @@ const VIDEOS = [
     descFr: "Comprenez pourquoi l'écoute accélère l'apprentissage.",
     descEn: "Understand why listening accelerates learning.",
   },
-  {
-    src: "/videos/video3.mp4",
-    titleFr: "Comment pratiquer chaque jour",
-    titleEn: "How to practice every day",
-    descFr: "Une routine simple pour progresser rapidement.",
-    descEn: "A simple routine to progress quickly.",
-  },
+  // {
+  //   src: "/videos/video3.mp4",
+  //   titleFr: "Comment pratiquer chaque jour",
+  //   titleEn: "How to practice every day",
+  //   descFr: "Une routine simple pour progresser rapidement.",
+  //   descEn: "A simple routine to progress quickly.",
+  // },
   //   {
   //     src: "/videos/lesson4.mp4",
   //     titleFr: "Résultats des étudiants",
