@@ -5,8 +5,7 @@ import RevealWrapper from "./RevealWrapper";
 
 const PILLS = [
   { fr: "Remboursement 10 jours", en: "10-day refund" },
-  { fr: "Aucun engagement", en: "No commitment" },
-  { fr: "Zéro spam", en: "Zero spam" },
+  { fr: "Garantie satisfaction", en: "Satisfaction guarantee" },
   { fr: "Annulation facile", en: "Easy cancellation" },
 ];
 
@@ -42,8 +41,8 @@ export default function Guarantee() {
           </p>
           <p className="text-gray-500 text-sm mb-8">
             {t(
-              "Votre confiance est notre priorité. Nous n'envoyons jamais de spam.",
-              "Your trust is our priority. We never send spam.",
+              "Votre confiance est notre priorité.",
+              "Your trust is our priority.",
             )}
           </p>
 

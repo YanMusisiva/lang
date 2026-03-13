@@ -56,8 +56,8 @@ export default function Authority() {
           </h2>
           <p className="text-gray-500 text-sm leading-relaxed mb-6">
             {t(
-              "LangListening n'est pas une application. C'est une approche humaine, fondée sur la recherche en linguistique : écoute intensive + répétition guidée + conversation réelle. Comme un enfant qui apprend à parler — mais en accéléré.",
-              "LangListening is not an app. It's a human approach, grounded in linguistic research: intensive listening + guided repetition + real conversation. Like a child learning to speak — but accelerated.",
+              "LangListening n'est pas une application. C'est une approche humaine, fondée sur la recherche en linguistique : écoute intensive + répétition guidée + conversation réelle. Les sessions se font en privé avec un formateur dédié, en ligne pour vous offrir flexibilité et attention totale. Comme un enfant qui apprend à parler — mais en accéléré.",
+              "LangListening is not an app. It's a human approach, grounded in linguistic research: intensive listening + guided repetition + real conversation. Sessions are private with a dedicated trainer, held online for full flexibility and personal attention. Like a child learning to speak — but accelerated.",
             )}
           </p>
 

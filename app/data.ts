@@ -123,12 +123,12 @@ export const BULLETS: BulletCard[] = [
   {
     num: "03",
     title: {
-      fr: "Apprenez avec de vraies personnes, pas seulement des apps ou de l’IA",
-      en: "Learn with real people, not just apps or AI",
+      fr: "Apprenez en privé avec un formateur dédié, en ligne et à votre rythme",
+      en: "Learn privately with a dedicated trainer, online and on your schedule",
     },
     desc: {
-      fr: "Contrairement aux applications ou à l’intelligence artificielle, nos formateurs humains qualifiés s’adaptent à votre niveau, corrigent vos erreurs en temps réel et vous poussent à parler naturellement. Cette interaction humaine garantit que vous progressez plus vite et que vous développez une vraie aisance à l’oral, impossible à obtenir uniquement avec des programmes automatiques.",
-      en: "Unlike apps or AI, our qualified human trainers adapt to your level, correct your mistakes in real time, and guide you to speak naturally. This human interaction ensures faster progress and genuine speaking fluency—something that automated programs alone cannot provide.",
+      fr: "Notre programme se déroule en sessions privées avec un formateur dédié qui se concentre uniquement sur vous. Contrairement aux applications ou à l’intelligence artificielle, votre formateur adapte chaque séance à votre niveau, corrige vos erreurs en temps réel et vous aide à parler naturellement. Comme tout se fait en ligne, vous bénéficiez d’une grande flexibilité : apprenez où que vous soyez et aux moments qui vous conviennent. Cette attention personnalisée garantit des progrès rapides et une vraie aisance à l’oral.",
+      en: "Our program takes place in private sessions with a dedicated trainer focused entirely on you. Unlike apps or AI, your trainer adapts each session to your level, corrects mistakes in real time, and helps you speak naturally. Since everything happens online, you gain full flexibility—learn from anywhere and at times that suit your schedule. This personalized attention ensures faster progress and real speaking confidence.",
     },
   },
 ];
