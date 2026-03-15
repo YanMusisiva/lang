@@ -114,7 +114,7 @@ function ArticleContent({ slug }: { slug: string }) {
           {t(article.excerpt.fr, article.excerpt.en)}
         </p>
 
-        <div className="border-t border-white/5 pt-10">
+        <div className="border-t border-white/5 pt-10 ">
           <div className="prose-custom space-y-1">
             {renderContent(t(article.content.fr, article.content.en))}
           </div>

@@ -74,10 +74,10 @@ export default function Authority() {
           </div>
 
           <a
-            href="#pricing"
+            href="blog/zero-a-b2-en-3-mois-methode"
             className="inline-block bg-[#c9a84c] text-black font-semibold px-8 py-3.5 rounded text-sm tracking-wide hover:bg-[#e8c96a] hover:-translate-y-0.5 transition-all duration-200"
           >
-            {t("Commencer ma transformation", "Start my transformation")}
+            {t("Comprendre toute la méthode", "Understand the full method")}
           </a>
         </RevealWrapper>
       </div>
