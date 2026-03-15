@@ -33,9 +33,9 @@ Vous avez téléchargé toutes les applications. Vous avez regardé des séries 
 
 Rassurez-vous, ce n'est pas votre faute.
 
-Le problème, c'est la méthode. Les applications comme Duolingo ou Babbel sont conçues pour vous faire SENTIR que vous progressez, pas pour vous faire PARLER. Elles transforment l'apprentissage en jeu, mais la vie réelle n'est pas un jeu : c'est une conversation qui demande des réponses en temps réel.
+Le problème, c'est la méthode. Les applications comme Duolingo ou Babbel sont conçues pour vous faire SENTIR que vous progressez, pas pour vous faire PARLER. Elles transforment l'apprentissage en jeu, mais la vie réelle pour les langues n'est pas un jeu : c'est une conversation qui demande des réponses en temps réel.
 
-Je suis coach en anglais depuis 2 ans, et j'ai aidé beaucoup d'élèves à briser ce mur du silence. Dans cet article, je vais vous révéler exactement pourquoi les méthodes traditionnelles échouent et comment nous allons, ensemble, atteindre le niveau B2 en seulement 3 mois.
+Nous avons coacher en anglais depuis 2 ans, et nous avons aidé beaucoup d'élèves à briser ce mur du silence. Dans cet article, nous allons vous révéler exactement pourquoi les méthodes traditionnelles échouent et comment nous allons, ensemble, atteindre le niveau B2 en seulement 3 mois.
 
 
 Partie 1 : Pourquoi les applications seules sont un leurre
@@ -224,7 +224,7 @@ Don't worry, it's not your fault.
 
 The problem is the method. Apps like Duolingo or Babbel are designed to make you *feel* like you're progressing, not to make you *speak*. They turn learning into a game, but real life isn't a game: it's a conversation that requires real-time responses.
 
-I've been an English coach for 5 years, and I've helped hundreds of students break through this wall of silence. In this article, I'll reveal exactly why traditional methods fail and how we'll reach B2 level together in just 3 months.
+We've been coaching for 2 years, and we've helped hundreds of students break through this wall of silence. In this article, we'll reveal exactly why traditional methods fail and how we'll reach B2 level together in just 3 months.
 
 
  Part 1: Why Apps Alone Are a Mirage
