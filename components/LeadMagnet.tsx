@@ -64,7 +64,7 @@ export default function LeadMagnet() {
               className="px-4 py-3 border-[1.5px] border-[#c9a84c]/50 rounded focus:outline-none focus:border-[#c9a84c] bg-white text-black text-sm min-w-[220px] font-[DM_Sans]"
             /> */}
             <Link
-              href="https://chat.whatsapp.com/GA54bbWLUXMFXU6WqlslwW?mode=gi_t"
+              href="https://chat.whatsapp.com/E5yLg2zxcBWLayZ1wnBLt9?mode=gi_t"
               className="bg-[#c9a84c] text-black font-semibold px-6 py-3 rounded text-sm hover:bg-[#e8c96a] hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
             >
               {t("Integrer le groupe", "Join the group")}
