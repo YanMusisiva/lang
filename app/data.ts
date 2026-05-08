@@ -33,7 +33,7 @@ export const TESTIMONIALS: Testimonial[] = [
 export const PLANS: Plan[] = [
   {
     name: { fr: "1 mois", en: "1 month" },
-    price: { fr: "99 $", en: "99 $" },
+    price: { fr: "49 $", en: "49 $" },
     featured: true,
     tag: { fr: "Populaire", en: "Popular" },
     desc: {
@@ -46,8 +46,8 @@ export const PLANS: Plan[] = [
         en: "30 days of natural learning",
       },
       {
-        fr: "20h d'appels avec le formateur",
-        en: "20 hours of calls with the trainer",
+        fr: "10h d'appels avec le formateur",
+        en: "10 hours of calls with the trainer",
       },
       {
         fr: "Premier niveau",
@@ -66,7 +66,7 @@ export const PLANS: Plan[] = [
   },
   {
     name: { fr: "3 mois", en: "3 months" },
-    price: { fr: "237 $ (save 20%)", en: "237 $ (save 20%)" },
+    price: { fr: "117 $ (save 20%)", en: "117 $ (save 20%)" },
     desc: {
       fr: "Pour ceux qui veulent atteindre l'objectif des 90 jours",
       en: "For those who want to reach the 90 days goal",
@@ -77,8 +77,8 @@ export const PLANS: Plan[] = [
         en: "90 days of natural learning",
       },
       {
-        fr: "60h d'appels avec le formateur",
-        en: "60 hours of calls with the trainer",
+        fr: "30h d'appels avec le formateur",
+        en: "30 hours of calls with the trainer",
       },
       {
         fr: "3 niveaux",
