@@ -66,7 +66,7 @@ export const PLANS: Plan[] = [
   },
   {
     name: { fr: "3 mois", en: "3 months" },
-    price: { fr: "117 $ (save 20%)", en: "117 $ (save 20%)" },
+    price: { fr: "147 $ ", en: "147 $" },
     desc: {
       fr: "Pour ceux qui veulent atteindre l'objectif des 90 jours",
       en: "For those who want to reach the 90 days goal",

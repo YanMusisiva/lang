@@ -1,6 +1,9 @@
 "use client";
 
 import { useLang } from "@/context/LangContext";
+import { Youtube, Facebook, Instagram } from "lucide-react";
+
+import { FaTiktok } from "react-icons/fa";
 
 const NAV_LINKS = [
   { href: "#presentation", fr: "Présentation", en: "About" },
@@ -30,6 +33,62 @@ export default function Footer() {
               "The human method to speak English fluently. Listening, repetition, real conversation.",
             )}
           </p>
+          {/* Social Networks */}
+          <div
+            className="flex justify-center items-center gap-4 sm:gap-5 mt-10"
+            style={{
+              animation: "fadeUp 0.7s 0.5s ease both",
+              animationFillMode: "both",
+            }}
+          >
+            <a
+              href="https://youtube.com/@langlistening?si=M8NS-3TvnEc5MrAd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+            >
+              <Youtube
+                className="text-white group-hover:text-black transition-colors duration-300"
+                size={24}
+              />
+            </a>
+
+            <a
+              href="https://www.facebook.com/profile.php?id=61583766185133"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+            >
+              <Facebook
+                className="text-white group-hover:text-black transition-colors duration-300"
+                size={22}
+              />
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@langlistening?_r=1&_t=ZS-96lAFZ7vvbo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+            >
+              <FaTiktok
+                size={18}
+                className="text-white group-hover:text-black transition-colors duration-300"
+              />
+            </a>
+
+            <a
+              href="https://www.instagram.com/langlistening?igsh=MXEzeDZ3MjJ5YW1hMQ=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+            >
+              <Instagram
+                className="text-white group-hover:text-black transition-colors duration-300"
+                size={22}
+              />
+            </a>
+          </div>
         </div>
 
         {/* Navigation */}

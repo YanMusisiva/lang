@@ -89,59 +89,13 @@ const VideoPlayer = ({
 
   return (
     <div className="bg-black rounded-2xl shadow-xl overflow-hidden relative">
-      <video
-        ref={videoRef}
+      <iframe
         src={src}
-        onClick={handleVideoClick}
-        onContextMenu={(e) => e.preventDefault()}
-        className="w-full max-h-[70vh] object-contain bg-black"
-        playsInline
+        title="Video player"
+        className="w-full h-[70vh] rounded-xl bg-black"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
       />
-
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-      </div>
-
-      <div className="absolute inset-0 flex flex-col justify-end p-4 pointer-events-none">
-        {showOverlay && !isPlaying && (
-          <div className="mb-3 text-center">
-            {title && <h3 className="text-white font-bold text-lg">{title}</h3>}
-            {description && (
-              <p className="text-gray-300 text-sm">{description}</p>
-            )}
-          </div>
-        )}
-
-        <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden mb-2">
-          <div
-            className="h-full bg-blue-500 transition-all"
-            style={{ width: `${isFinite(progress) ? progress : 0}%` }}
-          />
-        </div>
-
-        <div className="flex justify-end text-white text-xs mb-2">
-          {formatTime(currentTime)} / {formatTime(duration)}
-        </div>
-
-        {showOverlay && (
-          <div className="w-full flex justify-center">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePlayPause();
-              }}
-              className="pointer-events-auto bg-white/20 hover:bg-white/30 text-white rounded-full p-3 w-12 h-12 flex items-center justify-center mx-auto"
-              aria-label={isPlaying ? "Pause" : "Play"}
-            >
-              {isPlaying ? (
-                <Pause className="w-6 h-6" />
-              ) : (
-                <Play className="w-6 h-6" />
-              )}
-            </button>
-          </div>
-        )}
-      </div>
     </div>
   );
 };

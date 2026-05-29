@@ -6,19 +6,19 @@ import { useLang } from "@/context/LangContext";
 
 const VIDEOS = [
   {
-    src: "/videos/video2.mp4",
+    src: "https://www.youtube.com/embed/k827TUGQcs8?si=8alfAPvQM1GoVvw5",
     titleFr: "Introduction à la méthode",
     titleEn: "Introduction to the method",
-    descFr: "Découvrez comment fonctionne notre méthode d'écoute.",
-    descEn: "Discover how our listening method works.",
+    descFr: "Découvrez comment fonctionne notre méthode",
+    descEn: "Discover how our method works.",
   },
-  {
-    src: "/videos/video1.mp4",
-    titleFr: "Pourquoi l'écoute est essentielle",
-    titleEn: "Why listening is essential",
-    descFr: "Comprenez pourquoi l'écoute accélère l'apprentissage.",
-    descEn: "Understand why listening accelerates learning.",
-  },
+  // {
+  //   src: "/videos/video1.mp4",
+  //   titleFr: "Pourquoi l'écoute est essentielle",
+  //   titleEn: "Why listening is essential",
+  //   descFr: "Comprenez pourquoi l'écoute accélère l'apprentissage.",
+  //   descEn: "Understand why listening accelerates learning.",
+  // },
   // {
   //   src: "/videos/video3.mp4",
   //   titleFr: "Comment pratiquer chaque jour",

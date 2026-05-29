@@ -1,6 +1,7 @@
 "use client";
 
 import { useLang } from "@/context/LangContext";
+import { FaTiktok, FaYoutube, FaFacebookF, FaInstagram } from "react-icons/fa";
 
 const STATS = [
   { val: "100+", fr: "Étudiants formés", en: "Students trained" },
@@ -66,7 +67,7 @@ export default function Hero() {
           ).split("couramment").length > 1 ? (
             <>
               Apprenez à parler anglais{" "}
-              <em className="italic bg-gradient-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
+              <em className="italic bg-linear-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
                 couramment
               </em>{" "}
               en 90 jours, même si vous êtes débutant
@@ -74,7 +75,7 @@ export default function Hero() {
           ) : (
             <>
               Learn to speak English{" "}
-              <em className="italic bg-gradient-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
+              <em className="italic bg-linear-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
                 fluently
               </em>{" "}
               in 90 days, even as a complete beginner
@@ -139,6 +140,62 @@ export default function Hero() {
               </div>
             </div>
           ))}
+        </div>
+        {/* Social Networks */}
+        <div
+          className="flex justify-center items-center gap-4 sm:gap-5 mt-10"
+          style={{
+            animation: "fadeUp 0.7s 0.5s ease both",
+            animationFillMode: "both",
+          }}
+        >
+          <a
+            href="https://youtube.com/@langlistening?si=M8NS-3TvnEc5MrAd"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+          >
+            <FaYoutube
+              className="text-white group-hover:text-black transition-colors duration-300"
+              size={24}
+            />
+          </a>
+
+          <a
+            href="https://www.facebook.com/profile.php?id=61583766185133"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+          >
+            <FaFacebookF
+              className="text-white group-hover:text-black transition-colors duration-300"
+              size={22}
+            />
+          </a>
+
+          <a
+            href="https://www.tiktok.com/@langlistening?_r=1&_t=ZS-96lAFZ7vvbo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+          >
+            <FaTiktok
+              size={18}
+              className="text-white group-hover:text-black transition-colors duration-300"
+            />
+          </a>
+
+          <a
+            href="https://www.instagram.com/langlistening?igsh=MXEzeDZ3MjJ5YW1hMQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
+          >
+            <FaInstagram
+              className="text-white group-hover:text-black transition-colors duration-300"
+              size={22}
+            />
+          </a>
         </div>
       </div>
 
