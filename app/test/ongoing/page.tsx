@@ -284,6 +284,10 @@ export default function WritingTest() {
       french: "La maison est entre deux vieux arbres.",
       answer: "The house is between two old trees.",
     },
+    {
+      french: "Le vent souffle dans les arbres.",
+      answer: "The wind is blowing in the trees.",
+    },
   ];
 
   const [started, setStarted] = useState(false);
