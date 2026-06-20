@@ -15,8 +15,8 @@ export default function Page() {
       <Navbar />
       <div className="pt-16">
         <Hero />
-        <LeadMagnet />
         <VideoSection />
+        <LeadMagnet />
         <ValueSection />
         <SocialProof />
         <Authority />

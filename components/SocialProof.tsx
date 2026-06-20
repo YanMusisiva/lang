@@ -57,7 +57,7 @@ export default function SocialProof() {
                   &ldquo;{t(testi.quote.fr, testi.quote.en)}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#9a7a2e] to-[#c9a84c] flex items-center justify-center text-black font-bold text-xs">
+                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#9a7a2e] to-[#c9a84c] flex items-center justify-center text-black font-bold text-xs">
                     {testi.initials}
                   </div>
                   <div>
@@ -78,7 +78,7 @@ export default function SocialProof() {
         <RevealWrapper>
           <div className="grid grid-cols-2 md:grid-cols-4 border border-[#c9a84c]/15 rounded-lg overflow-hidden divide-x divide-[#c9a84c]/15">
             {PROOF_NUMBERS.map((item, i) => (
-              <div key={i} className="bg-white/[0.03] py-10 px-8 text-center">
+              <div key={i} className="bg-white/3 py-10 px-8 text-center">
                 <div
                   className="text-[#e8c96a] text-3xl font-bold"
                   style={{ fontFamily: "'Cormorant Garamond', serif" }}

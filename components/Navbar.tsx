@@ -6,11 +6,10 @@ import { useLang } from "@/context/LangContext";
 const NAV_LINKS = [
   { href: "/", fr: "Accueil", en: "Home" },
 
-  { href: "#presentation", fr: "Présentation", en: "About" },
   { href: "#value", fr: "Avantages", en: "Benefits" },
   { href: "#proof", fr: "Témoignages", en: "Testimonials" },
+  { href: "#presentation", fr: "Présentation", en: "About" },
   { href: "#pricing", fr: "Tarifs", en: "Pricing" },
-  { href: "#contact", fr: "Contact", en: "Contact" },
   { href: "/blog", fr: "Blog", en: "Blog" },
 ];
 
@@ -82,7 +81,7 @@ export default function Navbar() {
 
       {/* Mobile menu overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-[99] bg-[#0a0a0a]/97 backdrop-blur-md flex flex-col items-center justify-center gap-8">
+        <div className="fixed inset-0 z-99 bg-[#0a0a0a]/97 backdrop-blur-md flex flex-col items-center justify-center gap-8">
           <button
             className="absolute top-5 right-6 text-white text-3xl"
             onClick={() => setMenuOpen(false)}

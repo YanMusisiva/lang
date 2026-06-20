@@ -10,141 +10,164 @@ export default function LanguageTest() {
   const QUESTIONS = [
     {
       q: t(
-        "Quand vous apprenez une nouvelle langue, vous commencez généralement par :",
-        "When you learn a new language, you usually start by:",
+        "Complétez : Excuse me, where is the bank?",
+        "Complete: Excuse me, where is the bank?",
       ),
-      options: [
-        t("Étudier les règles de grammaire", "Studying grammar rules"),
-        t(
-          "Mémoriser beaucoup de vocabulaire",
-          "Memorizing a lot of vocabulary",
-        ),
-        t(
-          "Écouter la langue le plus possible",
-          "Listening to the language as much as possible",
-        ),
-        t("Traduire dans ma langue", "Translating into my language"),
-      ],
+      options: ["The small one", "It's over there", "You can go"],
+      correct: 1,
+    },
+    {
+      q: t("Complétez : Can I help you?", "Complete: Can I help you?"),
+      options: ["No, I don't worry", "It's very good", "Sorry, I can't"],
       correct: 2,
     },
     {
       q: t(
-        "Un enfant apprend sa langue maternelle principalement en :",
-        "A child learns their native language mainly by:",
+        "Complétez : Tom wants to go surfing in Hawaii.",
+        "Complete: Tom wants to go surfing in Hawaii.",
       ),
-      options: [
-        t("Lisant des livres", "Reading books"),
-        t("Écoutant les adultes parler", "Listening to adults speaking"),
-        t("Étudiant la grammaire", "Studying grammar"),
-        t("Mémorisant du vocabulaire", "Memorizing vocabulary"),
-      ],
-      correct: 1,
-    },
-    {
-      q: t(
-        "Si vous ne comprenez pas quand quelqu'un parle anglais, c'est souvent parce que :",
-        "If you don't understand when someone speaks English, it is often because:",
-      ),
-      options: [
-        t("Le vocabulaire est difficile", "The vocabulary is difficult"),
-        t("Vous n'êtes pas habitué aux sons", "You are not used to the sounds"),
-        t("Votre grammaire est faible", "Your grammar is weak"),
-        t(
-          "Vous ne connaissez pas assez de règles",
-          "You don't know enough rules",
-        ),
-      ],
-      correct: 1,
-    },
-    {
-      q: t(
-        "Combien d'heures d'écoute réelle avez-vous chaque semaine ?",
-        "How many hours of real listening do you have each week?",
-      ),
-      options: [
-        t("0 à 30 minutes", "0 to 30 minutes"),
-        t("1 à 2 heures", "1 to 2 hours"),
-        t("3 à 5 heures", "3 to 5 hours"),
-        t("Plus de 5 heures", "More than 5 hours"),
-      ],
-    },
-    {
-      q: t(
-        "Quand quelqu'un parle anglais rapidement vous :",
-        "When someone speaks English fast you:",
-      ),
-      options: [
-        t("Comprenez presque tout", "Understand almost everything"),
-        t("Comprenez quelques mots", "Understand a few words"),
-        t("Ne comprenez presque rien", "Understand almost nothing"),
-        t("Paniquez", "Panic"),
-      ],
-    },
-    {
-      q: t(
-        "Quand vous voulez parler anglais :",
-        "When you want to speak English:",
-      ),
-      options: [
-        t("Vous traduisez dans votre tête", "You translate in your head"),
-        t("Les mots viennent naturellement", "Words come naturally"),
-        t("Vous cherchez les règles", "You search for grammar rules"),
-        t("Vous bloquez", "You get stuck"),
-      ],
-    },
-    {
-      q: t(
-        "Quelle méthode avez-vous utilisée le plus souvent ?",
-        "Which method have you used the most?",
-      ),
-      options: [
-        t("Livres de grammaire", "Grammar books"),
-        t("Applications", "Apps"),
-        t("Cours scolaires", "School courses"),
-        t("Conversations + écoute", "Conversations + listening"),
-      ],
-    },
-    {
-      q: t(
-        "Selon vous, la chose la plus importante pour parler une langue est :",
-        "According to you, the most important thing to speak a language is:",
-      ),
-      options: [
-        t("La grammaire", "Grammar"),
-        t("Le vocabulaire", "Vocabulary"),
-        t("L'écoute", "Listening"),
-        t("L'écriture", "Writing"),
-      ],
+      options: ["Maybe not", "Be careful", "Really?"],
       correct: 2,
     },
     {
       q: t(
-        "Quand vous écoutez une langue étrangère :",
-        "When you listen to a foreign language:",
+        "Complétez : Let's go watch a movie.",
+        "Complete: Let's go watch a movie.",
       ),
-      options: [
-        t("Les sons sont confus", "The sounds are confusing"),
-        t("Vous comprenez les phrases", "You understand sentences"),
-        t("Vous comprenez seulement les mots", "You only understand words"),
-        t("Vous devez traduire", "You must translate"),
-      ],
+      options: ["Ok, I'll buy popcorn", "No, we weren't", "Yes, I'm sure"],
+      correct: 0,
+    },
+    {
+      q: t("How many eggs do you need?", "How many eggs do you need?"),
+      options: ["Not enough", "Not much", "Not many"],
+      correct: 2,
     },
     {
       q: t(
-        "Combien de temps pensez-vous qu'il faut pour commencer à parler une langue ?",
-        "How long do you think it takes to start speaking a language?",
+        "Not ..... knows the answer to this question.",
+        "Not ..... knows the answer to this question.",
       ),
-      options: [
-        t("Plusieurs années", "Several years"),
-        t("1 an", "1 year"),
-        t("Quelques mois", "A few months"),
-        t("Quelques semaines", "A few weeks"),
-      ],
+      options: ["Somebody", "Everybody", "Anybody", "Nobody"],
+      correct: 3,
+    },
+    {
+      q: t(
+        "I started school ..... I was five years old.",
+        "I started school ..... I was five years old.",
+      ),
+      options: ["About", "Since", "When", "That"],
+      correct: 2,
+    },
+    {
+      q: t(
+        "Leo has his driving test tomorrow, so he's feeling ....",
+        "Leo has his driving test tomorrow, so he's feeling ....",
+      ),
+      options: ["Disappointed", "Confused", "Surprised", "Stressed"],
+      correct: 3,
+    },
+    {
+      q: t(
+        "Please can you ..... the dishes?",
+        "Please can you ..... the dishes?",
+      ),
+      options: ["Make", "Help", "Give", "Do"],
+      correct: 3,
+    },
+    {
+      q: t(
+        "I need to hurry or I'll be late ..... work.",
+        "I need to hurry or I'll be late ..... work.",
+      ),
+      options: ["For", "At", "In", "Over"],
+      correct: 0,
+    },
+    {
+      q: t(
+        "This city is ..... because of the traffic.",
+        "This city is ..... because of the traffic.",
+      ),
+      options: ["Lively", "Polluted", "Crowded", "Unspoiled"],
+      correct: 2,
+    },
+    {
+      q: t(
+        "As soon as it ..... dark, she'll light a fire.",
+        "As soon as it ..... dark, she'll light a fire.",
+      ),
+      options: ["Would be", "Will get", "Will be", "Gets"],
+      correct: 3,
+    },
+    {
+      q: t(
+        "Turn the music down! I won't ..... up with this noise anymore.",
+        "Turn the music down! I won't ..... up with this noise anymore.",
+      ),
+      options: ["Keep", "Pick", "Put", "Set"],
+      correct: 2,
+    },
+    {
+      q: t(
+        "Sita was ..... to leave the office when her boss called a meeting.",
+        "Sita was ..... to leave the office when her boss called a meeting.",
+      ),
+      options: ["Soon after", "Not long", "Thinking", "About"],
+      correct: 3,
+    },
+    {
+      q: t(
+        "The gallery owner ..... that Martina stole the painting.",
+        "The gallery owner ..... that Martina stole the painting.",
+      ),
+      options: ["Claimed", "Accused", "Doubted", "Admitted"],
+      correct: 0,
+    },
+    {
+      q: t(
+        "There is so ..... water left and I'm thirsty!",
+        "There is so ..... water left and I'm thirsty!",
+      ),
+      options: ["Much", "Little", "Few", "Any"],
+      correct: 1,
+    },
+    {
+      q: t(
+        "I ..... remember meeting you years ago.",
+        "I ..... remember meeting you years ago.",
+      ),
+      options: ["Distinctly", "Strongly", "Closely", "Highly"],
+      correct: 0,
+    },
+    {
+      q: t(
+        "They'd rather you ..... the concept to David.",
+        "They'd rather you ..... the concept to David.",
+      ),
+      options: ["Would explain", "Will explain", "Explained", "To explain"],
+      correct: 2,
+    },
+    {
+      q: t(
+        "..... before had a song reached the top of the charts so quickly.",
+        "..... before had a song reached the top of the charts so quickly.",
+      ),
+      options: ["Sometime", "Hardly", "Rarely", "Never"],
+      correct: 3,
+    },
+    {
+      q: t(
+        "Ahmed was so ..... in his book that he didn't hear the doorbell.",
+        "Ahmed was so ..... in his book that he didn't hear the doorbell.",
+      ),
+      options: ["Engrossed", "Enthralled", "Captivated"],
+      correct: 0,
     },
   ];
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
+
+  const [started, setStarted] = useState(false);
 
   const select = (i: number) => {
     const copy = [...answers];
@@ -157,59 +180,228 @@ export default function LanguageTest() {
     else setStep(QUESTIONS.length);
   };
 
-  const score = answers.filter(
-    (a, i) => QUESTIONS[i].correct !== undefined && a === QUESTIONS[i].correct,
-  ).length;
+  const score =
+    (answers.filter((a, i) => a === QUESTIONS[i].correct).length /
+      QUESTIONS.length) *
+    100;
 
   const progress = ((step + 1) / QUESTIONS.length) * 100;
 
-  if (step >= QUESTIONS.length) {
+  let level = "";
+  let description = "";
+
+  if (score <= 25) {
+    level = "LEVEL 1 - Beginner";
+    description =
+      "You are at the beginner level. You need to build basic vocabulary and listening habits.";
+  } else if (score <= 50) {
+    level = "LEVEL 2 - Beginner+";
+    description =
+      "You know some English but still struggle with common structures and vocabulary.";
+  } else if (score <= 75) {
+    level = "LEVEL 3 - Intermediate";
+    description =
+      "You can communicate in many situations but still need more fluency and listening practice.";
+  } else {
+    level = "LEVEL 4 - Advanced";
+    description =
+      "You have a strong command of English and can understand complex structures.";
+  }
+
+  if (!started) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 text-center">
+      <section className="min-h-screen bg-[#0a0a0a] px-6 py-24">
         <Navbar />
-        <div className="max-w-2xl">
+
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h1
+              className="text-5xl md:text-6xl text-white mb-4"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              {t("Test d'anglais", "English Assessment Test")}
+            </h1>
+
+            <p className="text-white/60 max-w-2xl mx-auto">
+              {t(
+                "Découvrez votre niveau actuel d'anglais en répondant à 20 questions.",
+                "Discover your current English level by answering 20 questions.",
+              )}
+            </p>
+          </div>
+
+          <div className="bg-white/5 border border-[#c9a84c]/20 rounded-2xl p-8 md:p-10">
+            <div className="inline-flex items-center gap-2 bg-[#c9a84c]/10 border border-[#c9a84c]/20 rounded-full px-4 py-2 mb-8">
+              <span className="text-[#c9a84c] text-sm font-medium">
+                {t(
+                  "20 Questions • Gratuit • 5 Minutes",
+                  "20 Questions • Free • 5 Minutes",
+                )}
+              </span>
+            </div>
+
+            <p className="text-white/80 leading-relaxed mb-8">
+              {t(
+                "Ce test contient 20 questions conçues pour évaluer votre niveau actuel d'anglais.",
+                "This assessment contains 20 questions designed to evaluate your current level of English.",
+              )}
+            </p>
+
+            <div className="bg-[#c9a84c]/10 border border-[#c9a84c]/20 rounded-xl p-6 mb-8">
+              <h3 className="text-[#c9a84c] text-lg font-semibold mb-4">
+                {t("Système de notation", "Scoring System")}
+              </h3>
+
+              <p className="text-white/80">
+                {t(
+                  "Chaque bonne réponse vaut 5%.",
+                  "Each correct answer is worth 5%.",
+                )}
+              </p>
+
+              <p className="text-white/60 mt-2">
+                {t(
+                  "Votre score final sera calculé sur 100%.",
+                  "Your final score will be calculated out of 100%.",
+                )}
+              </p>
+            </div>
+
+            <h3 className="text-white text-xl font-semibold mb-5">
+              {t("Niveaux d'anglais", "English Levels")}
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="border border-red-500/20 bg-red-500/5 rounded-xl p-4">
+                <div className="text-red-400 font-semibold">
+                  {t("Niveau 1 • Débutant", "Level 1 • Beginner")}
+                </div>
+                <div className="text-white/60 text-sm mt-1">0% - 25%</div>
+              </div>
+
+              <div className="border border-orange-500/20 bg-orange-500/5 rounded-xl p-4">
+                <div className="text-orange-400 font-semibold">
+                  {t("Niveau 2 • Débutant +", "Level 2 • Beginner+")}
+                </div>
+                <div className="text-white/60 text-sm mt-1">26% - 50%</div>
+              </div>
+
+              <div className="border border-yellow-500/20 bg-yellow-500/5 rounded-xl p-4">
+                <div className="text-yellow-400 font-semibold">
+                  {t("Niveau 3 • Intermédiaire", "Level 3 • Intermediate")}
+                </div>
+                <div className="text-white/60 text-sm mt-1">51% - 75%</div>
+              </div>
+
+              <div className="border border-green-500/20 bg-green-500/5 rounded-xl p-4">
+                <div className="text-green-400 font-semibold">
+                  {t("Niveau 4 • Avancé", "Level 4 • Advanced")}
+                </div>
+                <div className="text-white/60 text-sm mt-1">76% - 100%</div>
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 mt-10 pt-8">
+              <p className="text-white/60 leading-relaxed">
+                {t(
+                  "À la fin du test, vous recevrez votre score, votre niveau estimé et un récapitulatif de vos réponses. Pour obtenir les bonnes réponses et les explications détaillées, vous pourrez contacter notre formateur.",
+                  "At the end of the assessment, you will receive your score, your estimated level and a summary of your answers. To receive the correct answers and detailed explanations, you will be invited to contact our teacher.",
+                )}
+              </p>
+            </div>
+
+            <div className="text-center mt-10">
+              <button
+                onClick={() => setStarted(true)}
+                className="bg-[#c9a84c] text-black px-10 py-4 rounded-lg font-semibold hover:bg-[#e8c96a] transition mx-auto"
+              >
+                {t("Commencer le test", "Start Test")}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (step >= QUESTIONS.length) {
+    const whatsappMessage = encodeURIComponent(`
+Bonjour Teacher,
+
+Je viens de terminer le test d'anglais.
+
+Mon score : ${Math.round(score)}%
+Mon niveau : ${level}
+
+Mes réponses :
+
+${QUESTIONS.map(
+  (q, i) =>
+    `Question ${i + 1}
+${q.q}
+My answer: ${q.options[answers[i]]}
+`,
+).join("\n")}
+
+Je souhaiterais recevoir les bonnes réponses et la correction.
+`);
+
+    const whatsappLink = `https://wa.me/243981984788?text=${whatsappMessage}`;
+
+    return (
+      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+        <Navbar />
+
+        <div className="max-w-4xl w-full text-center pt-20">
           <h2
-            className="text-4xl text-white mb-8"
+            className="text-4xl text-white mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            {t("Résultat de votre test", "Your test result")}
+            Test Completed
           </h2>
 
-          <p className="text-white/70 text-lg leading-relaxed mb-10">
-            {score <= 2
-              ? t(
-                  "Votre principal blocage est le manque d'écoute. Le cerveau humain apprend une langue grâce à l'écoute répétée.",
-                  "Your main problem is lack of listening. The human brain learns languages through repeated listening.",
-                )
-              : score === 3
-                ? t(
-                    "Vous connaissez des règles mais vous ne comprenez pas les sons. Vous avez besoin d'entraînement intensif à l'écoute.",
-                    "You know rules but you don't understand sounds. You need intensive listening training.",
-                  )
-                : t(
-                    "Votre cerveau traduit encore avant de parler. Notre méthode vous aide à penser directement en anglais.",
-                    "Your brain still translates before speaking. Our method helps you think directly in English.",
-                  )}
+          <h3 className="text-6xl text-[#c9a84c] mb-4 font-bold">
+            {Math.round(score)}%
+          </h3>
+
+          <p className="text-2xl text-white mb-3">{level}</p>
+
+          <p className="text-white/70 mb-10">{description}</p>
+
+          <div className="text-left border border-white/10 rounded-lg p-6 bg-white/5 mb-10">
+            <h4 className="text-white text-2xl mb-6">Your Answers</h4>
+
+            <div className="space-y-6">
+              {QUESTIONS.map((q, i) => (
+                <div key={i} className="border-b border-white/10 pb-4">
+                  <p className="text-white font-medium mb-2">
+                    Question {i + 1}
+                  </p>
+
+                  <p className="text-white/70 mb-2">{q.q}</p>
+
+                  <p className="text-[#c9a84c]">
+                    Your answer: {q.options[answers[i]]}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+            {t(
+              "Si vous souhaitez recevoir les bonnes réponses, les explications détaillées et des conseils personnalisés, veuillez contacter notre formateur.",
+              "To receive the correct answers, detailed explanations and personalized advice, please contact our teacher.",
+            )}
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="/#pricing"
-              className="bg-[#c9a84c] text-black font-semibold px-8 py-4 rounded hover:bg-[#e8c96a] transition"
-            >
-              {t("Commencer un niveau 30 jours", "Start a 30-day level")}
-            </a>
-
-            <a
-              href="/#leadmagnet"
-              className="border border-white/25 text-white px-8 py-4 rounded hover:border-[#e8c96a] hover:text-[#e8c96a]"
-            >
-              {t(
-                "Accéder aux leçons audio gratuites",
-                "Access free audio lessons",
-              )}
-            </a>
-          </div>
+          <a
+            href={whatsappLink}
+            target="_blank"
+            className="inline-block bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold hover:bg-[#e8c96a] transition mb-10"
+          >
+            Contact Teacher
+          </a>
         </div>
       </section>
     );

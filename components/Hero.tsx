@@ -92,8 +92,8 @@ export default function Hero() {
           }}
         >
           {t(
-            "Notre méthode d'écoute active et de conversation avec de vrais formateurs vous aide à développer votre grammaire, vocabulaire et prononciation — naturellement, sans stress. Les sessions sont privées, en ligne, avec un formateur dédié pour vous offrir toute l’attention nécessaire et une flexibilité totale.",
-            "Our active listening and real conversation method helps you build grammar, vocabulary and pronunciation — naturally, stress-free. Sessions are private and online with a dedicated trainer, giving you full attention and flexibility.",
+            "Notre méthode d'écoute active et de conversation avec de vrais formateurs vous aide à développer votre grammaire, vocabulaire et prononciation — naturellement. ",
+            "Our active listening and real conversation method helps you build grammar, vocabulary and pronunciation — naturally.",
           )}
         </p>
 

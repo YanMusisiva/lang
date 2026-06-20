@@ -12,27 +12,27 @@ const VIDEOS = [
     descFr: "Découvrez comment fonctionne notre méthode",
     descEn: "Discover how our method works.",
   },
-  // {
-  //   src: "/videos/video1.mp4",
-  //   titleFr: "Pourquoi l'écoute est essentielle",
-  //   titleEn: "Why listening is essential",
-  //   descFr: "Comprenez pourquoi l'écoute accélère l'apprentissage.",
-  //   descEn: "Understand why listening accelerates learning.",
-  // },
-  // {
-  //   src: "/videos/video3.mp4",
-  //   titleFr: "Comment pratiquer chaque jour",
-  //   titleEn: "How to practice every day",
-  //   descFr: "Une routine simple pour progresser rapidement.",
-  //   descEn: "A simple routine to progress quickly.",
-  // },
-  //   {
-  //     src: "/videos/lesson4.mp4",
-  //     titleFr: "Résultats des étudiants",
-  //     titleEn: "Student results",
-  //     descFr: "Voyez les progrès obtenus avec la méthode.",
-  //     descEn: "See the progress achieved with the method.",
-  //   },
+  {
+    src: "https://www.youtube.com/embed/PqoI50fDx3k?si=zVVNfZK8R0iRHW42",
+    titleFr: "3 erreurs que les adultes font en apprenant l'anglais",
+    titleEn: "3 mistakes adults make when learning English",
+    descFr: "Comprenez les erreurs qui ralentissent l'apprentissage.",
+    descEn: "Understand the mistakes that slow down learning.",
+  },
+  {
+    src: "https://youtube.com/embed/skTAwHHvoUc?si=-bM2HivcliO8cGsj",
+    titleFr: "Comment pratiquer chaque jour",
+    titleEn: "How to practice every day",
+    descFr: "Une routine simple pour progresser rapidement.",
+    descEn: "A simple routine to progress quickly.",
+  },
+  {
+    src: "https://www.youtube.com/embed/gK0ILtlqhP4?si=oGI0H9ct6BrHPTSF",
+    titleFr: "Ameliorez votre anglais en 7 semaines",
+    titleEn: "Improve your English in 7 weeks",
+    descFr: "le programme complet pour parler anglais avec confiance.",
+    descEn: "The complete program to speak English with confidence.",
+  },
 ];
 
 export default function VideoSection() {
@@ -76,7 +76,7 @@ export default function VideoSection() {
 
         <div className="flex gap-8 overflow-x-auto custom-scrollbar pb-6 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
           {VIDEOS.map((video, i) => (
-            <div key={i} className="min-w-[420px] max-w-[420px] flex-shrink-0">
+            <div key={i} className="min-w-105 max-w-105 shrink-0">
               <VideoPlayer
                 src={video.src}
                 title={t(video.titleFr, video.titleEn)}
