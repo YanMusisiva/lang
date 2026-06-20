@@ -7,160 +7,196 @@ import Navbar from "@/components/Navbar";
 export default function LanguageTest() {
   const { t } = useLang();
 
-  const QUESTIONS = [
+  type Question = {
+    q: string;
+    options: string[];
+    points: Record<number, number>;
+  };
+
+  const QUESTIONS: Question[] = [
     {
-      q: t(
-        "Complétez : Excuse me, where is the bank?",
-        "Complete: Excuse me, where is the bank?",
-      ),
-      options: ["The small one", "It's over there", "You can go"],
-      correct: 1,
+      q: "Excuse me, where is the bank ?",
+      options: ["the small one", "it's over there", "You can go"],
+      points: {
+        1: 5,
+        2: 1,
+      },
     },
+
     {
-      q: t("Complétez : Can I help you?", "Complete: Can I help you?"),
-      options: ["No, I don't worry", "It's very good", "Sorry, I can't"],
-      correct: 2,
+      q: "Can I help you ?",
+      options: ["No,don't worry", "It's very good", "Sorry, I can't"],
+      points: {
+        2: 1,
+        0: 5,
+      },
     },
+
     {
-      q: t(
-        "Complétez : Tom wants to go surfing in Hawaii.",
-        "Complete: Tom wants to go surfing in Hawaii.",
-      ),
-      options: ["Maybe not", "Be careful", "Really?"],
-      correct: 2,
+      q: "Tom wants to go surfing in Hawaii.",
+      options: ["Maybe not", "Be careful", "Really ?"],
+      points: {
+        2: 5,
+        1: 3,
+      },
     },
+
     {
-      q: t(
-        "Complétez : Let's go watch a movie.",
-        "Complete: Let's go watch a movie.",
-      ),
+      q: "Let's go watch a movie.",
       options: ["Ok, I'll buy popcorn", "No, we weren't", "Yes, I'm sure"],
-      correct: 0,
+      points: {
+        0: 5,
+        2: 3,
+      },
     },
+
     {
-      q: t("How many eggs do you need?", "How many eggs do you need?"),
+      q: "How many eggs do you need ?",
       options: ["Not enough", "Not much", "Not many"],
-      correct: 2,
+      points: {
+        2: 5,
+        1: 1,
+      },
     },
+
     {
-      q: t(
-        "Not ..... knows the answer to this question.",
-        "Not ..... knows the answer to this question.",
-      ),
+      q: "Not …….. knows the answer to this question",
       options: ["Somebody", "Everybody", "Anybody", "Nobody"],
-      correct: 3,
+      points: {
+        1: 5,
+        2: 3,
+        3: 1,
+      },
     },
+
     {
-      q: t(
-        "I started school ..... I was five years old.",
-        "I started school ..... I was five years old.",
-      ),
+      q: "I started school ….. I was five years old.",
       options: ["About", "Since", "When", "That"],
-      correct: 2,
+      points: {
+        2: 5,
+        1: 1,
+      },
     },
+
     {
-      q: t(
-        "Leo has his driving test tomorrow, so he's feeling ....",
-        "Leo has his driving test tomorrow, so he's feeling ....",
-      ),
-      options: ["Disappointed", "Confused", "Surprised", "Stressed"],
-      correct: 3,
+      q: "Leo has his driving test tomorrow, so he's feeling ………",
+      options: ["disappointed", "confused", "surprised", "stressed"],
+      points: {
+        3: 5,
+        1: 3,
+      },
     },
+
     {
-      q: t(
-        "Please can you ..... the dishes?",
-        "Please can you ..... the dishes?",
-      ),
-      options: ["Make", "Help", "Give", "Do"],
-      correct: 3,
+      q: "Please can you …… the dishes",
+      options: ["make", "help", "give", "do"],
+      points: {
+        3: 5,
+        0: 1,
+      },
     },
+
     {
-      q: t(
-        "I need to hurry or I'll be late ..... work.",
-        "I need to hurry or I'll be late ..... work.",
-      ),
-      options: ["For", "At", "In", "Over"],
-      correct: 0,
+      q: "I need to hurry or I'll be late …… work",
+      options: ["for", "at", "in", "over"],
+      points: {
+        0: 5,
+        1: 1,
+      },
     },
+
     {
-      q: t(
-        "This city is ..... because of the traffic.",
-        "This city is ..... because of the traffic.",
-      ),
-      options: ["Lively", "Polluted", "Crowded", "Unspoiled"],
-      correct: 2,
+      q: "This city is ………. because of the traffic.",
+      options: ["lively", "polluted", "crowded", "unspoiled"],
+      points: {
+        2: 5,
+        1: 3,
+      },
     },
+
     {
-      q: t(
-        "As soon as it ..... dark, she'll light a fire.",
-        "As soon as it ..... dark, she'll light a fire.",
-      ),
-      options: ["Would be", "Will get", "Will be", "Gets"],
-      correct: 3,
+      q: "As soon as it ……. dark, she'll light a fire",
+      options: ["would be", "will get", "will be", "gets"],
+      points: {
+        3: 5,
+        2: 1,
+      },
     },
+
     {
-      q: t(
-        "Turn the music down! I won't ..... up with this noise anymore.",
-        "Turn the music down! I won't ..... up with this noise anymore.",
-      ),
-      options: ["Keep", "Pick", "Put", "Set"],
-      correct: 2,
+      q: "Turn the music down ! I won't …….. up with this noise anymore.",
+      options: ["keep", "pick", "put", "set"],
+      points: {
+        2: 5,
+        0: 3,
+      },
     },
+
     {
-      q: t(
-        "Sita was ..... to leave the office when her boss called a meeting.",
-        "Sita was ..... to leave the office when her boss called a meeting.",
-      ),
-      options: ["Soon after", "Not long", "Thinking", "About"],
-      correct: 3,
+      q: "Sita was ……. to leave the office when her boss called a meeting.",
+      options: ["Soon after", "not long", "thinking", "about"],
+      points: {
+        3: 5,
+        2: 3,
+      },
     },
+
     {
-      q: t(
-        "The gallery owner ..... that Martina stole the painting.",
-        "The gallery owner ..... that Martina stole the painting.",
-      ),
-      options: ["Claimed", "Accused", "Doubted", "Admitted"],
-      correct: 0,
+      q: "The gallery's owner …… that Martina stole the painting.",
+      options: ["claimed", "accused", "doubted", "admitted"],
+      points: {
+        0: 5,
+        1: 3,
+        2: 1,
+      },
     },
+
     {
-      q: t(
-        "There is so ..... water left and I'm thirsty!",
-        "There is so ..... water left and I'm thirsty!",
-      ),
-      options: ["Much", "Little", "Few", "Any"],
-      correct: 1,
+      q: "There is so …… water left and I'm thirsty !",
+      options: ["much", "little", "few", "any"],
+      points: {
+        1: 5,
+        0: 1,
+      },
     },
+
     {
-      q: t(
-        "I ..... remember meeting you years ago.",
-        "I ..... remember meeting you years ago.",
-      ),
-      options: ["Distinctly", "Strongly", "Closely", "Highly"],
-      correct: 0,
+      q: "I ….. remember meeting you years ago.",
+      options: ["distinctly", "strongly", "closely", "highly"],
+      points: {
+        0: 5,
+        1: 3,
+      },
     },
+
     {
-      q: t(
-        "They'd rather you ..... the concept to David.",
-        "They'd rather you ..... the concept to David.",
-      ),
-      options: ["Would explain", "Will explain", "Explained", "To explain"],
-      correct: 2,
+      q: "They'd rather you …….. the concept to David.",
+      options: ["would explain", "will explain", "explained", "to explain"],
+      points: {
+        2: 5,
+        3: 1,
+      },
     },
+
     {
-      q: t(
-        "..... before had a song reached the top of the charts so quickly.",
-        "..... before had a song reached the top of the charts so quickly.",
-      ),
+      q: "……….. before had a song reached the top of the charts so quickly.",
       options: ["Sometime", "Hardly", "Rarely", "Never"],
-      correct: 3,
+      points: {
+        3: 5,
+        2: 1,
+        0: 3,
+      },
     },
+
     {
-      q: t(
-        "Ahmed was so ..... in his book that he didn't hear the doorbell.",
-        "Ahmed was so ..... in his book that he didn't hear the doorbell.",
-      ),
-      options: ["Engrossed", "Enthralled", "Captivated"],
-      correct: 0,
+      q: "Ahmed was so ……. in his book that he didn't hear the doorbell.",
+      options: ["engrossed", "enthralled", "captivated", "concentrated"],
+      points: {
+        0: 5,
+        2: 3,
+        1: 1,
+        3: 1,
+      },
     },
   ];
 
@@ -180,10 +216,12 @@ export default function LanguageTest() {
     else setStep(QUESTIONS.length);
   };
 
-  const score =
-    (answers.filter((a, i) => a === QUESTIONS[i].correct).length /
-      QUESTIONS.length) *
-    100;
+  const score = answers.reduce((total, answer, index) => {
+    return total + (QUESTIONS[index].points?.[answer] || 0);
+  }, 0);
+  const maxScore = QUESTIONS.length * 5;
+
+  const percentage = Math.round((score / maxScore) * 100);
 
   const progress = ((step + 1) / QUESTIONS.length) * 100;
 

@@ -295,14 +295,30 @@ export default function WritingTest() {
   const [input, setInput] = useState("");
   const [answers, setAnswers] = useState<string[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [score, setScore] = useState(0);
 
   const currentQuestion = QUESTIONS[step];
+
+  const normalize = (text: string) =>
+    text
+      .toLowerCase()
+      .replace(/[.,!?;:'"]/g, "") // ignore la ponctuation
+      .replace(/\s+/g, " ") // remplace plusieurs espaces par un seul
+      .trim();
 
   const confirmAnswer = () => {
     const copy = [...answers];
     copy[step] = input;
 
     setAnswers(copy);
+
+    const userAnswer = normalize(input);
+    const correctAnswer = normalize(currentQuestion.answer);
+
+    if (userAnswer === correctAnswer) {
+      setScore((prev) => prev + 1);
+    }
+
     setShowAnswer(true);
   };
 
@@ -361,6 +377,22 @@ export default function WritingTest() {
           <p className="text-white/70 text-lg">
             Vous avez terminé toutes les questions.
           </p>
+          <div className="my-8">
+            <p className="text-white/50 uppercase tracking-widest text-sm mb-2">
+              Final Score
+            </p>
+
+            <h2
+              className="text-[#c9a84c] text-7xl font-bold"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              {score}/{QUESTIONS.length}
+            </h2>
+
+            <p className="text-white/60 mt-3">
+              {Math.round((score / QUESTIONS.length) * 100)}% Correct
+            </p>
+          </div>
           <div className="text-white/70 text-lg">
             Contactez-nous pour recevoir des conseils personnalisés pour ce qui
             semble difficile.
@@ -386,6 +418,18 @@ export default function WritingTest() {
             className="h-2 bg-[#c9a84c] rounded"
             style={{ width: `${progress}%` }}
           />
+        </div>
+        <div className="text-center mb-8">
+          <p className="text-white/50 uppercase tracking-widest text-sm">
+            Current Score
+          </p>
+
+          <h2
+            className="text-[#c9a84c] text-6xl font-bold"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          >
+            {score}/{QUESTIONS.length}
+          </h2>
         </div>
 
         <div className="text-center mb-6 text-white/50">
