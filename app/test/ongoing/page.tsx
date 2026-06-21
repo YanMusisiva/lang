@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { useLang } from "@/context/LangContext";
+import { useEffect } from "react";
 
 export default function WritingTest() {
   const { t } = useLang();
@@ -296,6 +297,123 @@ export default function WritingTest() {
   const [answers, setAnswers] = useState<string[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
   const [score, setScore] = useState(0);
+  const [hasProgress, setHasProgress] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("translation-progress");
+
+    if (saved) {
+      const data = JSON.parse(saved);
+
+      if (data.step >= QUESTIONS.length) {
+        localStorage.removeItem("translation-progress");
+        return;
+      }
+
+      setStep(data.step || 0);
+      setScore(data.score || 0);
+      setAnswers(data.answers || []);
+      // setStarted(data.started || false);
+      setHasProgress(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "translation-progress",
+      JSON.stringify({
+        step,
+        score,
+        answers,
+        started,
+      }),
+    );
+  }, [step, score, answers, started]);
+
+  const restartProgress = () => {
+    localStorage.removeItem("translation-progress");
+
+    setStep(0);
+    setScore(0);
+    setAnswers([]);
+    setInput("");
+    setShowAnswer(false);
+    setHasProgress(false);
+  };
+
+  const showMilestone = step > 0 && step % 100 === 0 && !showAnswer;
+
+  {
+    showMilestone && (
+      <div className="bg-[#c9a84c]/10 border border-[#c9a84c]/30 rounded-xl p-6 mb-8 text-center">
+        <h3 className="text-[#c9a84c] text-2xl font-semibold mb-3">
+          🎉 Congratulations!
+        </h3>
+
+        <p className="text-white/80">
+          You have completed {step} translation exercises.
+        </p>
+
+        <p className="text-white/60 mt-2">
+          Consistency is one of the most important keys to learning a language.
+        </p>
+      </div>
+    );
+  }
+
+  if (!started) {
+    return (
+      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+        <Navbar />
+
+        <div className="max-w-3xl text-center pt-20">
+          <h1
+            className="text-5xl text-white mb-8"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          >
+            English Translation Practice
+          </h1>
+
+          {hasProgress ? (
+            <>
+              <p className="text-white/70 text-lg mb-8">
+                Welcome back.
+                <br />
+                You stopped at question {step + 1}.
+              </p>
+
+              <button
+                onClick={() => setStarted(true)}
+                className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold"
+              >
+                Continue Learning
+              </button>
+              <button
+                onClick={restartProgress}
+                className="mt-4 ml-4 border border-white/20 text-white px-8 py-3 rounded"
+              >
+                Start Again From Question 1
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="text-white/70 text-lg mb-8">
+                Translate French sentences into English and improve your writing
+                skills.
+              </p>
+
+              <button
+                onClick={() => setStarted(true)}
+                className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold"
+              >
+                Start Practice
+              </button>
+            </>
+          )}
+        </div>
+      </section>
+    );
+  }
 
   const currentQuestion = QUESTIONS[step];
 

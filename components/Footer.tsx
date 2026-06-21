@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: "#value", fr: "Avantages", en: "Benefits" },
   { href: "#proof", fr: "Témoignages", en: "Testimonials" },
   { href: "#pricing", fr: "Tarifs", en: "Pricing" },
-  { href: "#contact", fr: "Contact", en: "Contact" },
+  // { href: "#contact", fr: "Contact", en: "Contact" },
 ];
 
 export default function Footer() {
@@ -124,14 +124,14 @@ export default function Footer() {
                 hello@langlistening.online
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 href="#contact"
                 className="text-white/50 text-sm hover:text-[#e8c96a] transition-colors"
               >
                 {t("Formulaire de contact", "Contact form")}
               </a>
-            </li>
+            </li> */}
             <li>
               <a
                 href="#garantie"
@@ -151,10 +151,7 @@ export default function Footer() {
           {t("Tous droits réservés.", "All rights reserved.")}
         </p>
         <p className="text-white/20 text-xs">
-          {t(
-            "Aucun spam. Désabonnement en 1 clic.",
-            "No spam. Unsubscribe in 1 click.",
-          )}
+          {t("Conçu par ASIKIRE & CO.", "Designed by ASIKIRE & CO.")}
         </p>
       </div>
     </footer>
