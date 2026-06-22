@@ -237,7 +237,6 @@ export default function SpeakingExercise() {
 
   useEffect(() => {
     if (step >= PHRASES.length) return;
-    if (!started) return;
 
     const timer = setTimeout(() => {
       lireLaPhrase();
