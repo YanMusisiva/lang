@@ -449,7 +449,6 @@ export default function WritingTest() {
       "haven't": "have not",
       "hasn't": "has not",
       "hadn't": "had not",
-      "ain't": "is not",
     };
 
     const expanded = text
