@@ -6,10 +6,10 @@ import { useLang } from "@/context/LangContext";
 const NAV_LINKS = [
   { href: "/", fr: "Accueil", en: "Home" },
 
-  { href: "#value", fr: "Avantages", en: "Benefits" },
   { href: "#proof", fr: "Témoignages", en: "Testimonials" },
-  { href: "#presentation", fr: "Présentation", en: "About" },
+
   { href: "#pricing", fr: "Tarifs", en: "Pricing" },
+  { href: "/contact", fr: "Contact", en: "Contact" },
   { href: "/blog", fr: "Blog", en: "Blog" },
 ];
 

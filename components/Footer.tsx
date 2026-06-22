@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: "#value", fr: "Avantages", en: "Benefits" },
   { href: "#proof", fr: "Témoignages", en: "Testimonials" },
   { href: "#pricing", fr: "Tarifs", en: "Pricing" },
-  // { href: "#contact", fr: "Contact", en: "Contact" },
+  { href: "/contact", fr: "Contact", en: "Contact" },
 ];
 
 export default function Footer() {

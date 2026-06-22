@@ -8,7 +8,7 @@ const PROOF_NUMBERS = [
   { val: "100+", fr: "Étudiants formés", en: "Students trained" },
   { val: "2 ans", fr: "D'expérience", en: "Of experience" },
   { val: "90%", fr: "Taux de satisfaction", en: "Satisfaction rate" },
-  { val: "12+", fr: "Formateurs qualifiés", en: "Qualified trainers" },
+  { val: "9+", fr: "Formateurs qualifiés", en: "Qualified trainers" },
 ];
 
 export default function SocialProof() {

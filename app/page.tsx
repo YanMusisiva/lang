@@ -8,6 +8,7 @@ import Pricing from "../components/Pricing";
 import Guarantee from "../components/Guarantee";
 import VideoSection from "@/components/VideoSection";
 import Footer from "../components/Footer";
+import CommunitySection from "@/components/CommunitySection";
 
 export default function Page() {
   return (
@@ -19,6 +20,7 @@ export default function Page() {
         <LeadMagnet />
         <ValueSection />
         <SocialProof />
+        <CommunitySection />
         <Authority />
         <Pricing />
         <Guarantee />

@@ -19,7 +19,7 @@ export default function Authority() {
       <div className="max-w-6xl mx-auto flex flex-wrap items-center gap-16">
         {/* Visual block */}
         <RevealWrapper className="shrink-0">
-          <div className="w-72 h-80 md:w-80 md:h-[340px] rounded-lg bg-gradient-to-br from-[#0a0a0a] to-[#1c1c1c] border border-[#c9a84c]/20 relative overflow-hidden flex items-center justify-center">
+          <div className="w-72 h-80 md:w-80 md:h-85 rounded-lg bg-linear-to-br from-[#0a0a0a] to-[#1c1c1c] border border-[#c9a84c]/20 relative overflow-hidden flex items-center justify-center">
             {/* <span
               className="text-[#c9a84c] opacity-20"
               style={{
@@ -37,7 +37,7 @@ export default function Authority() {
         </RevealWrapper>
 
         {/* Content */}
-        <RevealWrapper className="flex-1 min-w-[280px]">
+        <RevealWrapper className="flex-1 min-w-70">
           <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#c9a84c] mb-4">
             {t("Notre autorité", "Our authority")}
           </p>

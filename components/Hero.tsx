@@ -62,23 +62,23 @@ export default function Hero() {
           }}
         >
           {t(
-            "Apprenez à parler anglais couramment en 90 jours, même si vous êtes débutant",
-            "Learn to speak English fluently in 90 days, even as a complete beginner",
-          ).split("couramment").length > 1 ? (
+            "Parlez anglais pour développer votre carrière et votre business dans 90 jours",
+            "Speak English to grow your career and your business in 90 days",
+          ).split("votre carrière et votre business").length > 1 ? (
             <>
-              Apprenez à parler anglais{" "}
+              Parlez anglais pour développer{" "}
               <em className="italic bg-linear-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
-                couramment
+                votre carrière et votre business
               </em>{" "}
-              en 90 jours, même si vous êtes débutant
+              dans 90 jours.
             </>
           ) : (
             <>
-              Learn to speak English{" "}
+              Speak english to grow{" "}
               <em className="italic bg-linear-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
-                fluently
+                your career and your business
               </em>{" "}
-              in 90 days, even as a complete beginner
+              in 90 days.
             </>
           )}
         </h1>
@@ -92,8 +92,8 @@ export default function Hero() {
           }}
         >
           {t(
-            "Notre méthode d'écoute active et de conversation avec de vrais formateurs vous aide à développer votre grammaire, vocabulaire et prononciation — naturellement. ",
-            "Our active listening and real conversation method helps you build grammar, vocabulary and pronunciation — naturally.",
+            "Développez votre confiance pour communiquer avec des clients, employeurs et partenaires internationaux sans dépendre constamment d'un traducteur.-PS: Vous pourrez aussi lire vos emails, messages et documents en anglais sans effort.",
+            "Build your confidence to communicate with clients, employers, and international partners without constantly relying on a translator. PS: You will also be able to read your emails, messages, and documents in English without effort.",
           )}
         </p>
 
@@ -112,10 +112,10 @@ export default function Hero() {
             {t("Passer un test", "Start a test")}
           </a>
           <a
-            href="https://wa.me/243981984788?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20s'il%20vous%20pla%C3%AEt%3F"
+            href="/contact"
             className="border border-white/25 text-white font-light px-9 py-4 rounded text-base hover:border-[#e8c96a] hover:text-[#e8c96a] transition-all duration-200"
           >
-            {t("Parler avec un formateur", "Talk to a tutor")}
+            {t("Contactez-nous", "Contact us")}
           </a>
         </div>
 
