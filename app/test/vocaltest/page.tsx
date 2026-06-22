@@ -163,7 +163,7 @@ export default function SpeakingExercise() {
 
       const alreadyValidated = validatedQuestions.includes(step);
 
-      if (percentage >= 90 && !alreadyValidated) {
+      if (percentage >= 88 && !alreadyValidated) {
         setScore((prev) => prev + 1);
 
         setValidatedQuestions((prev) => [...prev, step]);
