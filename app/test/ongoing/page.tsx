@@ -109,7 +109,7 @@ export default function WritingTest() {
       answer: "Father has two brothers and three sisters.",
     },
     {
-      french: "Ils ont chacun plusieurs garçons et plusieurs filles.",
+      french: "Ils ont chacun plusieurs fils et plusieurs filles.",
       answer: "They each have several sons and daughters.",
     },
     {
@@ -142,7 +142,7 @@ export default function WritingTest() {
     },
     {
       french: "Il prend son petit-déjeuner.",
-      answer: "He is having breakfast.",
+      answer: "He is having his breakfast.",
     },
     {
       french: "Il est assis sur une chaise.",
@@ -417,12 +417,53 @@ export default function WritingTest() {
 
   const currentQuestion = QUESTIONS[step];
 
-  const normalize = (text: string) =>
-    text
+  const normalize = (text: string) => {
+    const contractions: Record<string, string> = {
+      "i'm": "i am",
+      "you're": "you are",
+      "he's": "he is",
+      "she's": "she is",
+      "it's": "it is",
+      "we're": "we are",
+      "they're": "they are",
+      "that's": "that is",
+      "there's": "there is",
+      "who's": "who is",
+      "what's": "what is",
+      "where's": "where is",
+      "when's": "when is",
+      "why's": "why is",
+      "how's": "how is",
+      "i've": "i have",
+      "you've": "you have",
+      "we've": "we have",
+      "they've": "they have",
+      "can't": "cannot",
+      "don't": "do not",
+      "didn't": "did not",
+      "doesn't": "does not",
+      "won't": "will not",
+      "shouldn't": "should not",
+      "couldn't": "could not",
+      "wouldn't": "would not",
+      "haven't": "have not",
+      "hasn't": "has not",
+      "hadn't": "had not",
+      "ain't": "is not",
+    };
+
+    const expanded = text
       .toLowerCase()
+      .replace(
+        /\b(?:i'm|you're|he's|she's|it's|we're|they're|that's|there's|who's|what's|where's|when's|why's|how's|i've|you've|we've|they've|can't|don't|didn't|doesn't|won't|shouldn't|couldn't|wouldn't|haven't|hasn't|hadn't|ain't)\b/g,
+        (match) => contractions[match],
+      );
+
+    return expanded
       .replace(/[.,!?;:'"]/g, "") // ignore la ponctuation
       .replace(/\s+/g, " ") // remplace plusieurs espaces par un seul
       .trim();
+  };
 
   const confirmAnswer = () => {
     const copy = [...answers];
