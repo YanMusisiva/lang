@@ -104,6 +104,7 @@ export default function SpeakingExercise() {
 
   const [estEnTrainDeLire, setEstEnTrainDeLire] = useState(false);
   const [started, setStarted] = useState(false);
+  const [hasProgress, setHasProgress] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("speaking-progress");
@@ -115,6 +116,7 @@ export default function SpeakingExercise() {
     setStep(progress.step || 0);
     setScore(progress.score || 0);
     setValidatedQuestions(progress.validatedQuestions || []);
+    setHasProgress(true);
   }, []);
 
   useEffect(() => {
@@ -124,9 +126,10 @@ export default function SpeakingExercise() {
         step,
         score,
         validatedQuestions,
+        hasProgress: true,
       }),
     );
-  }, [step, score, validatedQuestions]);
+  }, [step, score, validatedQuestions, hasProgress]);
 
   const currentPhrase = PHRASES[step]?.sentence ?? "";
 
@@ -204,8 +207,9 @@ export default function SpeakingExercise() {
 
   const startListening = () => {
     if (!recognition) return;
-
-    window.speechSynthesis.cancel();
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
 
     setEstEnTrainDeLire(false);
 
@@ -237,6 +241,7 @@ export default function SpeakingExercise() {
 
   useEffect(() => {
     if (step >= PHRASES.length) return;
+    if (!started) return;
 
     const timer = setTimeout(() => {
       lireLaPhrase();
@@ -258,6 +263,7 @@ export default function SpeakingExercise() {
 
     setLastPercentage(0);
     setStarted(true);
+    setHasProgress(false);
   };
 
   const nextQuestion = () => {
@@ -270,6 +276,92 @@ export default function SpeakingExercise() {
   };
 
   const isFinished = step >= PHRASES.length;
+
+  if (!started) {
+    return (
+      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+        <Navbar />
+
+        <div className="max-w-3xl text-center pt-20">
+          <h1
+            className="text-5xl text-white mb-8"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          >
+            English Speaking Practice
+          </h1>
+
+          {hasProgress ? (
+            <>
+              <div className="bg-white/5 border border-[#c9a84c]/20 rounded-xl p-8 mb-8">
+                <h2 className="text-[#c9a84c] text-2xl mb-4">Welcome Back</h2>
+
+                <p className="text-white/70 text-lg leading-relaxed">
+                  You already started this speaking exercise.
+                </p>
+
+                <p className="text-white/60 mt-3">Last completed question:</p>
+
+                <p className="text-[#c9a84c] text-4xl mt-2 font-semibold">
+                  {step + 1}
+                </p>
+
+                <p className="text-white/50 mt-4">
+                  Your progress has been automatically saved.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-4">
+                <button
+                  onClick={() => setStarted(true)}
+                  className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold hover:bg-[#e8c96a] transition"
+                >
+                  Continue Practice
+                </button>
+
+                <button
+                  onClick={restartExercise}
+                  className="border border-white/20 text-white px-8 py-4 rounded hover:border-[#c9a84c] hover:text-[#c9a84c] transition"
+                >
+                  Restart From Beginning
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="bg-white/5 border border-[#c9a84c]/20 rounded-xl p-8 mb-8 text-left">
+                <h2 className="text-[#c9a84c] text-2xl mb-6">How It Works</h2>
+
+                <div className="space-y-4 text-white/70">
+                  <p>1. Listen carefully to the model sentence.</p>
+
+                  <p>2. Repeat the sentence aloud using the microphone.</p>
+
+                  <p>3. The system will transcribe what you said.</p>
+
+                  <p>
+                    4. Your pronunciation will be compared to the target
+                    sentence.
+                  </p>
+
+                  <p>
+                    5. A sentence is validated when your score reaches at least
+                    80%.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setStarted(true)}
+                className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold hover:bg-[#e8c96a] transition"
+              >
+                Start Speaking Practice
+              </button>
+            </>
+          )}
+        </div>
+      </section>
+    );
+  }
 
   if (isFinished) {
     return (
