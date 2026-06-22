@@ -13,6 +13,8 @@ export default function LanguageTest() {
     points: Record<number, number>;
   };
 
+  type LevelKey = 1 | 2 | 3 | 4;
+
   const QUESTIONS: Question[] = [
     {
       q: "Excuse me, where is the bank ?",
@@ -200,6 +202,39 @@ export default function LanguageTest() {
     },
   ];
 
+  const LEVELS: Record<
+    LevelKey,
+    { title: string; image: string; description: string }
+  > = {
+    1: {
+      title: "Foundation English",
+      image: "/modules/level1.jpg",
+      description:
+        "Essential vocabulary and listening practice based on English for everyone method.",
+    },
+
+    2: {
+      title: "Everyday English",
+      image: "/modules/level2.jpg",
+      description:
+        "Build confidence in daily conversations based on English for everyone method.",
+    },
+
+    3: {
+      title: "Intermediate English",
+      image: "/modules/level3.jpg",
+      description:
+        "Improve fluency and comprehension based on English for everyone method.",
+    },
+
+    4: {
+      title: "Advanced English",
+      image: "/modules/level4.jpg",
+      description:
+        "Master natural English communication based on English for everyone method.",
+    },
+  };
+
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
 
@@ -222,29 +257,35 @@ export default function LanguageTest() {
   const maxScore = QUESTIONS.length * 5;
 
   const percentage = Math.round((score / maxScore) * 100);
-
+  let levelNumber: LevelKey = 1;
   const progress = ((step + 1) / QUESTIONS.length) * 100;
 
   let level = "";
   let description = "";
 
   if (score <= 25) {
+    levelNumber = 1;
     level = "LEVEL 1 - Beginner";
     description =
       "You are at the beginner level. You need to build basic vocabulary and listening habits.";
   } else if (score <= 50) {
+    levelNumber = 2;
     level = "LEVEL 2 - Beginner+";
     description =
       "You know some English but still struggle with common structures and vocabulary.";
   } else if (score <= 75) {
+    levelNumber = 3;
     level = "LEVEL 3 - Intermediate";
     description =
       "You can communicate in many situations but still need more fluency and listening practice.";
   } else {
+    levelNumber = 4;
     level = "LEVEL 4 - Advanced";
     description =
       "You have a strong command of English and can understand complex structures.";
   }
+
+  const recommendedModule = LEVELS[levelNumber];
 
   if (!started) {
     return (
@@ -406,7 +447,7 @@ Je souhaiterais recevoir les bonnes réponses et la correction.
 
           <p className="text-white/70 mb-10">{description}</p>
 
-          <div className="text-left border border-white/10 rounded-lg p-6 bg-white/5 mb-10">
+          {/* <div className="text-left border border-white/10 rounded-lg p-6 bg-white/5 mb-10">
             <h4 className="text-white text-2xl mb-6">Your Answers</h4>
 
             <div className="space-y-6">
@@ -424,12 +465,38 @@ Je souhaiterais recevoir les bonnes réponses et la correction.
                 </div>
               ))}
             </div>
+          </div> */}
+
+          <div className="max-w-3xl mx-auto text-center mt-10 mb-10">
+            <p className="text-white/70 text-lg leading-relaxed mb-4">
+              Based on your test results, we recommend starting with the program
+              below.
+            </p>
+
+            <h3
+              className="text-[#c9a84c] text-3xl mb-4"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              {recommendedModule.title}
+            </h3>
+
+            <p className="text-white/60 max-w-2xl mx-auto leading-relaxed mb-8">
+              {recommendedModule.description}
+            </p>
+
+            <div className="flex justify-center">
+              <img
+                src={recommendedModule.image}
+                alt={recommendedModule.title}
+                className="w-full max-w-md rounded-2xl border border-[#c9a84c]/20 shadow-lg"
+              />
+            </div>
           </div>
 
           <p className="text-white/70 mb-8 max-w-2xl mx-auto">
             {t(
-              "Si vous souhaitez recevoir les bonnes réponses, les explications détaillées et des conseils personnalisés, veuillez contacter notre formateur.",
-              "To receive the correct answers, detailed explanations and personalized advice, please contact our teacher.",
+              "Si vous souhaitez recevoir les bonnes réponses, les explications détaillées ou des cours de coaching sur le module recommandé , veuillez contacter notre formateur.",
+              "To receive the correct answers, detailed explanations or personalized coaching on the recommended module , please contact our teacher.",
             )}
           </p>
 
@@ -449,7 +516,15 @@ Je souhaiterais recevoir les bonnes réponses et la correction.
 
   return (
     <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
-      <div className="max-w-2xl w-full">
+      <Navbar />
+
+      <div className="max-w-2xl w-full pt-20 pb-12">
+        <div className="text-center mb-10">
+          <h1>{t("Test de niveau", "Level Test")}</h1>
+          <div className="text-center mb-6 text-white/50">
+            Question {step + 1} / {QUESTIONS.length}
+          </div>
+        </div>
         <div className="w-full bg-white/10 h-2 rounded mb-10">
           <div
             className="h-2 bg-[#c9a84c] rounded"

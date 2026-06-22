@@ -38,7 +38,7 @@ export default function WritingTest() {
     },
     {
       french: "Il y a un garçon sur la bicyclette.",
-      answer: "There is one boy on the bicycle.",
+      answer: "There is a boy on the bicycle.",
     },
     {
       french: "Père est derrière la table.",
