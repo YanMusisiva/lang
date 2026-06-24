@@ -39,7 +39,7 @@ export default function LanguageTest() {
       options: ["Maybe not", "Be careful", "Really ?"],
       points: {
         2: 5,
-        1: 3,
+        1: 1,
       },
     },
 
@@ -48,7 +48,7 @@ export default function LanguageTest() {
       options: ["Ok, I'll buy popcorn", "No, we weren't", "Yes, I'm sure"],
       points: {
         0: 5,
-        2: 3,
+        2: 1,
       },
     },
 
@@ -66,8 +66,7 @@ export default function LanguageTest() {
       options: ["Somebody", "Everybody", "Anybody", "Nobody"],
       points: {
         1: 5,
-        2: 3,
-        3: 1,
+        2: 1,
       },
     },
 
@@ -85,7 +84,7 @@ export default function LanguageTest() {
       options: ["disappointed", "confused", "surprised", "stressed"],
       points: {
         3: 5,
-        1: 3,
+        1: 1,
       },
     },
 
@@ -112,7 +111,7 @@ export default function LanguageTest() {
       options: ["lively", "polluted", "crowded", "unspoiled"],
       points: {
         2: 5,
-        1: 3,
+        1: 1,
       },
     },
 
@@ -130,7 +129,7 @@ export default function LanguageTest() {
       options: ["keep", "pick", "put", "set"],
       points: {
         2: 5,
-        0: 3,
+        0: 1,
       },
     },
 
@@ -139,7 +138,7 @@ export default function LanguageTest() {
       options: ["Soon after", "not long", "thinking", "about"],
       points: {
         3: 5,
-        2: 3,
+        2: 1,
       },
     },
 
@@ -148,8 +147,7 @@ export default function LanguageTest() {
       options: ["claimed", "accused", "doubted", "admitted"],
       points: {
         0: 5,
-        1: 3,
-        2: 1,
+        1: 1,
       },
     },
 
@@ -167,7 +165,7 @@ export default function LanguageTest() {
       options: ["distinctly", "strongly", "closely", "highly"],
       points: {
         0: 5,
-        1: 3,
+        1: 1,
       },
     },
 
@@ -186,7 +184,7 @@ export default function LanguageTest() {
       points: {
         3: 5,
         2: 1,
-        0: 3,
+        0: 1,
       },
     },
 
@@ -195,9 +193,7 @@ export default function LanguageTest() {
       options: ["engrossed", "enthralled", "captivated", "concentrated"],
       points: {
         0: 5,
-        2: 3,
-        1: 1,
-        3: 1,
+        2: 1,
       },
     },
   ];
@@ -412,17 +408,7 @@ Je viens de terminer le test d'anglais.
 Mon score : ${Math.round(score)}%
 Mon niveau : ${level}
 
-Mes réponses :
-
-${QUESTIONS.map(
-  (q, i) =>
-    `Question ${i + 1}
-${q.q}
-My answer: ${q.options[answers[i]]}
-`,
-).join("\n")}
-
-Je souhaiterais recevoir les bonnes réponses et la correction.
+Je souhaiterais recevoir la correction et en savoir plus sur le module recommandé.
 `);
 
     const whatsappLink = `https://wa.me/243981984788?text=${whatsappMessage}`;
@@ -469,8 +455,10 @@ Je souhaiterais recevoir les bonnes réponses et la correction.
 
           <div className="max-w-3xl mx-auto text-center mt-10 mb-10">
             <p className="text-white/70 text-lg leading-relaxed mb-4">
-              Based on your test results, we recommend starting with the program
-              below.
+              {t(
+                " Au vu de vos résultats, nous vous invitons à découvrir le programme personnalisé ci-dessous. (PS : une méthode de 90 jours pour maîtriser pleinement votre niveau !)",
+                "Based on your test results, we recommend starting with the program below. (PS : 90 days program to master your level)",
+              )}
             </p>
 
             <h3
