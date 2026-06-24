@@ -1,28 +1,27 @@
-// app/practice/[level]/[module]/page.tsx
-
 import { PRACTICE, DATASETS } from "@/data/practice";
+
 import SpeakingExercise from "@/components/practice/SpeakingExercise";
 import WritingExercise from "@/components/practice/WritingExercise";
 
-type Props = {
+export default function ModulePage({
+  params,
+}: {
   params: {
     level: string;
     module: string;
   };
-};
-
-export default function ModulePage({ params }: Props) {
+}) {
   const levelData = PRACTICE[params.level as keyof typeof PRACTICE];
 
   if (!levelData) {
-    return <div className="p-10 text-center">Level not found</div>;
+    return <div>Level not found</div>;
   }
 
   const moduleData =
     levelData.modules[params.module as keyof typeof levelData.modules];
 
   if (!moduleData) {
-    return <div className="p-10 text-center">Module not found</div>;
+    return <div>Module not found</div>;
   }
 
   const phrases = DATASETS[moduleData.dataset as keyof typeof DATASETS];
