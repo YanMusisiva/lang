@@ -112,6 +112,13 @@ export default function Hero() {
             {t("Passer un test", "Start a test")}
           </a>
           <a
+            href="/practice"
+            className="bg-[#c9a84c] text-black font-semibold px-9 py-4 rounded text-base tracking-wide hover:bg-[#e8c96a] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(201,168,76,0.3)] transition-all duration-200"
+          >
+            {t("Commencer gratuitement", "Start for free")}
+          </a>
+
+          <a
             href="/contact"
             className="border border-white/25 text-white font-light px-9 py-4 rounded text-base hover:border-[#e8c96a] hover:text-[#e8c96a] transition-all duration-200"
           >

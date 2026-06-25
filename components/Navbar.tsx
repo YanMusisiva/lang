@@ -5,10 +5,14 @@ import { useLang } from "@/context/LangContext";
 
 const NAV_LINKS = [
   { href: "/", fr: "Accueil", en: "Home" },
+  { href: "#story", fr: "Notre histoire", en: "Our Story" },
 
-  { href: "#proof", fr: "Témoignages", en: "Testimonials" },
+  // { href: "#proof", fr: "Témoignages", en: "Testimonials" },
+  // { href: "#value", fr: "Valeur", en: "Value" },
 
-  { href: "#pricing", fr: "Tarifs", en: "Pricing" },
+  // { href: "#video", fr: "Vidéo", en: "Video" },
+  // { href: "#community", fr: "Communauté", en: "Community" },
+  // { href: "#pricing", fr: "Tarifs", en: "Pricing" },
   { href: "/contact", fr: "Contact", en: "Contact" },
   { href: "/blog", fr: "Blog", en: "Blog" },
 ];

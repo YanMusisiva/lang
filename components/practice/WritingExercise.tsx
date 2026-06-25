@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { useLang } from "@/context/LangContext";
-import { useEffect } from "react";
+import { PRACTICE } from "@/data/practice";
 
 type Question = {
   french: string;
@@ -23,6 +24,9 @@ export default function WritingExercise({
 }: WritingExerciseProps) {
   const { t } = useLang();
 
+  // Clé unique propre à ce niveau et ce module
+  const storageKey = `translation-progress-${level}-${module}`;
+
   const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
   const [input, setInput] = useState("");
@@ -31,121 +35,161 @@ export default function WritingExercise({
   const [score, setScore] = useState(0);
   const [hasProgress, setHasProgress] = useState(false);
 
+  // États liés au verrouillage séquentiel
+  const [isLocked, setIsLocked] = useState(false);
+  const [previousModuleTitle, setPreviousModuleTitle] = useState("");
+
+  // 1. Vérification des prérequis de blocage (Vérifie le module précédent)
   useEffect(() => {
-    const saved = localStorage.getItem("translation-progress");
+    const currentLevelData = PRACTICE[level as keyof typeof PRACTICE];
+    if (!currentLevelData) return;
+
+    const moduleKeys = Object.keys(currentLevelData.modules);
+    const currentIndex = moduleKeys.indexOf(module);
+
+    // Si ce n'est pas le premier module du niveau
+    if (currentIndex > 0) {
+      const prevModuleKey = moduleKeys[currentIndex - 1];
+      const prevModuleData =
+        currentLevelData.modules[
+          prevModuleKey as keyof typeof currentLevelData.modules
+        ];
+      setPreviousModuleTitle(prevModuleData.title);
+
+      // Vérifie s'il existe une progression sur le module précédent (indifféremment Speaking ou Writing)
+      const prevSpeakingSaved = localStorage.getItem(
+        `speaking-progress-${level}-${prevModuleKey}`,
+      );
+      const prevWritingSaved = localStorage.getItem(
+        `translation-progress-${level}-${prevModuleKey}`,
+      );
+
+      // Si aucune sauvegarde n'est détectée pour le module précédent, on bloque l'accès
+      if (!prevSpeakingSaved && !prevWritingSaved) {
+        setIsLocked(true);
+      } else {
+        setIsLocked(false);
+      }
+    }
+  }, [level, module]);
+
+  // 2. Récupération de la progression spécifique à ce module
+  useEffect(() => {
+    const saved = localStorage.getItem(storageKey);
 
     if (saved) {
       const data = JSON.parse(saved);
 
       if (data.step >= questions.length) {
-        localStorage.removeItem("translation-progress");
+        localStorage.removeItem(storageKey);
         return;
       }
 
       setStep(data.step || 0);
       setScore(data.score || 0);
       setAnswers(data.answers || []);
-      // setStarted(data.started || false);
       setHasProgress(true);
     }
-  }, []);
+  }, [storageKey, questions.length]);
 
+  // ==========================================
+  // 1. BLOCAGE SI LE MODULE PRÉCÉDENT N'A PAS >= 50%
+  // ==========================================
   useEffect(() => {
+    const currentLevelData = PRACTICE[level as keyof typeof PRACTICE];
+    if (!currentLevelData) return;
+
+    const moduleKeys = Object.keys(currentLevelData.modules);
+    const currentIndex = moduleKeys.indexOf(module);
+
+    // Si ce n'est pas le premier module du niveau, on inspecte le précédent
+    if (currentIndex > 0) {
+      const prevModuleKey = moduleKeys[currentIndex - 1];
+      const prevModuleData =
+        currentLevelData.modules[
+          prevModuleKey as keyof typeof currentLevelData.modules
+        ];
+      setPreviousModuleTitle(prevModuleData.title);
+
+      const prevSpeakingSaved = localStorage.getItem(
+        `speaking-progress-${level}-${prevModuleKey}`,
+      );
+      const prevWritingSaved = localStorage.getItem(
+        `translation-progress-${level}-${prevModuleKey}`,
+      );
+
+      let isPrevFinished = false;
+      let prevScorePercent = 0;
+
+      // Détection de la complétion et calcul du score sur 100
+      if (prevSpeakingSaved) {
+        const data = JSON.parse(prevSpeakingSaved);
+        isPrevFinished = data.isFinished === true;
+        if (data.totalQuestions) {
+          prevScorePercent = Math.round(
+            (data.score / data.totalQuestions) * 100,
+          );
+        }
+      } else if (prevWritingSaved) {
+        const data = JSON.parse(prevWritingSaved);
+        isPrevFinished = data.isFinished === true;
+        if (data.totalQuestions) {
+          prevScorePercent = Math.round(
+            (data.score / data.totalQuestions) * 100,
+          );
+        }
+      }
+
+      // Sécurité stricte : Verrouillage si non terminé OU moins de 50% de réussite
+      if (!isPrevFinished || prevScorePercent < 50) {
+        setIsLocked(true);
+      } else {
+        setIsLocked(false);
+      }
+    }
+  }, [level, module]);
+
+  // ==========================================
+  // 2. SAUVEGARDE ENREGISTRANT LE TOTAL DE QUESTIONS ET LA COMPLÉTION
+  // ==========================================
+  useEffect(() => {
+    if (!started && !hasProgress) return;
+
+    // Le module est considéré terminé si l'utilisateur a répondu à toutes les questions
+    const finished = step >= questions.length && questions.length > 0;
+
     localStorage.setItem(
-      "translation-progress",
+      storageKey,
       JSON.stringify({
         step,
         score,
         answers,
         started,
+        hasProgress: true,
+        totalQuestions: questions.length, // Permet le calcul du taux de réussite sur la liste
+        isFinished: finished,
       }),
     );
-  }, [step, score, answers, started]);
+  }, [
+    step,
+    score,
+    answers,
+    started,
+    hasProgress,
+    storageKey,
+    questions.length,
+  ]);
 
   const restartProgress = () => {
-    localStorage.removeItem("translation-progress");
-
+    localStorage.removeItem(storageKey);
     setStep(0);
     setScore(0);
     setAnswers([]);
     setInput("");
     setShowAnswer(false);
     setHasProgress(false);
+    setStarted(true);
   };
-
-  const showMilestone = step > 0 && step % 100 === 0 && !showAnswer;
-
-  {
-    showMilestone && (
-      <div className="bg-[#c9a84c]/10 border border-[#c9a84c]/30 rounded-xl p-6 mb-8 text-center">
-        <h3 className="text-[#c9a84c] text-2xl font-semibold mb-3">
-          🎉 Congratulations!
-        </h3>
-
-        <p className="text-white/80">
-          You have completed {step} translation exercises.
-        </p>
-
-        <p className="text-white/60 mt-2">
-          Consistency is one of the most important keys to learning a language.
-        </p>
-      </div>
-    );
-  }
-
-  if (!started) {
-    return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
-        <Navbar />
-
-        <div className="max-w-3xl text-center pt-20">
-          <h1
-            className="text-5xl text-white mb-8"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            English Translation Practice
-          </h1>
-
-          {hasProgress ? (
-            <>
-              <p className="text-white/70 text-lg mb-8">
-                Welcome back.
-                <br />
-                You stopped at question {step + 1}.
-              </p>
-
-              <button
-                onClick={() => setStarted(true)}
-                className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold"
-              >
-                Continue Learning
-              </button>
-              <button
-                onClick={restartProgress}
-                className="mt-4 ml-4 border border-white/20 text-white px-8 py-3 rounded"
-              >
-                Start Again From Question 1
-              </button>
-            </>
-          ) : (
-            <>
-              <p className="text-white/70 text-lg mb-8">
-                Translate French sentences into English and improve your writing
-                skills.
-              </p>
-
-              <button
-                onClick={() => setStarted(true)}
-                className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold"
-              >
-                Start Practice
-              </button>
-            </>
-          )}
-        </div>
-      </section>
-    );
-  }
 
   const currentQuestion = questions[step];
 
@@ -191,15 +235,14 @@ export default function WritingExercise({
       );
 
     return expanded
-      .replace(/[.,!?;:'"]/g, "") // ignore la ponctuation
-      .replace(/\s+/g, " ") // remplace plusieurs espaces par un seul
+      .replace(/[.,!?;:'"]/g, "")
+      .replace(/\s+/g, " ")
       .trim();
   };
 
   const confirmAnswer = () => {
     const copy = [...answers];
     copy[step] = input;
-
     setAnswers(copy);
 
     const userAnswer = normalize(input);
@@ -218,45 +261,153 @@ export default function WritingExercise({
     setShowAnswer(false);
   };
 
+  // 4. Calcul dynamique du lien vers le module suivant
+  const getNextModuleUrl = () => {
+    const currentLevelData = PRACTICE[level as keyof typeof PRACTICE];
+    if (!currentLevelData) return `/practice/${level}`;
+
+    const moduleKeys = Object.keys(currentLevelData.modules);
+    const currentIndex = moduleKeys.indexOf(module);
+
+    if (currentIndex !== -1 && currentIndex < moduleKeys.length - 1) {
+      const nextModuleKey = moduleKeys[currentIndex + 1];
+      return `/practice/${level}/${nextModuleKey}`;
+    }
+    return `/practice/${level}`;
+  };
+
   const progress = ((step + 1) / questions.length) * 100;
 
-  if (!started) {
+  // RENDER : Écran d'interdiction / Verrouillage
+  if (isLocked) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-6">
         <Navbar />
-
-        <div className="max-w-3xl text-center pt-20">
-          <h1
-            className="text-5xl text-white mb-8"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            Test d'Expression Écrite
-          </h1>
-
-          <p className="text-white/70 text-lg leading-relaxed mb-10">
-            Traduisez chaque phrase du français vers l'anglais.
-            <br />
-            Après avoir confirmé votre réponse, la correction apparaîtra
-            immédiatement.
+        <div className="max-w-md w-full bg-white/5 border border-yellow-500/20 rounded-xl p-8 text-center mt-12">
+          <span className="text-5xl">🔒</span>
+          <h2 className="text-[#c9a84c] text-2xl font-bold mt-4 mb-2">
+            Module Verrouillé
+          </h2>
+          <p className="text-white/70 text-sm mb-6 leading-relaxed">
+            Pour commencer ce test, vous devez d'avance terminer le module
+            précédent : <br />
+            <strong className="text-white">"{previousModuleTitle}"</strong>.
           </p>
-
-          <button
-            onClick={() => setStarted(true)}
-            className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold hover:bg-[#e8c96a] transition"
+          <Link
+            href={`/practice/${level}`}
+            className="bg-[#c9a84c] text-black px-6 py-2.5 rounded font-semibold hover:bg-[#e8c96a] transition text-sm"
           >
-            Commencer le test
-          </button>
+            Retourner aux modules
+          </Link>
         </div>
       </section>
     );
   }
 
-  if (step >= questions.length) {
+  // RENDER : Écran d'accueil avant de démarrer
+  if (!started) {
+    const savedRaw =
+      typeof window !== "undefined" ? localStorage.getItem(storageKey) : null;
+    const isAlreadyDone = savedRaw ? JSON.parse(savedRaw).isFinished : false;
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center px-6 text-white">
         <Navbar />
 
-        <div className="max-w-2xl text-center pt-20">
+        <div className="max-w-3xl w-full text-center pt-10">
+          <div className="text-left mb-6">
+            <Link
+              href={`/practice/${level}`}
+              className="text-sm text-white/50 hover:text-[#c9a84c] transition"
+            >
+              ← Back to Level
+            </Link>
+          </div>
+
+          <h1
+            className="text-5xl mb-8"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          >
+            Test d'Expression Écrite
+          </h1>
+
+          {isAlreadyDone ? (
+            <div className="bg-white/5 border border-green-500/20 rounded-xl p-8 mb-8">
+              <h2 className="text-green-400 text-2xl mb-2">✓ Module Terminé</h2>
+              <p className="text-white/70 mb-6">
+                Félicitations, vous avez validé ce test écrit.
+              </p>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={restartProgress}
+                  className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold hover:bg-[#e8c96a] transition"
+                >
+                  Refaire le test
+                </button>
+                <Link
+                  href={`/practice/${level}`}
+                  className="border border-white/20 text-white px-8 py-4 rounded hover:bg-white/10 transition"
+                >
+                  Retour aux modules
+                </Link>
+              </div>
+            </div>
+          ) : hasProgress ? (
+            <>
+              <div className="bg-white/5 border border-[#c9a84c]/20 rounded-xl p-8 mb-8">
+                <h2 className="text-[#c9a84c] text-2xl mb-4">Welcome Back</h2>
+                <p className="text-white/70 text-lg mb-2">
+                  Vous aviez interrompu cet exercice.
+                </p>
+                <p className="text-white/50 text-sm">
+                  Question actuelle :{" "}
+                  <strong className="text-[#c9a84c] text-lg">
+                    {step + 1} / {questions.length}
+                  </strong>
+                </p>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-4">
+                <button
+                  onClick={() => setStarted(true)}
+                  className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold hover:bg-[#e8c96a] transition"
+                >
+                  Continuer le test
+                </button>
+                <button
+                  onClick={restartProgress}
+                  className="border border-white/20 text-white px-8 py-4 rounded hover:border-red-400 hover:text-red-400 transition"
+                >
+                  Recommencer à la question 1
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+                Traduisez chaque phrase du français vers l'anglais. Après avoir
+                confirmé votre réponse, la correction apparaîtra immédiatement.
+              </p>
+
+              <button
+                onClick={() => setStarted(true)}
+                className="bg-[#c9a84c] text-black px-10 py-4 rounded font-semibold hover:bg-[#e8c96a] transition"
+              >
+                Commencer le test
+              </button>
+            </>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  // RENDER : Écran de fin d'exercice (Exercice Complété)
+  if (step >= questions.length) {
+    return (
+      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 text-white">
+        <Navbar />
+
+        <div className="max-w-2xl w-full pt-10 text-center">
           <h2
             className="text-5xl text-[#c9a84c] mb-8"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -264,77 +415,107 @@ export default function WritingExercise({
             Test terminé
           </h2>
 
-          <p className="text-white/70 text-lg">
-            Vous avez terminé toutes les questions.
+          <p className="text-white/70 text-lg mb-6">
+            Vous avez fini d'évaluer toutes les questions de ce module.
           </p>
-          <div className="my-8">
-            <p className="text-white/50 uppercase tracking-widest text-sm mb-2">
+
+          <div className="bg-white/5 border border-white/10 rounded-xl p-8 mb-8 text-center">
+            <p className="text-white/50 uppercase tracking-widest text-xs mb-2">
               Final Score
             </p>
-
             <h2
-              className="text-[#c9a84c] text-7xl font-bold"
+              className="text-[#c9a84c] text-6xl font-bold mb-2"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               {score}/{questions.length}
             </h2>
-
-            <p className="text-white/60 mt-3">
-              {Math.round((score / questions.length) * 100)}% Correct
+            <p className="text-white/60 text-sm">
+              Taux de précision : {Math.round((score / questions.length) * 100)}
+              %
             </p>
           </div>
-          <div className="text-white/70 text-lg">
-            Contactez-nous pour recevoir des conseils personnalisés pour ce qui
-            semble difficile.
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            <button
+              onClick={restartProgress}
+              className="bg-white/5 border border-white/20 text-white py-4 rounded-lg font-semibold hover:border-white transition"
+            >
+              🔄 Refaire le test
+            </button>
+            <Link
+              href={getNextModuleUrl()}
+              className="bg-[#c9a84c] text-black py-4 rounded-lg font-semibold hover:bg-[#e8c96a] transition flex items-center justify-center gap-1"
+            >
+              Exercice suivant ➔
+            </Link>
           </div>
-          <a
-            href="https://wa.me/243981984788?text=Bonjour%20Teacher%2C%20je%20viens%20de%20terminer%20le%20test."
-            className="border border-white/25 text-white font-light px-9 py-4 rounded text-base hover:border-[#e8c96a] hover:text-[#e8c96a] transition-all duration-200"
-          >
-            {t("Ecrire un formateur", "Write to a tutor")}
-          </a>
+
+          <div className="bg-white/5 border border-white/5 rounded-xl p-6 mb-8 text-sm text-white/60 leading-relaxed">
+            Besoin d'un retour ou de conseils sur vos erreurs d'écriture ?
+            Contactez un formateur :
+            <div className="mt-4">
+              <a
+                href="https://wa.me/243981984788?text=Bonjour%20Teacher%2C%20je%20viens%20de%20terminer%20le%20test%20d%27ecriture."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-green-600/20 border border-green-500/30 text-green-400 font-medium px-6 py-2.5 rounded-lg hover:bg-green-600/40 transition"
+              >
+                {t("Ecrire un formateur", "Write to a tutor")}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     );
   }
 
+  // RENDER : Interface d'entraînement principale (Session en cours)
   return (
-    <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+    <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 text-white py-12">
       <Navbar />
 
-      <div className="max-w-3xl w-full pt-20">
-        <div className="w-full bg-white/10 h-2 rounded mb-10">
+      <div className="max-w-3xl w-full pt-10">
+        <div className="flex justify-between items-center mb-6">
+          <Link
+            href={`/practice/${level}`}
+            className="text-xs text-white/50 hover:text-[#c9a84c] transition underline"
+          >
+            ← Abandonner le test
+          </Link>
+          <span className="text-xs bg-white/10 px-3 py-1 rounded text-white/70 uppercase tracking-widest">
+            Writing Mode
+          </span>
+        </div>
+
+        {/* Barre de progression supérieure */}
+        <div className="w-full bg-white/10 h-1.5 rounded-full mb-8">
           <div
-            className="h-2 bg-[#c9a84c] rounded"
+            className="h-1.5 bg-[#c9a84c] rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="text-center mb-8">
-          <p className="text-white/50 uppercase tracking-widest text-sm">
-            Current Score
-          </p>
 
+        <div className="text-center mb-8">
+          <p className="text-white/50 uppercase tracking-widest text-xs mb-1">
+            Score Actuel
+          </p>
           <h2
-            className="text-[#c9a84c] text-6xl font-bold"
+            className="text-[#c9a84c] text-5xl font-bold"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             {score}/{questions.length}
           </h2>
+          <p className="text-white/40 text-xs mt-2">
+            Phrase {step + 1} sur {questions.length}
+          </p>
         </div>
 
-        <div className="text-center mb-6 text-white/50">
-          Question {step + 1} / {questions.length}
-        </div>
-
-        <h2
-          className="text-4xl text-white text-center mb-10"
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-        >
-          Traduisez :
+        <h2 className="text-2xl text-white/60 text-center mb-4 font-light">
+          Traduisez la phrase suivante :
         </h2>
 
-        <div className="bg-white/5 border border-white/10 rounded-lg p-6 mb-8">
-          <p className="text-2xl text-[#e8c96a] text-center">
+        <div className="bg-white/5 border border-white/10 rounded-xl p-8 mb-6 text-center">
+          <p className="text-2xl text-[#e8c96a] font-medium">
             "{currentQuestion.french}"
           </p>
         </div>
@@ -343,16 +524,16 @@ export default function WritingExercise({
           value={input}
           disabled={showAnswer}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Write your translation here..."
-          className="w-full min-h-35 bg-white/5 border border-white/20 rounded-lg p-4 text-white outline-none focus:border-[#c9a84c]"
+          placeholder="Saisissez votre traduction anglaise ici..."
+          className="w-full min-h-[120px] bg-white/5 border border-white/20 rounded-xl p-4 text-white outline-none focus:border-[#c9a84c] transition resize-none text-lg"
         />
 
         {!showAnswer && (
-          <div className="text-center mt-8">
+          <div className="text-center mt-6">
             <button
               onClick={confirmAnswer}
               disabled={!input.trim()}
-              className="bg-[#c9a84c] text-black px-8 py-3 rounded font-semibold hover:bg-[#e8c96a] transition disabled:opacity-40"
+              className="bg-[#c9a84c] text-black px-10 py-3.5 rounded-xl font-semibold hover:bg-[#e8c96a] transition disabled:opacity-30 disabled:cursor-not-allowed shadow-md"
             >
               Confirmer ma réponse
             </button>
@@ -360,21 +541,24 @@ export default function WritingExercise({
         )}
 
         {showAnswer && (
-          <div className="mt-10">
-            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6">
-              <h3 className="text-green-400 font-semibold mb-3">
-                Réponse attendue :
+          <div className="mt-8 animate-fadeIn">
+            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-6">
+              <h3 className="text-green-400 text-xs uppercase tracking-wider font-semibold mb-2">
+                Correction attendue :
               </h3>
-
-              <p className="text-white text-xl">{currentQuestion.english}</p>
+              <p className="text-white text-xl font-medium">
+                "{currentQuestion.english}"
+              </p>
             </div>
 
-            <div className="text-center mt-8 mb-20">
+            <div className="text-center mb-12">
               <button
                 onClick={nextQuestion}
-                className="bg-[#c9a84c] text-black px-8 py-3 rounded font-semibold hover:bg-[#e8c96a] transition"
+                className="bg-[#c9a84c] text-black px-12 py-3.5 rounded-xl font-semibold hover:bg-[#e8c96a] transition shadow-md"
               >
-                Question suivante
+                {step + 1 === questions.length
+                  ? "Terminer le test ➔"
+                  : "Question suivante ➔"}
               </button>
             </div>
           </div>

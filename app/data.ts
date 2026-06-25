@@ -101,34 +101,34 @@ export const BULLETS: BulletCard[] = [
   {
     num: "01",
     title: {
-      fr: "Habituez votre oreille à l’anglais réel",
-      en: "Train your ear to real English",
+      fr: "Habituez votre cerveau aux réalités du terrain",
+      en: "Train your brain for real-world scenarios",
     },
     desc: {
-      fr: "Vous écoutez l'anglais sous plusieurs tonalités et accents afin d'habituer votre cerveau aux sons réels de la langue. Grâce à la répétition guidée et à plus de 20 heures d'appels de pratique avec des formateurs, vous développez naturellement compréhension et fluidité. Avec cette combinaison, il devient extrêmement difficile de rester bloqué à l'oral.",
-      en: "You listen to English in multiple tones and accents to train your brain to recognize real language sounds. Through guided repetition and more than 20 hours of live practice calls with trainers, you naturally build comprehension and speaking fluency. With this combination, remaining unable to speak becomes extremely unlikely.",
+      fr: "Vous entraînez votre oreille à l'anglais des affaires sous plusieurs tonalités et accents pour habituer votre cerveau aux sons réels du monde professionnel. Grâce à notre méthode d'écoute active et à la répétition guidée, vous assimilez le vocabulaire corporate de manière instinctive, rendant le blocage à l'oral techniquement impossible lors de vos réunions.",
+      en: "You train your ear to business English across multiple tones and accents to condition your brain to the real sounds of the corporate world. Through our active listening method and guided repetition, you absorb corporate vocabulary instinctively, making freezing during meetings technically impossible.",
     },
   },
   {
     num: "02",
     title: {
-      fr: "Progressez en 5 niveaux en seulement 30 jours chacun",
-      en: "Advance through 5 levels in just 30 days each",
+      fr: "Un plan d'action précis pour un impact sous 90 jours",
+      en: "A precise action plan for impact in 90 days",
     },
     desc: {
-      fr: "Notre programme est structuré en 5 niveaux : les 3 premiers niveaux sur 90 jours vous permettent de parler anglais couramment, tandis que les 2 niveaux suivants vous aident à améliorer lecture et écriture et à vous préparer à la grammaire avancée ainsi qu'aux examens comme IELTS ou TOEFL. Chaque niveau est conçu pour progresser rapidement grâce à l'écoute active et aux exercices pratiques.",
-      en: "Our program is structured in 5 levels: the first 3 levels over 90 days help you speak English fluently, while the last 2 levels improve your reading and writing and prepare you for advanced grammar and exams like IELTS or TOEFL. Each level is designed for rapid progress through active listening and practical exercises.",
+      fr: "Oubliez la théorie scolaire inutile. Notre parcours est structuré pour transformer votre carrière et votre business en seulement 3 mois. Les premiers paliers débloquent votre fluidité immédiate et votre confiance à l'oral, tandis que les modules avancés vous arment pour négocier, manager et présenter des projets complexes en anglais sans aucune hésitation.",
+      en: "Forget useless academic theory. Our curriculum is structured to transform your career and business in just 3 months. The first stages unlock your immediate fluency and speaking confidence, while advanced modules equip you to negotiate, manage, and pitch complex projects in English without hesitation.",
     },
   },
   {
     num: "03",
     title: {
-      fr: "Apprenez en privé avec un formateur dédié, en ligne et à votre rythme",
-      en: "Learn privately with a dedicated trainer, online and on your schedule",
+      fr: "Pratique interactive en solo et immersion dans une immense communauté",
+      en: "Interactive solo practice and immersion in a massive community",
     },
     desc: {
-      fr: "Notre programme se déroule en sessions privées avec un formateur dédié qui se concentre uniquement sur vous. Contrairement aux applications ou à l’intelligence artificielle, votre formateur adapte chaque séance à votre niveau, corrige vos erreurs en temps réel et vous aide à parler naturellement. Comme tout se fait en ligne, vous bénéficiez d’une grande flexibilité : apprenez où que vous soyez et aux moments qui vous conviennent. Cette attention personnalisée garantit des progrès rapides et une vraie aisance à l’oral.",
-      en: "Our program takes place in private sessions with a dedicated trainer focused entirely on you. Unlike apps or AI, your trainer adapts each session to your level, corrects mistakes in real time, and helps you speak naturally. Since everything happens online, you gain full flexibility—learn from anywhere and at times that suit your schedule. This personalized attention ensures faster progress and real speaking confidence.",
+      fr: "Bénéficiez d'un double écosystème puissant et flexible. Au quotidien, pratiquez gratuitement à votre rythme sur notre plateforme interactive via des exercices oraux et écrits stimulants. Ensuite, passez à l'action en rejoignant notre immense communauté internationale sur WhatsApp pour débattre en temps réel sur des sujets concrets et des situations business réelles.",
+      en: "Benefit from a powerful, flexible dual ecosystem. On a daily basis, practice for free at your own pace on our interactive platform with stimulating speaking and writing exercises. Then, take action by joining our massive international community on WhatsApp to debate in real-time on concrete topics and real business scenarios.",
     },
   },
 ];

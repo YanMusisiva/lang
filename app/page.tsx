@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import LeadMagnet from "../components/LeadMagnet";
 import ValueSection from "../components/ValueSection";
-import SocialProof from "../components/SocialProof";
+// import SocialProof from "../components/SocialProof";
 import Authority from "../components/Authority";
 import Pricing from "../components/Pricing";
 import Guarantee from "../components/Guarantee";
@@ -19,7 +19,7 @@ export default function Page() {
         <VideoSection />
         <LeadMagnet />
         <ValueSection />
-        <SocialProof />
+        {/* <SocialProof /> */}
         <CommunitySection />
         <Authority />
         <Pricing />

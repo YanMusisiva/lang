@@ -40,7 +40,7 @@ export default function VideoSection() {
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-[#0a0a0a] py-24 relative overflow-hidden">
+    <section id="video" className="bg-[#0a0a0a] py-24 relative overflow-hidden">
       {/* glow background */}
       <div
         className="absolute inset-0 pointer-events-none"
