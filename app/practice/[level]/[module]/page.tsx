@@ -51,9 +51,15 @@ export default async function ModulePage({ params }: ModulePageProps) {
 
   // 4. Récupération du module
   const moduleKey = resolvedParams.module as keyof typeof levelData.modules;
-  const moduleData = levelData.modules[moduleKey];
+  const moduleData = levelData.modules[moduleKey] as
+    | { dataset: keyof typeof DATASETS; type: "speaking" | "writing" }
+    | undefined;
 
-  if (!moduleData) {
+  if (
+    !moduleData ||
+    typeof moduleData !== "object" ||
+    !("dataset" in moduleData)
+  ) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-6">
         <div className="max-w-md w-full bg-white/5 border border-red-500/30 rounded-xl p-6 text-center">
@@ -79,7 +85,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
   }
 
   // 5. Récupération des phrases associées au dataset du module
-  const datasetKey = moduleData.dataset as keyof typeof DATASETS;
+  const datasetKey = moduleData.dataset;
   const phrases = DATASETS[datasetKey] || [];
 
   // 6. Routage vers le bon composant (Oral ou Écrit)
