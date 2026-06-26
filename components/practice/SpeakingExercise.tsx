@@ -244,24 +244,71 @@ export default function Speaking({
   const normalize = (text: string) =>
     text
       .toLowerCase()
-      .replace(/[.,!?;:'"]/g, "")
+      // Retire la ponctuation de manière plus complète
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿¡'’‘"]/g, "")
+      // Remplacements spécifiques pour la transcription des nombres (optionnel mais ultra-crédible)
+      .replace(/\b7\b/g, "seven")
+      .replace(/\b15\b/g, "fifteen")
+      .replace(/\b2015\b/g, "twenty fifteen")
       .replace(/\s+/g, " ")
       .trim();
 
-  const calculateSimilarity = (userText: string, targetText: string) => {
-    const userWords = normalize(userText).split(" ");
-    const targetWords = normalize(targetText).split(" ");
+  // Fonction interne pour calculer la distance de Levenshtein (différence de caractères)
+  const levenshtein = (a: string, b: string): number => {
+    const matrix = Array.from({ length: b.length + 1 }, (_, i) => [i]);
+    for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
 
-    let correct = 0;
-    targetWords.forEach((word) => {
-      if (userWords.includes(word)) {
-        correct++;
+    for (let i = 1; i <= b.length; i++) {
+      for (let j = 1; j <= a.length; j++) {
+        if (b[i - 1] === a[j - 1]) {
+          matrix[i][j] = matrix[i - 1][j - 1];
+        } else {
+          matrix[i][j] = Math.min(
+            matrix[i - 1][j - 1] + 1, // substitution
+            matrix[i][j - 1] + 1, // insertion
+            matrix[i - 1][j] + 1, // suppression
+          );
+        }
       }
-    });
-
-    return Math.round((correct / targetWords.length) * 100);
+    }
+    return matrix[b.length][a.length];
   };
 
+  const calculateSimilarity = (userText: string, targetText: string) => {
+    const cleanUser = normalize(userText);
+    const cleanTarget = normalize(targetText);
+
+    // Cas parfaits ou vides
+    if (cleanUser === cleanTarget) return 100;
+    if (!cleanUser || !cleanTarget) return 0;
+
+    const userWords = cleanUser.split(" ");
+    const targetWords = cleanTarget.split(" ");
+
+    // 1. CALCUL DU SCORE PAR MOTS (60% de la note)
+    let correctWords = 0;
+    const tempUserWords = [...userWords]; // Copie pour gérer proprement les doublons
+
+    targetWords.forEach((word) => {
+      const index = tempUserWords.indexOf(word);
+      if (index !== -1) {
+        correctWords++;
+        tempUserWords.splice(index, 1); // On retire le mot trouvé pour éviter qu'un mot répété valide tout
+      }
+    });
+    const wordScore = (correctWords / targetWords.length) * 100;
+
+    // 2. CALCUL PAR LEVENSHTEIN / CARACTÈRES (40% de la note)
+    const maxLength = Math.max(cleanUser.length, cleanTarget.length);
+    const distance = levenshtein(cleanUser, cleanTarget);
+    const charScore = ((maxLength - distance) / maxLength) * 100;
+
+    // 3. MIX HYBRIDE PONDÉRÉ
+    const finalScore = wordScore * 0.6 + charScore * 0.4;
+
+    // Retourne un score arrondi borné entre 0 et 100
+    return Math.max(0, Math.min(100, Math.round(finalScore)));
+  };
   const startListening = () => {
     if (!recognition) return;
     if ("speechSynthesis" in window) {
