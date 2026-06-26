@@ -52,11 +52,13 @@ export default function Speaking({
     // Si ce n'est pas le premier module du niveau, on vérifie le précédent
     if (currentIndex > 0) {
       const prevModuleKey = moduleKeys[currentIndex - 1];
-      const prevModuleData =
-        currentLevelData.modules[
-          prevModuleKey as keyof typeof currentLevelData.modules
-        ];
-      setPreviousModuleTitle(prevModuleData.title);
+      const prevModuleData = currentLevelData.modules[
+        prevModuleKey as keyof typeof currentLevelData.modules
+      ] as
+        | { title?: string; dataset?: string; type?: "speaking" | "writing" }
+        | undefined;
+
+      setPreviousModuleTitle(prevModuleData?.title ?? "");
 
       // On vérifie indifféremment s'il s'agissait d'un exercice speaking ou writing
       const prevSpeakingSaved = localStorage.getItem(
@@ -117,11 +119,13 @@ export default function Speaking({
     // Si ce n'est pas le premier module du niveau, on inspecte le précédent
     if (currentIndex > 0) {
       const prevModuleKey = moduleKeys[currentIndex - 1];
-      const prevModuleData =
-        currentLevelData.modules[
-          prevModuleKey as keyof typeof currentLevelData.modules
-        ];
-      setPreviousModuleTitle(prevModuleData.title);
+      const prevModuleData = currentLevelData.modules[
+        prevModuleKey as keyof typeof currentLevelData.modules
+      ] as
+        | { title?: string; dataset?: string; type?: "speaking" | "writing" }
+        | undefined;
+
+      setPreviousModuleTitle(prevModuleData?.title ?? "");
 
       const prevSpeakingSaved = localStorage.getItem(
         `speaking-progress-${level}-${prevModuleKey}`,
