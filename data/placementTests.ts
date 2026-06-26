@@ -55,7 +55,7 @@ export const PLACEMENT_TESTS: Record<string, PlacementQuestion[]> = {
       textWithBlank: "He is ___ than his brother.",
       options: ["tall", "taller", "tallest"],
       correctOption: "taller",
-      englishFull: "He is tighter than his brother",
+      englishFull: "He is taller than his brother",
       frenchTranslation: "Il est plus grand que son frère.",
     },
     {
@@ -620,7 +620,6 @@ export const PLACEMENT_TESTS: Record<string, PlacementQuestion[]> = {
         "Due to the economic crisis, we have to lay ___ fifty workers.",
       options: ["off", "down", "out"],
       correctOption: "off",
-
       englishFull:
         "Due to the economic crisis we have to lay off fifty workers",
       frenchTranslation:
