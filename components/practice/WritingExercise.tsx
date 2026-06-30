@@ -534,7 +534,7 @@ export default function WritingExercise({
           disabled={showAnswer}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Saisissez votre traduction anglaise ici..."
-          className="w-full min-h-[120px] bg-white/5 border border-white/20 rounded-xl p-4 text-white outline-none focus:border-[#c9a84c] transition resize-none text-lg"
+          className="w-full min-h-30 bg-white/5 border border-white/20 rounded-xl p-4 text-white outline-none focus:border-[#c9a84c] transition resize-none text-lg"
         />
 
         {!showAnswer && (

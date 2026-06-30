@@ -369,7 +369,7 @@ function AdminContent() {
                       /{article.slug}
                     </p>
                   </div>
-                  <div className="flex gap-2 flex-shrink-0">
+                  <div className="flex gap-2 shrink-0">
                     <Link
                       href={`/blog/${article.slug}`}
                       className="font-mono text-[10px] text-white/30 hover:text-white border border-white/10 px-3 py-1.5 hover:border-white/25 transition-colors"
