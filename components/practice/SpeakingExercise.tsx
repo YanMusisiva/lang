@@ -541,6 +541,9 @@ export default function Speaking({
             <p className="text-white/60 mt-2 text-sm">
               Sentences successfully mastered
             </p>
+            <p className="text-white/60 text-sm">
+              Taux de précision : {Math.round((score / phrases.length) * 100)}%
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-8">
@@ -695,7 +698,7 @@ export default function Speaking({
                 ) : (
                   <span className="text-red-400 font-semibold text-sm bg-red-500/10 px-3 py-1.5 rounded border border-red-500/20">
                     {" "}
-                    Try Again
+                    <button onClick={startListening}>Try Again</button>
                   </span>
                 )}
               </div>

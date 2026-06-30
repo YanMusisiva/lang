@@ -411,7 +411,7 @@ export default function WritingExercise({
       <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 text-white">
         <Navbar />
 
-        <div className="max-w-2xl w-full pt-10 text-center">
+        <div className="max-w-2xl w-full pt-10 md:pt-20 text-center">
           <h2
             className="text-5xl text-[#c9a84c] mb-8"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -453,18 +453,23 @@ export default function WritingExercise({
               Exercice suivant ➔
             </Link>
           </div>
+          <Link
+            href={`/practice/${level}`}
+            className="border border-white/20 text-white px-8 py-4 rounded hover:bg-white/10 transition"
+          >
+            Retour aux modules
+          </Link>
 
-          <div className="bg-white/5 border border-white/5 rounded-xl p-6 mb-8 text-sm text-white/60 leading-relaxed">
-            Besoin d'un retour ou de conseils sur vos erreurs d'écriture ?
-            Contactez un formateur :
+          <div className="bg-white/5 border border-white/5 rounded-xl p-6 mt-6 mb-8 text-sm text-white/60 leading-relaxed">
+            Besoin de coaching en ligne ? Contactez un formateur :
             <div className="mt-4">
               <a
-                href="https://wa.me/243981984788?text=Bonjour%20Teacher%2C%20je%20viens%20de%20terminer%20le%20test%20d%27ecriture."
+                href="https://wa.me/243981984788?text=Bonjour%20Teacher%2C%20je%20viens%20de%20terminer%20le%20test%20d%27ecriture.%20Donnez%20moi%20plus%20d%27informations%20sur%20le%20coaching"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-green-600/20 border border-green-500/30 text-green-400 font-medium px-6 py-2.5 rounded-lg hover:bg-green-600/40 transition"
               >
-                {t("Ecrire un formateur", "Write to a tutor")}
+                {t("Ecrire à un formateur", "Write to a tutor")}
               </a>
             </div>
           </div>
