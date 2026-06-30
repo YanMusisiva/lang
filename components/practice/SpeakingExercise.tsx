@@ -5,6 +5,7 @@ import Link from "next/link";
 import useRouter from "next/navigation"; // Pour la redirection automatique si besoin
 import Navbar from "@/components/Navbar";
 import { PRACTICE } from "@/data/practice";
+import confetti from "canvas-confetti";
 
 type Phrase = {
   french: string;
@@ -15,6 +16,46 @@ type SpeakingExerciseProps = {
   phrases: Phrase[];
   level: string;
   module: string;
+};
+
+const fireRealisticConfetti = () => {
+  // 🔊 Déclenchement du son (Next.js sert le dossier public à la racine '/')
+  const audio = new Audio("/sounds/success-confetti.mp3");
+  audio.volume = 0.4; // Ajuste le volume entre 0.0 et 1.0 pour ne pas éclater les oreilles
+
+  audio.play().catch((error) => {
+    // Le navigateur bloque parfois le son si l'utilisateur n'a pas encore interagi avec la page
+    console.log("Lecture audio bloquée ou échouée :", error);
+  });
+
+  // Animation des confettis (ton code précédent)
+  const duration = 2 * 1000;
+  const animationEnd = Date.now() + duration;
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+  const randomInRange = (min: number, max: number) =>
+    Math.random() * (max - min) + min;
+
+  const interval: any = setInterval(function () {
+    const timeLeft = animationEnd - Date.now();
+
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+
+    const particleCount = 50 * (timeLeft / duration);
+
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+    });
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+    });
+  }, 250);
 };
 
 export default function Speaking({
@@ -231,6 +272,7 @@ export default function Speaking({
       if (percentage >= 80 && !alreadyValidated) {
         setScore((prev) => prev + 1);
         setValidatedQuestions((prev) => [...prev, step]);
+        fireRealisticConfetti();
       }
       setShowResult(true);
     };
