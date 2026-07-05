@@ -139,11 +139,15 @@ export default function PlacementTestModal({
   const hasPassed = finalScorePercent >= 80;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 z-50 animate-fadeIn">
-      <div className="bg-[#0f0f0f] border border-[#c9a84c]/30 rounded-2xl max-w-2xl w-full p-4 sm:p-8 relative shadow-2xl shadow-yellow-500/5 max-h-[calc(100vh-2rem)] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 animate-fadeIn overflow-y-auto p-2 sm:p-4 flex justify-center items-start sm:items-center">
+      {/* Changements clés :
+        - Le parent a "overflow-y-auto" et "items-start" sur mobile pour que le modal commence tout en haut s'il est géant.
+        - Le conteneur ci-dessous utilise "my-auto" pour rester centré verticalement UNIQUEMENT s'il y a assez de place.
+      */}
+      <div className="bg-[#0f0f0f] border border-[#c9a84c]/30 rounded-2xl max-w-2xl w-full p-4 sm:p-8 relative shadow-2xl shadow-yellow-500/5 my-auto flex flex-col max-h-[90vh] sm:max-h-[calc(100vh-2rem)]">
         {/* ÉCRAN ANTI-TRICHE */}
         {hasCheated ? (
-          <div className="text-center py-4 sm:py-8 animate-fadeIn">
+          <div className="text-center py-4 sm:py-8 animate-fadeIn overflow-y-auto">
             <span className="text-4xl sm:text-6xl block mb-4">⚠️</span>
             <h3 className="text-2xl sm:text-3xl font-serif text-red-500 mb-2">
               Test Annulé pour Triche
@@ -174,11 +178,11 @@ export default function PlacementTestModal({
             </div>
           </div>
         ) : !testFinished ? (
-          /* ÉCRAN DE JEU CLASSIQUE */
-          <div className="animate-fadeIn">
+          /* ÉCRAN DE JEU CLASSIQUE (On isole la zone scrollable à l'intérieur) */
+          <div className="flex flex-col overflow-y-auto pr-1">
             <button
               onClick={onClose}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white/40 hover:text-white text-xl p-2"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white/40 hover:text-white text-xl p-2 z-10"
             >
               ✕
             </button>
@@ -194,7 +198,7 @@ export default function PlacementTestModal({
               Question {step + 1} / {questions.length}
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-6 mb-4 text-center">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-6 mb-4 text-center shrink-0">
               <p className="text-lg sm:text-xl text-white font-light tracking-wide break-words">
                 {currentQuestion.textWithBlank.replace(
                   "___",
@@ -206,14 +210,13 @@ export default function PlacementTestModal({
               </p>
             </div>
 
-            {/* Grille adaptative pour les options sur mobile */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4 shrink-0">
               {currentQuestion.options.map((opt) => (
                 <button
                   key={opt}
                   disabled={isOptionConfirmed}
                   onClick={() => setSelectedOption(opt)}
-                  className={`py-3 px-4 rounded-lg text-xs sm:text-sm transition font-medium border text-center break-words ${
+                  className={`py-2.5 px-4 rounded-lg text-xs sm:text-sm transition font-medium border text-center break-words ${
                     selectedOption === opt
                       ? "bg-[#c9a84c] text-black border-[#c9a84c]"
                       : "bg-white/5 text-white/80 border-white/10 hover:border-white/30"
@@ -227,14 +230,14 @@ export default function PlacementTestModal({
             {selectedOption && !isOptionConfirmed && (
               <button
                 onClick={() => setIsOptionConfirmed(true)}
-                className="w-full bg-white/10 text-white py-3 rounded-lg text-xs sm:text-sm border border-white/20 hover:bg-white/20 transition mb-4 font-medium"
+                className="w-full bg-white/10 text-white py-3 rounded-lg text-xs sm:text-sm border border-white/20 hover:bg-white/20 transition mb-4 font-medium shrink-0"
               >
                 Confirmer l'option & Étape Vocale
               </button>
             )}
 
             {isOptionConfirmed && (
-              <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-4 sm:p-6 text-center animate-fadeIn space-y-4">
+              <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-4 sm:p-6 text-center animate-fadeIn space-y-4 shrink-0">
                 <p className="text-[10px] sm:text-xs uppercase text-[#c9a84c] tracking-widest">
                   Étape Orale : Lisez la phrase complète
                 </p>
@@ -289,7 +292,7 @@ export default function PlacementTestModal({
           </div>
         ) : (
           /* ÉCRAN DE RÉSULTAT FINAL */
-          <div className="text-center py-4 sm:py-6">
+          <div className="text-center py-4 sm:py-6 overflow-y-auto">
             <span className="text-4xl sm:text-5xl">
               {hasPassed ? "🎉" : "🔒"}
             </span>
