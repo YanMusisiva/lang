@@ -27,11 +27,9 @@ export default function PlacementTestModal({
 
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [testFinished, setTestFinished] = useState(false);
-
-  // ÉTAT DE SÉCURITÉ : Détecte si l'utilisateur a triché/quitté l'onglet
   const [hasCheated, setHasCheated] = useState(false);
 
-  // 1. Système de détection anti-triche (Changement d'onglet ou perte de focus)
+  // 1. Système de détection anti-triche
   useEffect(() => {
     if (testFinished || hasCheated) return;
 
@@ -45,7 +43,6 @@ export default function PlacementTestModal({
       setHasCheated(true);
     };
 
-    // Écouteurs d'événements
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("blur", handleWindowBlur);
 
@@ -81,13 +78,13 @@ export default function PlacementTestModal({
   if (questions.length === 0) {
     return (
       <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-        <div className="bg-[#121212] border border-[#c9a84c]/30 p-8 rounded-2xl max-w-sm text-center">
-          <p className="text-white/70">
+        <div className="bg-[#121212] border border-[#c9a84c]/30 p-6 sm:p-8 rounded-2xl max-w-sm w-full text-center">
+          <p className="text-white/70 text-sm sm:text-base">
             Aucune question configurée pour ce niveau.
           </p>
           <button
             onClick={onClose}
-            className="mt-4 bg-[#c9a84c] text-black px-4 py-2 rounded"
+            className="mt-4 w-full sm:w-auto bg-[#c9a84c] text-black px-4 py-2 rounded-xl text-sm font-medium"
           >
             Fermer
           </button>
@@ -142,80 +139,81 @@ export default function PlacementTestModal({
   const hasPassed = finalScorePercent >= 80;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fadeIn">
-      <div className="bg-[#0f0f0f] border border-[#c9a84c]/30 rounded-2xl max-w-2xl w-full p-8 relative shadow-2xl shadow-yellow-500/5">
-        {/* ÉCRAN ANTI-TRICHE : S'affiche immédiatement si l'utilisateur quitte la page */}
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 z-50 animate-fadeIn">
+      <div className="bg-[#0f0f0f] border border-[#c9a84c]/30 rounded-2xl max-w-2xl w-full p-4 sm:p-8 relative shadow-2xl shadow-yellow-500/5 max-h-[calc(100vh-2rem)] overflow-y-auto">
+        {/* ÉCRAN ANTI-TRICHE */}
         {hasCheated ? (
-          <div className="text-center py-8 animate-fadeIn">
-            <span className="text-6xl block mb-4">⚠️</span>
-            <h3 className="text-3xl font-serif text-red-500 mb-2">
+          <div className="text-center py-4 sm:py-8 animate-fadeIn">
+            <span className="text-4xl sm:text-6xl block mb-4">⚠️</span>
+            <h3 className="text-2xl sm:text-3xl font-serif text-red-500 mb-2">
               Test Annulé pour Triche
             </h3>
-            <p className="text-white/70 text-sm mb-6 max-w-md mx-auto leading-relaxed">
+            <p className="text-white/70 text-xs sm:text-sm mb-6 max-w-md mx-auto leading-relaxed px-2">
               Vous avez quitté la fenêtre ou changé d'onglet pendant le test.
               Par souci d'équité et d'authenticité, toute sortie est
               éliminatoire.
             </p>
-            <div className="flex gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center px-4">
               <button
                 onClick={() => {
                   setStep(0);
                   setCorrectAnswersCount(0);
                   setTestFinished(false);
-                  setHasCheated(false); // Réinitialise le flag
+                  setHasCheated(false);
                 }}
-                className="bg-[#c9a84c] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[#e8c96a] transition text-sm"
+                className="w-full sm:w-auto bg-[#c9a84c] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[#e8c96a] transition text-xs sm:text-sm"
               >
                 Recommencer honnêtement
               </button>
               <button
                 onClick={onClose}
-                className="border border-white/10 text-white/50 px-6 py-3 rounded-xl text-sm hover:text-white transition"
+                className="w-full sm:w-auto border border-white/10 text-white/50 px-6 py-3 rounded-xl text-xs sm:text-sm hover:text-white transition"
               >
                 Quitter
               </button>
             </div>
           </div>
         ) : !testFinished ? (
-          /* ÉCRAN DE JEU CLASSIQUE (En cours) */
-          <div>
+          /* ÉCRAN DE JEU CLASSIQUE */
+          <div className="animate-fadeIn">
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-white/40 hover:text-white text-xl"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white/40 hover:text-white text-xl p-2"
             >
               ✕
             </button>
 
-            <h2 className="text-2xl text-[#c9a84c] mb-1 font-serif">
+            <h2 className="text-xl sm:text-2xl text-[#c9a84c] mb-1 font-serif pr-8">
               Test d'accès : {levelTitle}
             </h2>
-            <p className="text-xs text-red-400/80 uppercase tracking-widest mb-6 font-mono font-medium">
-              ⚠️ Ne quittez pas cet onglet sous peine d'annulation automatique
+            <p className="text-[10px] sm:text-xs text-red-400/80 uppercase tracking-widest mb-4 font-mono font-medium">
+              ⚠️ Interdiction de quitter cet onglet
             </p>
 
-            <div className="text-sm text-white/50 mb-4 font-mono">
+            <div className="text-xs sm:text-sm text-white/50 mb-3 font-mono">
               Question {step + 1} / {questions.length}
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 text-center">
-              <p className="text-xl text-white font-light tracking-wide">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-6 mb-4 text-center">
+              <p className="text-lg sm:text-xl text-white font-light tracking-wide break-words">
                 {currentQuestion.textWithBlank.replace(
                   "___",
                   selectedOption ? `[ ${selectedOption} ]` : "______",
                 )}
               </p>
-              <p className="text-xs text-white/40 mt-2 italic">
+              <p className="text-[11px] sm:text-xs text-white/40 mt-2 italic">
                 Traduisez : {currentQuestion.frenchTranslation}
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            {/* Grille adaptative pour les options sur mobile */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
               {currentQuestion.options.map((opt) => (
                 <button
                   key={opt}
                   disabled={isOptionConfirmed}
                   onClick={() => setSelectedOption(opt)}
-                  className={`py-3 rounded-lg text-sm transition font-medium border ${
+                  className={`py-3 px-4 rounded-lg text-xs sm:text-sm transition font-medium border text-center break-words ${
                     selectedOption === opt
                       ? "bg-[#c9a84c] text-black border-[#c9a84c]"
                       : "bg-white/5 text-white/80 border-white/10 hover:border-white/30"
@@ -229,18 +227,18 @@ export default function PlacementTestModal({
             {selectedOption && !isOptionConfirmed && (
               <button
                 onClick={() => setIsOptionConfirmed(true)}
-                className="w-full bg-white/10 text-white py-2.5 rounded-lg text-sm border border-white/20 hover:bg-white/20 transition mb-6 font-medium"
+                className="w-full bg-white/10 text-white py-3 rounded-lg text-xs sm:text-sm border border-white/20 hover:bg-white/20 transition mb-4 font-medium"
               >
-                Confirmer l'option & Activer l'étape Vocale
+                Confirmer l'option & Étape Vocale
               </button>
             )}
 
             {isOptionConfirmed && (
-              <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-6 text-center animate-fadeIn">
-                <p className="text-xs uppercase text-[#c9a84c] tracking-widest mb-3">
+              <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-4 sm:p-6 text-center animate-fadeIn space-y-4">
+                <p className="text-[10px] sm:text-xs uppercase text-[#c9a84c] tracking-widest">
                   Étape Orale : Lisez la phrase complète
                 </p>
-                <p className="text-lg text-white/90 mb-4 font-serif">
+                <p className="text-base sm:text-lg text-white/90 font-serif leading-relaxed break-words px-2">
                   "
                   {currentQuestion.textWithBlank.replace(
                     "___",
@@ -249,23 +247,27 @@ export default function PlacementTestModal({
                   "
                 </p>
 
-                <button
-                  onClick={startListening}
-                  className={`w-16 h-16 rounded-full text-2xl transition mb-2 ${
-                    isListening
-                      ? "bg-red-500 animate-pulse"
-                      : "bg-[#c9a84c] text-black"
-                  }`}
-                >
-                  {isListening ? "🛑" : "🎙️"}
-                </button>
-                <p className="text-[11px] text-white/40">
-                  {isListening ? "Parlez maintenant..." : "Cliquez pour parler"}
-                </p>
+                <div className="flex flex-col items-center justify-center">
+                  <button
+                    onClick={startListening}
+                    className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full text-xl sm:text-2xl transition flex items-center justify-center ${
+                      isListening
+                        ? "bg-red-500 animate-pulse text-white"
+                        : "bg-[#c9a84c] text-black"
+                    }`}
+                  >
+                    {isListening ? "🛑" : "🎙️"}
+                  </button>
+                  <p className="text-[10px] sm:text-[11px] text-white/40 mt-2">
+                    {isListening
+                      ? "Parlez maintenant..."
+                      : "Cliquez pour parler"}
+                  </p>
+                </div>
 
                 {spokenText && (
-                  <div className="mt-4 bg-black/40 p-3 rounded-lg text-sm border border-white/5">
-                    <span className="text-green-400 text-xs block mb-1">
+                  <div className="bg-black/40 p-3 rounded-lg text-xs sm:text-sm border border-white/5 text-left break-words">
+                    <span className="text-green-400 text-[10px] sm:text-xs block mb-1 font-medium">
                       Texte détecté :
                     </span>
                     <span className="text-white italic">"{spokenText}"</span>
@@ -275,7 +277,7 @@ export default function PlacementTestModal({
                 {spokenText && (
                   <button
                     onClick={handleNext}
-                    className="mt-6 w-full bg-[#c9a84c] text-black py-3 rounded-xl font-semibold hover:bg-[#e8c96a] transition text-sm"
+                    className="w-full bg-[#c9a84c] text-black py-3 rounded-xl font-semibold hover:bg-[#e8c96a] transition text-xs sm:text-sm shadow-lg shadow-yellow-500/10"
                   >
                     {step + 1 === questions.length
                       ? "Terminer le test ➔"
@@ -287,14 +289,16 @@ export default function PlacementTestModal({
           </div>
         ) : (
           /* ÉCRAN DE RÉSULTAT FINAL */
-          <div className="text-center py-6">
-            <span className="text-5xl">{hasPassed ? "🎉" : "🔒"}</span>
-            <h3 className="text-3xl font-serif mt-4 mb-2 text-white">
+          <div className="text-center py-4 sm:py-6">
+            <span className="text-4xl sm:text-5xl">
+              {hasPassed ? "🎉" : "🔒"}
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-serif mt-4 mb-2 text-white">
               {hasPassed ? "Test Réussi !" : "Score Insuffisant"}
             </h3>
-            <p className="text-white/60 text-sm mb-6 max-w-sm mx-auto">
+            <p className="text-white/60 text-xs sm:text-sm mb-6 max-w-sm mx-auto px-2 leading-relaxed">
               Vous avez obtenu un score de{" "}
-              <strong className="text-[#c9a84c] text-lg">
+              <strong className="text-[#c9a84c] text-base sm:text-lg">
                 {finalScorePercent}%
               </strong>{" "}
               ({correctAnswersCount} sur {questions.length} correctes).
@@ -305,25 +309,25 @@ export default function PlacementTestModal({
             {hasPassed ? (
               <button
                 onClick={onSuccess}
-                className="bg-[#c9a84c] text-black px-10 py-3 rounded-xl font-semibold hover:bg-[#e8c96a] transition text-sm"
+                className="w-full sm:w-auto bg-[#c9a84c] text-black px-10 py-3 rounded-xl font-semibold hover:bg-[#e8c96a] transition text-xs sm:text-sm"
               >
                 Débloquer et Entrer
               </button>
             ) : (
-              <div className="flex gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center px-4">
                 <button
                   onClick={() => {
                     setStep(0);
                     setCorrectAnswersCount(0);
                     setTestFinished(false);
                   }}
-                  className="bg-white/10 text-white px-6 py-3 rounded-xl border border-white/10 text-sm hover:bg-white/20 transition"
+                  className="w-full sm:w-auto bg-white/10 text-white px-6 py-3 rounded-xl border border-white/10 text-xs sm:text-sm hover:bg-white/20 transition"
                 >
                   Recommencer le test
                 </button>
                 <button
                   onClick={onClose}
-                  className="border border-white/20 text-white/60 px-6 py-3 rounded-xl text-sm hover:text-white transition"
+                  className="w-full sm:w-auto border border-white/20 text-white/60 px-6 py-3 rounded-xl text-xs sm:text-sm hover:text-white transition"
                 >
                   Retour
                 </button>
