@@ -6,8 +6,8 @@ const COMMUNITY_IMAGES = [
   {
     image: "/community/group1.jpg",
     badge: "+120",
-    fr: "Membres actifs",
-    en: "Active members",
+    fr: "Professionnels actifs",
+    en: "Active professionals",
   },
   // {
   //   image: "/community/group2.jpg",
@@ -18,8 +18,8 @@ const COMMUNITY_IMAGES = [
   {
     image: "/community/group2.jpg",
     badge: "+80",
-    fr: "Étudiants accompagnés",
-    en: "Students coached",
+    fr: "Apprenants accompagnés",
+    en: "Learners coached",
   },
   {
     image: "/community/group4.jpg",
@@ -58,15 +58,15 @@ export default function CommunitySection() {
           }}
         >
           {t(
-            "Une communauté active d'apprenants",
-            "A thriving learning community",
+            "Pratiquez avec des professionnels qui ont les mêmes défis",
+            "Practice with professionals facing the same challenges",
           )}
         </h2>
 
         <p className="text-white/60 text-center max-w-2xl mx-auto mb-14 leading-relaxed">
           {t(
-            "Des centaines d'étudiants progressent chaque semaine grâce à notre méthode basée sur l'écoute et la conversation.",
-            "Hundreds of students improve every week through our listening and conversation based method.",
+            "Développeurs, entrepreneurs et employés s'entraînent ensemble à parler de projets, de clients, de réunions et d'opportunités professionnelles.",
+            "Developers, entrepreneurs, and employees train together to discuss projects, clients, meetings, and professional opportunities.",
           )}
         </p>
 
@@ -115,8 +115,8 @@ export default function CommunitySection() {
         <div className="text-center mt-10">
           <p className="text-white/40 text-sm">
             {t(
-              "Rejoignez une communauté qui pratique l'anglais chaque jour.",
-              "Join a community that practices English every day.",
+              "Ne pratiquez plus un anglais abstrait : utilisez celui de votre vie professionnelle.",
+              "Stop practicing abstract English: use the English of your professional life.",
             )}
           </p>
         </div>

@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLang } from "@/context/LangContext";
+import { CircleUserRound } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 
 const NAV_LINKS = [
   { href: "/", fr: "Accueil", en: "Home" },
@@ -20,6 +23,15 @@ const NAV_LINKS = [
 export default function Navbar() {
   const { lang, toggleLang, t } = useLang();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    if (!supabase) return;
+    void supabase.auth.getUser().then(({ data }: { data: { user: unknown } }) => setSignedIn(Boolean(data.user)));
+    const { data } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => setSignedIn(Boolean(session)));
+    return () => data.subscription.unsubscribe();
+  }, []);
 
   return (
     <>
@@ -50,6 +62,9 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="hidden md:flex items-center gap-4">
+            <a href={signedIn ? "/dashboard" : "/auth"} title={signedIn ? "Mon espace" : "Se connecter"} aria-label={signedIn ? "Mon espace" : "Se connecter"} className="text-white/70 hover:text-[#e8c96a]">
+              <CircleUserRound size={21} />
+            </a>
             <button
               onClick={toggleLang}
               className="border border-[#c9a84c]/50 text-[#e8c96a] px-3 py-1.5 rounded text-xs font-bold tracking-widest hover:bg-[#c9a84c] hover:text-black hover:border-[#c9a84c] transition-all duration-200"
@@ -104,6 +119,9 @@ export default function Navbar() {
             </a>
           ))}
           <div className="flex gap-4 mt-4 items-center">
+            <a href={signedIn ? "/dashboard" : "/auth"} onClick={() => setMenuOpen(false)} className="text-white">
+              {signedIn ? t("Mon espace", "Dashboard") : t("Connexion", "Sign in")}
+            </a>
             <button
               onClick={() => {
                 toggleLang();

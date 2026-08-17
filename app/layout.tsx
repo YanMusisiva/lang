@@ -3,6 +3,7 @@ import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "../context/LangContext";
 import { BlogProvider } from "../context/BlogContext";
+import ProgressSync from "@/components/ProgressSync";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -20,9 +21,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "LangListening – Parlez anglais couramment en 90 jours",
+  title: "LangListening – Pratiquez l'anglais chaque jour",
   description:
-    "Apprenez à parler anglais avec la méthode d'écoute active et de conversation humaine. Résultats garantis en 7 semaines.",
+    "Progressez en anglais avec des exercices oraux et écrits, un parcours personnalisé et un accompagnement humain.",
 };
 
 export default function RootLayout({
@@ -34,7 +35,7 @@ export default function RootLayout({
     <html lang="fr" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased">
         <LangProvider>
-          <BlogProvider>{children}</BlogProvider>
+          <BlogProvider><ProgressSync />{children}</BlogProvider>
         </LangProvider>
       </body>
     </html>

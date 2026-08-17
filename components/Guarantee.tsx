@@ -35,8 +35,8 @@ export default function Guarantee() {
           </h2>
           <p className="text-gray-500 text-sm leading-relaxed mb-2">
             {t(
-              "Si après 10 jours, de pratique régulière, vous sentez que le programme ne vous aide pas à progresser, vous pouvez demander un remboursement.",
-              "If after 10 days of consistent practice you feel that the program is not helping you improve, you can request a refund.",
+              "Testez pendant 10 jours les exercices et les simulations liés à votre métier. Si le programme ne vous aide pas à mieux communiquer au travail, vous pouvez demander un remboursement.",
+              "Try the exercises and professional simulations for 10 days. If the program does not help you communicate better at work, you can request a refund.",
             )}
           </p>
           <p className="text-gray-500 text-sm mb-8">

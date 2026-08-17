@@ -32,66 +32,66 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const PLANS: Plan[] = [
   {
-    name: { fr: "1 mois", en: "1 month" },
-    price: { fr: "49 $", en: "49 $" },
+    name: { fr: "Coach personnel", en: "Personal Coach" },
+    price: { fr: "149", en: "149" },
     featured: true,
     tag: { fr: "Populaire", en: "Popular" },
     desc: {
-      fr: "Notre programme premium pour un progrès rapide et un accompagnement personnalisé",
-      en: "Our premium program for fast progress and personalized support",
+      fr: "Votre anglais, votre métier et un coach dédié pendant un mois.",
+      en: "Your English, your profession, and a dedicated coach for one month.",
     },
     features: [
       {
-        fr: "30 jours d'apprentissage naturel",
-        en: "30 days of natural learning",
+        fr: "Séances individuelles avec votre coach",
+        en: "One-to-one sessions with your coach",
       },
       {
-        fr: "10h d'appels avec le formateur",
-        en: "10 hours of calls with the trainer",
+        fr: "Programme adapté à votre niveau et votre métier",
+        en: "A program tailored to your level and profession",
       },
       {
-        fr: "Premier niveau",
-        en: "First level",
+        fr: "Réunions, entretiens et présentations simulés",
+        en: "Simulated meetings, interviews, and presentations",
       },
       {
-        fr: "Votre disponibilite est prise en compte",
-        en: "Your availability is taken into account",
+        fr: "Correction personnalisée et travail de prononciation",
+        en: "Personal feedback and pronunciation practice",
       },
 
       {
-        fr: "Jour valide selon la performance de l'apprenant",
-        en: "Valid day based on the learner's performance",
+        fr: "Suivi de votre progression professionnelle",
+        en: "Professional progress tracking",
       },
     ],
   },
   {
-    name: { fr: "3 mois", en: "3 months" },
-    price: { fr: "147 $ ", en: "147 $" },
+    name: { fr: "Coach personnel - 3 mois", en: "3-Month Personal Coach" },
+    price: { fr: "350", en: "350" },
     desc: {
-      fr: "Pour ceux qui veulent atteindre l'objectif des 90 jours",
-      en: "For those who want to reach the 90 days goal",
+      fr: "Un accompagnement continu de trois mois avec 97 $ d'économie.",
+      en: "Three months of continuous coaching with $97 in savings.",
     },
     features: [
       {
-        fr: "90 jours d'apprentissage naturel",
-        en: "90 days of natural learning",
+        fr: "Trois mois avec votre coach personnel",
+        en: "Three months with your personal coach",
       },
       {
-        fr: "30h d'appels avec le formateur",
-        en: "30 hours of calls with the trainer",
+        fr: "Parcours Developer, Business ou Professional English",
+        en: "Developer, Business, or Professional English track",
       },
       {
-        fr: "3 niveaux",
-        en: "3 levels",
+        fr: "Préparation aux réunions, entretiens et clients",
+        en: "Preparation for meetings, interviews, and clients",
       },
       {
-        fr: "Votre disponibilite est prise en compte",
-        en: "Your availability is taken into account",
+        fr: "Exercices adaptés à vos situations de travail",
+        en: "Exercises tailored to your workplace situations",
       },
 
       {
-        fr: "Jour valide selon la performance de l'apprenant",
-        en: "Valid day based on the learner's performance",
+        fr: "Suivi continu et corrections personnalisées",
+        en: "Ongoing support and personalized feedback",
       },
     ],
   },
@@ -101,34 +101,34 @@ export const BULLETS: BulletCard[] = [
   {
     num: "01",
     title: {
-      fr: "Habituez votre cerveau aux réalités du terrain",
-      en: "Train your brain for real-world scenarios",
+      fr: "L'anglais de votre quotidien professionnel",
+      en: "English for your professional life",
     },
     desc: {
-      fr: "Vous entraînez votre oreille à l'anglais des affaires sous plusieurs tonalités et accents pour habituer votre cerveau aux sons réels du monde professionnel. Grâce à notre méthode d'écoute active et à la répétition guidée, vous assimilez le vocabulaire corporate de manière instinctive, rendant le blocage à l'oral techniquement impossible lors de vos réunions.",
-      en: "You train your ear to business English across multiple tones and accents to condition your brain to the real sounds of the corporate world. Through our active listening method and guided repetition, you absorb corporate vocabulary instinctively, making freezing during meetings technically impossible.",
+      fr: "Développeur, entrepreneur ou employé de bureau : apprenez à présenter votre travail, expliquer un projet, répondre à un client et intervenir clairement en réunion.",
+      en: "Developer, entrepreneur, or office professional: learn to present your work, explain a project, respond to a client, and contribute clearly in meetings.",
     },
   },
   {
     num: "02",
     title: {
-      fr: "Un plan d'action précis pour un impact sous 90 jours",
-      en: "A precise action plan for impact in 90 days",
+      fr: "Learn. Listen. Speak. Interact.",
+      en: "Learn. Listen. Speak. Interact.",
     },
     desc: {
-      fr: "Oubliez la théorie scolaire inutile. Notre parcours est structuré pour transformer votre carrière et votre business en seulement 3 mois. Les premiers paliers débloquent votre fluidité immédiate et votre confiance à l'oral, tandis que les modules avancés vous arment pour négocier, manager et présenter des projets complexes en anglais sans aucune hésitation.",
-      en: "Forget useless academic theory. Our curriculum is structured to transform your career and business in just 3 months. The first stages unlock your immediate fluency and speaking confidence, while advanced modules equip you to negotiate, manage, and pitch complex projects in English without hesitation.",
+      fr: "Apprenez les expressions utiles, entraînez votre oreille, répétez à voix haute puis interagissez avec d'autres apprenants et votre coach jusqu'à pouvoir réellement utiliser l'anglais.",
+      en: "Learn useful expressions, train your ear, speak aloud, then interact with other learners and your coach until you can genuinely use English.",
     },
   },
   {
     num: "03",
     title: {
-      fr: "Pratique interactive en solo et immersion dans une immense communauté",
-      en: "Interactive solo practice and immersion in a massive community",
+      fr: "Des situations proches de votre métier",
+      en: "Situations that match your profession",
     },
     desc: {
-      fr: "Bénéficiez d'un double écosystème puissant et flexible. Au quotidien, pratiquez gratuitement à votre rythme sur notre plateforme interactive via des exercices oraux et écrits stimulants. Ensuite, passez à l'action en rejoignant notre immense communauté internationale sur WhatsApp pour débattre en temps réel sur des sujets concrets et des situations business réelles.",
-      en: "Benefit from a powerful, flexible dual ecosystem. On a daily basis, practice for free at your own pace on our interactive platform with stimulating speaking and writing exercises. Then, take action by joining our massive international community on WhatsApp to debate in real-time on concrete topics and real business scenarios.",
+      fr: "Travaillez votre présentation, vos daily stand-ups, vos appels, vos emails, vos entretiens, vos négociations et vos prises de parole grâce aux exercices gratuits et aux simulations accompagnées.",
+      en: "Practice introductions, daily stand-ups, calls, emails, interviews, negotiations, and presentations through free exercises and guided simulations.",
     },
   },
 ];

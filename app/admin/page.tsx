@@ -9,11 +9,6 @@ function AdminContent() {
   const { t, lang } = useLang();
   const { articles, addArticle, deleteArticle } = useBlog();
 
-  const ADMIN_CODE = "0979663050";
-  const [accessGranted, setAccessGranted] = useState(false);
-  const [accessCode, setAccessCode] = useState("");
-  const [accessError, setAccessError] = useState<string | null>(null);
-
   const [success, setSuccess] = useState(false);
   const [form, setForm] = useState({
     title: "",
@@ -25,8 +20,8 @@ function AdminContent() {
     contentEn: "",
     category: "Stratégie",
     categoryEn: "Strategy",
-    author: "Nexus Growth",
-    authorEn: "Nexus Growth",
+    author: "LangListening",
+    authorEn: "LangListening",
     date: new Date().toISOString().split("T")[0],
     readTime: "",
   });
@@ -46,15 +41,6 @@ function AdminContent() {
       }
       return updated;
     });
-  };
-
-  const handleAccessSubmit = () => {
-    if (accessCode.trim() === ADMIN_CODE) {
-      setAccessGranted(true);
-      setAccessError(null);
-      return;
-    }
-    setAccessError(t("admin.access_error"));
   };
 
   const handleSubmit = () => {
@@ -82,8 +68,8 @@ function AdminContent() {
       contentEn: "",
       category: "Stratégie",
       categoryEn: "Strategy",
-      author: "Nexus Growth",
-      authorEn: "Nexus Growth",
+      author: "LangListening",
+      authorEn: "LangListening",
       date: new Date().toISOString().split("T")[0],
       readTime: "",
     });
@@ -94,41 +80,6 @@ function AdminContent() {
     "w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-[#22c55e]/40 transition-colors font-mono";
   const labelClass =
     "font-mono text-[10px] uppercase tracking-widest text-white/30 block mb-2";
-
-  if (!accessGranted) {
-    return (
-      <main className="bg-[#050505] min-h-screen">
-        <Nav />
-        <div className="max-w-md mx-auto px-6 pt-36 pb-28">
-          <div className="bg-[#0a0a0a] border border-white/8 p-10 text-center">
-            <h1 className="font-display text-4xl font-black text-white mb-4">
-              {t("admin.access_title")}
-            </h1>
-            <p className="text-white/40 mb-6">{t("admin.access_prompt")}</p>
-            <input
-              type="text"
-              value={accessCode}
-              onChange={(e) => {
-                setAccessCode(e.target.value);
-                setAccessError(null);
-              }}
-              placeholder="Write the code"
-              className={inputClass}
-            />
-            {accessError && (
-              <p className="text-red-400 text-sm mt-2">{accessError}</p>
-            )}
-            <button
-              onClick={handleAccessSubmit}
-              className="mt-6 w-full btn-primary py-3 text-sm uppercase tracking-widest "
-            >
-              {t("admin.access_submit")}
-            </button>
-          </div>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="bg-[#050505] min-h-screen">

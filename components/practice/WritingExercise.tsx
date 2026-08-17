@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { useLang } from "@/context/LangContext";
 import { PRACTICE } from "@/data/practice";
 import confetti from "canvas-confetti";
+import { persistProgress } from "@/lib/progress-client";
 
 type Question = {
   french: string;
@@ -203,7 +204,7 @@ export default function WritingExercise({
     // Le module est considéré terminé si l'utilisateur a répondu à toutes les questions
     const finished = step >= questions.length && questions.length > 0;
 
-    localStorage.setItem(
+    persistProgress(
       storageKey,
       JSON.stringify({
         step,

@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import type { BilingualText } from "@/types/";
 
 export interface Article {
@@ -624,13 +624,34 @@ const BlogContext = createContext<BlogContextType>({
 export function BlogProvider({ children }: { children: ReactNode }) {
   const [articles, setArticles] = useState<Article[]>(defaultArticles);
 
+  useEffect(() => {
+    void fetch("/api/articles")
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => {
+        if (data?.articles?.length) setArticles(data.articles);
+      });
+  }, []);
+
   const addArticle = (a: Omit<Article, "id">) => {
     const newArticle: Article = { ...a, id: Date.now().toString() };
     setArticles((prev) => [newArticle, ...prev]);
+    void fetch("/api/articles", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(a),
+    }).then(async (response) => {
+      if (response.ok) {
+        const { id } = await response.json();
+        setArticles((prev) => prev.map((item) => item.id === newArticle.id ? { ...item, id } : item));
+      } else {
+        setArticles((prev) => prev.filter((item) => item.id !== newArticle.id));
+      }
+    });
   };
 
   const deleteArticle = (id: string) => {
     setArticles((prev) => prev.filter((a) => a.id !== id));
+    void fetch(`/api/articles?id=${encodeURIComponent(id)}`, { method: "DELETE" });
   };
 
   const getArticle = (slug: string) => articles.find((a) => a.slug === slug);

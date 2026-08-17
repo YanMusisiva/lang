@@ -29,8 +29,8 @@ export default function Footer() {
           </div>
           <p className="text-white/45 text-sm leading-relaxed">
             {t(
-              "La méthode humaine pour parler anglais couramment. Écoute, répétition, conversation réelle.",
-              "The human method to speak English fluently. Listening, repetition, real conversation.",
+              "L'anglais professionnel pour les développeurs, entrepreneurs et employés. Learn. Listen. Speak. Interact.",
+              "Professional English for developers, entrepreneurs, and employees. Learn. Listen. Speak. Interact.",
             )}
           </p>
           {/* Social Networks */}

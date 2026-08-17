@@ -3,6 +3,7 @@
 import { useLang } from "@/context/LangContext";
 import { PLANS } from "@/app/data";
 import RevealWrapper from "./RevealWrapper";
+import Link from "next/link";
 
 export default function Pricing() {
   const { t } = useLang();
@@ -10,7 +11,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="py-24 bg-white px-8">
       <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#c9a84c] text-center mb-4">
-        {t("Nos offres", "Our plans")}
+        {t("Coaching individuel", "One-to-one coaching")}
       </p>
       <h2
         className="text-center text-black mb-16 leading-tight"
@@ -20,7 +21,7 @@ export default function Pricing() {
           fontWeight: 600,
         }}
       >
-        {t("Choisissez votre parcours", "Choose your path")}
+        {t("Votre anglais. Votre métier. Votre coach.", "Your English. Your profession. Your coach.")}
       </h2>
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
@@ -93,16 +94,19 @@ export default function Pricing() {
               {/* CTA */}
               {plan.featured ? (
                 <a
-                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20formation1mois.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20s'il%20vous%20pla%C3%AEt%3F"
+                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20coaching%20personnel%20d'un%20mois."
                   className="block w-full bg-[#c9a84c] text-black font-semibold py-3.5 rounded text-sm tracking-wide hover:bg-[#e8c96a] transition-colors"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {t(`Choisir ${plan.name.fr}`, `Choose ${plan.name.en}`)}
                 </a>
               ) : (
                 <a
-                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20votre%20formation3mois.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20s'il%20vous%20pla%C3%AEt%3F"
+                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20coaching%20personnel%20de%20trois%20mois."
                   className="block w-full border border-black/15 text-black font-semibold py-3.5 rounded text-sm hover:border-[#c9a84c] hover:text-[#9a7a2e] transition-all"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {t(`Choisir ${plan.name.fr}`, `Choose ${plan.name.en}`)}
                 </a>
@@ -110,6 +114,21 @@ export default function Pricing() {
             </div>
           </RevealWrapper>
         ))}
+      </div>
+
+      <div className="max-w-2xl mx-auto mt-14 text-center border-t border-black/10 pt-10">
+        <p className="text-gray-600 mb-5">
+          {t(
+            "Vous préférez apprendre en groupe ou cherchez une formule plus accessible ?",
+            "Would you rather learn in a group or are you looking for a more accessible plan?",
+          )}
+        </p>
+        <Link
+          href="/offres-speciales"
+          className="inline-flex items-center justify-center rounded border border-[#c9a84c] px-8 py-3.5 font-semibold text-[#7a5d1d] transition hover:bg-[#c9a84c] hover:text-black"
+        >
+          {t("Découvrir les offres spéciales", "View special offers")}
+        </Link>
       </div>
     </section>
   );
