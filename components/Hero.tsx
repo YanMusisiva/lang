@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen bg-[#0a0a0a] flex items-center relative overflow-hidden pt-16">
-      {/* Radial glow */}
+      {/* Radiale glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
