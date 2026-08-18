@@ -66,8 +66,8 @@ export default function VideoSection() {
 
           <p className="text-white/60 max-w-xl mx-auto">
             {t(
-              "Quelques vidéos pour comprendre pourquoi notre méthode d'écoute permet de parler plus vite.",
-              "A few videos to understand why our listening method helps you speak faster.",
+              "Découvrez comment l'écoute, la répétition et l'interaction vous préparent aux situations réelles de votre travail.",
+              "See how listening, repetition, and interaction prepare you for real situations at work.",
             )}
           </p>
         </div>

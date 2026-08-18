@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import PlacementTestModal from "@/components/PlacementTestModal";
+import { persistProgress } from "@/lib/progress-client";
 
 const LEVELS = [
   { slug: "level1", title: "Foundation", requiresTest: false },
@@ -51,7 +52,7 @@ export default function PracticePage() {
   };
 
   const handleTestSuccess = (slug: string) => {
-    localStorage.setItem(`placement-test-passed-${slug}`, "true");
+    persistProgress(`placement-test-passed-${slug}`, "true");
     setUnlockedLevels((prev) => ({ ...prev, [slug]: true }));
     setActiveTestLevel(null);
   };

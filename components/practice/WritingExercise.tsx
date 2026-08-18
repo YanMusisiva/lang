@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { useLang } from "@/context/LangContext";
 import { PRACTICE } from "@/data/practice";
 import confetti from "canvas-confetti";
+import { persistProgress } from "@/lib/progress-client";
 
 type Question = {
   french: string;
@@ -203,7 +204,7 @@ export default function WritingExercise({
     // Le module est considéré terminé si l'utilisateur a répondu à toutes les questions
     const finished = step >= questions.length && questions.length > 0;
 
-    localStorage.setItem(
+    persistProgress(
       storageKey,
       JSON.stringify({
         step,
@@ -285,6 +286,26 @@ export default function WritingExercise({
       .trim();
   };
 
+  const editDistance = (left: string, right: string) => {
+    const row = Array.from({ length: right.length + 1 }, (_, index) => index);
+    for (let i = 1; i <= left.length; i++) {
+      let previous = row[0];
+      row[0] = i;
+      for (let j = 1; j <= right.length; j++) {
+        const current = row[j];
+        row[j] = Math.min(row[j] + 1, row[j - 1] + 1, previous + (left[i - 1] === right[j - 1] ? 0 : 1));
+        previous = current;
+      }
+    }
+    return row[right.length];
+  };
+
+  const answersAreEquivalent = (userAnswer: string, correctAnswer: string) => {
+    if (userAnswer === correctAnswer) return true;
+    const longest = Math.max(userAnswer.length, correctAnswer.length);
+    return longest >= 12 && editDistance(userAnswer, correctAnswer) <= Math.max(1, Math.floor(longest * 0.04));
+  };
+
   const confirmAnswer = () => {
     const copy = [...answers];
     copy[step] = input;
@@ -293,7 +314,7 @@ export default function WritingExercise({
     const userAnswer = normalize(input);
     const correctAnswer = normalize(currentQuestion.english);
 
-    if (userAnswer === correctAnswer) {
+    if (answersAreEquivalent(userAnswer, correctAnswer)) {
       setScore((prev) => prev + 1);
       fireRealisticConfetti();
     }

@@ -23,8 +23,8 @@ export default function LeadMagnet() {
         <div className="w-full">
           <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#9a7a2e] mb-3 font-mono">
             {t(
-              "Pratique interactive & Communauté",
-              "Interactive Practice & Community",
+              "Commencez gratuitement",
+              "Start for free",
             )}
           </p>
 
@@ -33,15 +33,15 @@ export default function LeadMagnet() {
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             {t(
-              "Pratiquez chaque jour en solo, débattez en groupe en conditions réelles",
-              "Practice daily on your own, debate in groups under real conditions",
+              "Entraînez l'anglais dont vous avez besoin au travail",
+              "Practice the English you need at work",
             )}
           </h2>
 
           <p className="text-gray-700 text-base leading-relaxed max-w-3xl mx-auto">
             {t(
-              "Propulsez votre anglais grâce à une double routine unique : affinez vos compétences quotidiennement et gratuitement sur notre plateforme interactive, puis rejoignez notre communauté WhatsApp exclusive pour participer à des débats passionnants avec d'autres membres autour de sujets et de situations de la vie réelle.",
-              "Boost your English with a unique double routine: sharpen your skills daily and for free on our interactive platform, then join our exclusive WhatsApp community to take part in exciting debates with other members around real-life topics and situations.",
+              "Utilisez nos exercices gratuits pour travailler votre écoute, votre expression orale et vos réponses écrites. Rejoignez ensuite la communauté pour pratiquer des réunions, entretiens, présentations et échanges professionnels avec d'autres apprenants.",
+              "Use our free exercises to improve listening, speaking, and written responses. Then join the community to practice meetings, interviews, presentations, and workplace conversations with other learners.",
             )}
           </p>
 
@@ -51,8 +51,8 @@ export default function LeadMagnet() {
               <span className="text-[#9a7a2e]">✓</span>
               <span>
                 {t(
-                  "Exercices oraux et écrits 100% gratuits",
-                  "100% free speaking and writing exercises",
+                  "Speaking et writing gratuits",
+                  "Free speaking and writing practice",
                 )}
               </span>
             </div>
@@ -60,8 +60,8 @@ export default function LeadMagnet() {
               <span className="text-[#9a7a2e]">✓</span>
               <span>
                 {t(
-                  "Débats hebdomadaires sur des sujets concrets",
-                  "Weekly debates on real-world topics",
+                  "Simulations de situations professionnelles",
+                  "Workplace simulations",
                 )}
               </span>
             </div>
@@ -69,8 +69,8 @@ export default function LeadMagnet() {
               <span className="text-[#9a7a2e]">✓</span>
               <span>
                 {t(
-                  "Immersion collective stimulante",
-                  "Stimulating community immersion",
+                  "Pratique avec d'autres professionnels",
+                  "Practice with other professionals",
                 )}
               </span>
             </div>
@@ -87,7 +87,7 @@ export default function LeadMagnet() {
             href="https://chat.whatsapp.com/E5yLg2zxcBWLayZ1wnBLt9?mode=gi_t"
             className="w-full sm:w-auto text-center bg-[#0a0a0a] text-[#e8c96a] border border-[#c9a84c]/50 font-semibold px-8 py-4 rounded-xl text-sm uppercase tracking-wider hover:bg-[#c9a84c] hover:text-black hover:-translate-y-0.5 transition-all duration-300 shadow-xl whitespace-nowrap"
           >
-            {t("Club de débat", "Debate club")}
+            {t("Rejoindre la communauté", "Join the community")}
           </Link>
         </div>
       </div>

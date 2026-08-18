@@ -1,4 +1,5 @@
 "use client";
+import { persistProgress } from "@/lib/progress-client";
 
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
@@ -120,7 +121,7 @@ export default function SpeakingExercise() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(
+    persistProgress(
       "speaking-progress",
       JSON.stringify({
         step,

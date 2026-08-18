@@ -4,8 +4,8 @@ import { useLang } from "@/context/LangContext";
 import { FaTiktok, FaYoutube, FaFacebookF, FaInstagram } from "react-icons/fa";
 
 const STATS = [
-  { val: "100+", fr: "Étudiants formés", en: "Students trained" },
-  { val: "90", fr: "Jours pour parler", en: "Days to fluency" },
+  { val: "100+", fr: "Professionnels accompagnés", en: "Professionals coached" },
+  { val: "3", fr: "Parcours métiers", en: "Professional tracks" },
   { val: "90%", fr: "Satisfaction", en: "Satisfaction rate" },
   { val: "2+", fr: "Années d'expérience", en: "Years of experience" },
 ];
@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen bg-[#0a0a0a] flex items-center relative overflow-hidden pt-16">
-      {/* Radial glow */}
+      {/* Radiale glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -47,7 +47,7 @@ export default function Hero() {
           className="inline-block border border-[#c9a84c]/50 text-[#e8c96a] px-5 py-1.5 rounded-full text-xs font-bold tracking-[0.15em] uppercase mb-8"
           style={{ animation: "fadeUp 0.6s ease both" }}
         >
-          {t("✦ Méthode éprouvée par la science", "✦ Science Proven method")}
+          {t("✦ Anglais professionnel orienté pratique", "✦ Practical professional English")}
         </div>
 
         {/* Headline */}
@@ -62,23 +62,21 @@ export default function Hero() {
           }}
         >
           {t(
-            "Parlez anglais pour développer votre carrière et votre business dans 90 jours",
-            "Speak English to grow your career and your business in 90 days",
-          ).split("votre carrière et votre business").length > 1 ? (
+            "Vous connaissez votre métier. Maintenant, apprenez à en parler en anglais.",
+            "You know your profession. Now learn to talk about it in English.",
+          ).includes("métier") ? (
             <>
-              Parlez anglais pour développer{" "}
+              Vous connaissez votre métier. Maintenant, apprenez à{" "}
               <em className="italic bg-linear-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
-                votre carrière et votre business
+                en parler en anglais.
               </em>{" "}
-              dans 90 jours.
             </>
           ) : (
             <>
-              Speak english to grow{" "}
+              You know your profession. Now learn to{" "}
               <em className="italic bg-linear-to-r from-[#e8c96a] to-[#c9a84c] bg-clip-text text-transparent">
-                your career and your business
+                talk about it in English.
               </em>{" "}
-              in 90 days.
             </>
           )}
         </h1>
@@ -92,8 +90,8 @@ export default function Hero() {
           }}
         >
           {t(
-            "Développez votre confiance pour communiquer avec des clients, employeurs et partenaires internationaux sans dépendre constamment d'un traducteur.-PS: Vous pourrez aussi lire vos emails, messages et documents en anglais sans effort.",
-            "Build your confidence to communicate with clients, employers, and international partners without constantly relying on a translator. PS: You will also be able to read your emails, messages, and documents in English without effort.",
+            "Développeur, entrepreneur ou professionnel de bureau : apprenez à présenter votre travail, participer à une réunion, parler à un client, défendre une idée et réussir un entretien en anglais.",
+            "Developer, entrepreneur, or office professional: learn to present your work, join meetings, speak with clients, defend an idea, and succeed in English interviews.",
           )}
         </p>
 

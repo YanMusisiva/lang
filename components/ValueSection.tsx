@@ -10,7 +10,7 @@ export default function ValueSection() {
   return (
     <section id="value" className="py-24 bg-white px-8">
       <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#c9a84c] text-center mb-4">
-        {t("Ce que vous allez apprendre", "What you will learn")}
+        {t("Un anglais utile au travail", "English you can use at work")}
       </p>
       <h2
         className="text-center text-black mb-16 leading-tight"
@@ -21,8 +21,8 @@ export default function ValueSection() {
         }}
       >
         {t(
-          "3 raisons pour lesquelles LangListening fonctionne",
-          "3 reasons why LangListening works",
+          "Passez de « je comprends » à « je peux l'utiliser »",
+          "Move from “I understand” to “I can use it”",
         )}
       </h2>
 

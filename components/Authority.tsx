@@ -9,18 +9,18 @@ import StartFreeButton from "@/components/ui/StartFreeButton"; // Ajustez le che
 const STATS = [
   {
     value: "2 Ans",
-    fr: "de R&D en ingénierie pédagogique",
-    en: "of pedagogical R&D",
+    fr: "de développement de la méthode",
+    en: "developing the method",
   },
   {
     value: "100%",
-    fr: "axé Carrière & Business réel",
-    en: "focused on Career & Real Business",
+    fr: "axé Tech, Business & Bureau",
+    en: "focused on Tech, Business & Office work",
   },
   {
-    value: "Immense",
-    fr: "communauté active de débat",
-    en: "huge active debating community",
+    value: "4 étapes",
+    fr: "Learn, Listen, Speak, Interact",
+    en: "Learn, Listen, Speak, Interact",
   },
 ];
 
@@ -53,8 +53,8 @@ export default function Authority() {
         <RevealWrapper className="flex-1 min-w-[280px]">
           <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#c9a84c] mb-4 font-mono">
             {t(
-              "Les faits derrière notre méthode",
-              "The facts behind our method",
+              "Une méthode pensée pour votre travail",
+              "A method designed for your work",
             )}
           </p>
 
@@ -67,22 +67,22 @@ export default function Authority() {
             }}
           >
             {t(
-              "2 années de recherche pour concevoir l'écosystème d'apprentissage des leaders",
-              "2 years of research to design the ultimate learning ecosystem for leaders",
+              "Apprenez à communiquer dans les situations qui comptent pour votre carrière",
+              "Learn to communicate in the situations that matter to your career",
             )}
           </h2>
 
           <p className="text-gray-600 text-base leading-relaxed mb-4">
             {t(
-              "Nous avons passé les deux dernières années à modéliser, tester et perfectionner un système linguistique pensé exclusivement pour le monde professionnel et les affaires. L'anglais académique théorique ne fonctionne pas sous pression ; notre écosystème, oui.",
-              "We spent the last two years modeling, testing, and perfecting a linguistic system designed exclusively for the corporate and business world. Theoretical academic English fails under pressure; our ecosystem thrives.",
+              "Vous n'avez pas besoin d'anglais uniquement pour réussir des exercices de grammaire. Vous devez pouvoir expliquer une application, pitcher une idée, répondre à un appel, rédiger un message, contribuer à une réunion ou passer un entretien.",
+              "You do not need English only to pass grammar exercises. You need to explain an application, pitch an idea, answer a call, write a message, contribute to a meeting, or succeed in an interview.",
             )}
           </p>
 
           <p className="text-gray-600 text-base leading-relaxed mb-6">
             {t(
-              "Pour briser définitivement la barrière de la parole, nous combinons une technologie de pointe et la puissance du collectif : d'un côté, notre plateforme interactive d'exercices gratuits pour entraîner votre cerveau en solo au quotidien ; de l'autre, une immense communauté internationale pour vous immerger instantanément dans des débats complexes et des situations réelles de business.",
-              "To permanently break the speech barrier, we combine cutting-edge technology with collective power: on one hand, our interactive platform with free exercises to train your brain solo daily; on the other, a massive international community to instantly immerse you in complex debates and real-world business scenarios.",
+              "Notre méthode suit quatre étapes : apprendre le vocabulaire utile, écouter l'anglais parlé, répéter et produire vos propres phrases, puis interagir avec un groupe et un coach. L'objectif n'est plus seulement de comprendre, mais de pouvoir agir en anglais.",
+              "Our method follows four steps: learn useful vocabulary, listen to spoken English, repeat and produce your own sentences, then interact with a group and a coach. The goal is not only to understand, but to act in English.",
             )}
           </p>
 

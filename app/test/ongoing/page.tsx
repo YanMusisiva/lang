@@ -1,4 +1,5 @@
 "use client";
+import { persistProgress } from "@/lib/progress-client";
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
@@ -319,7 +320,7 @@ export default function WritingTest() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(
+    persistProgress(
       "translation-progress",
       JSON.stringify({
         step,
@@ -340,26 +341,6 @@ export default function WritingTest() {
     setShowAnswer(false);
     setHasProgress(false);
   };
-
-  const showMilestone = step > 0 && step % 100 === 0 && !showAnswer;
-
-  {
-    showMilestone && (
-      <div className="bg-[#c9a84c]/10 border border-[#c9a84c]/30 rounded-xl p-6 mb-8 text-center">
-        <h3 className="text-[#c9a84c] text-2xl font-semibold mb-3">
-          🎉 Congratulations!
-        </h3>
-
-        <p className="text-white/80">
-          You have completed {step} translation exercises.
-        </p>
-
-        <p className="text-white/60 mt-2">
-          Consistency is one of the most important keys to learning a language.
-        </p>
-      </div>
-    );
-  }
 
   if (!started) {
     return (

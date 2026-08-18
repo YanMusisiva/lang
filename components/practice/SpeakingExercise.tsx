@@ -6,6 +6,7 @@ import useRouter from "next/navigation"; // Pour la redirection automatique si b
 import Navbar from "@/components/Navbar";
 import { PRACTICE } from "@/data/practice";
 import confetti from "canvas-confetti";
+import { persistProgress } from "@/lib/progress-client";
 
 type Phrase = {
   french: string;
@@ -109,22 +110,6 @@ export default function Speaking({
         `translation-progress-${level}-${prevModuleKey}`,
       );
 
-      let prevScore = 0;
-      let prevTotal = 1; // Évite la division par zéro
-
-      if (prevSpeakingSaved) {
-        const parsed = JSON.parse(prevSpeakingSaved);
-        prevScore = parsed.score || 0;
-      } else if (prevWritingSaved) {
-        const parsed = JSON.parse(prevWritingSaved);
-        prevScore = parsed.score || 0;
-      }
-
-      // Vous pouvez adapter selon votre structure si vous connaissez le nombre total de phrases du précédent
-      // Par défaut, si aucune donnée n'existe, le score est de 0%, donc verrouillé.
-      const currentLevelDataRaw = PRACTICE[level as keyof typeof PRACTICE];
-      const prevDatasetKey = (prevModuleData as any).dataset;
-
       // Simulation ou estimation du succès global (Règle stricte : si pas commencé ou < 50% => Bloqué)
       if (!prevSpeakingSaved && !prevWritingSaved) {
         setIsLocked(true);
@@ -215,7 +200,7 @@ export default function Speaking({
     // Le module est considéré terminé si l'utilisateur a répondu à toutes les phrases
     const finished = step >= phrases.length && phrases.length > 0;
 
-    localStorage.setItem(
+    persistProgress(
       storageKey,
       JSON.stringify({
         step,
@@ -730,6 +715,9 @@ export default function Speaking({
                 </p>
                 <p className="text-4xl font-bold text-[#c9a84c]">
                   {lastPercentage}%
+                </p>
+                <p className="mt-2 max-w-xs text-xs normal-case tracking-normal text-white/35">
+                  Ce score compare la transcription aux mots attendus. Il ne mesure pas de façon fiable l'accent, la tonalité ou l'intonation.
                 </p>
               </div>
               <div className="text-right">
