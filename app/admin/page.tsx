@@ -100,6 +100,9 @@ function AdminContent() {
           >
             ← {t("nav.blog")}
           </Link>
+          <Link href="/admin/learning" className="btn-outline px-5 py-2.5 text-xs uppercase tracking-widest">
+            Mini-leçons
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-2 gap-10">

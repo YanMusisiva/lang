@@ -4,6 +4,8 @@ import "./globals.css";
 import { LangProvider } from "../context/LangContext";
 import { BlogProvider } from "../context/BlogContext";
 import ProgressSync from "@/components/ProgressSync";
+import MicroLessonPopup from "@/components/MicroLessonPopup";
+import AuthenticatedNavigation from "@/components/AuthenticatedNavigation";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -35,7 +37,7 @@ export default function RootLayout({
     <html lang="fr" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased">
         <LangProvider>
-          <BlogProvider><ProgressSync />{children}</BlogProvider>
+          <BlogProvider><ProgressSync /><MicroLessonPopup /><AuthenticatedNavigation />{children}</BlogProvider>
         </LangProvider>
       </body>
     </html>

@@ -716,6 +716,9 @@ export default function Speaking({
                 <p className="text-4xl font-bold text-[#c9a84c]">
                   {lastPercentage}%
                 </p>
+                <p className="mt-2 max-w-xs text-xs normal-case tracking-normal text-white/35">
+                  Ce score compare la transcription aux mots attendus. Il ne mesure pas de façon fiable l'accent, la tonalité ou l'intonation.
+                </p>
               </div>
               <div className="text-right">
                 {lastPercentage >= 80 ? (

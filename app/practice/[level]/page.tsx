@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import DashboardReturnButton from "@/components/practice/DashboardReturnButton";
 import Navbar from "@/components/Navbar";
 import { PRACTICE } from "@/data/practice";
 import { useParams } from "next/navigation";
@@ -107,7 +106,6 @@ export default function LevelPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white py-12 px-4">
       <Navbar />
-      <DashboardReturnButton />
       <div className="max-w-5xl mx-auto pt-10">
         <div className="mb-8">
           <Link
