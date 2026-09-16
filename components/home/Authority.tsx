@@ -1,7 +1,8 @@
 "use client";
 
 import { useLang } from "@/context/LangContext";
-import RevealWrapper from "./RevealWrapper";
+import RevealWrapper from "@/components/motion/RevealWrapper";
+import ScrollAccent from "@/components/motion/ScrollAccent";
 import Image from "next/image";
 import Link from "next/link";
 import StartFreeButton from "@/components/ui/StartFreeButton"; // Ajustez le chemin d'import selon votre projet
@@ -35,22 +36,24 @@ export default function Authority() {
       {/* Ligne dorée subtile pour marquer l'autorité */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-[#c9a84c]/40" />
 
-      <div className="max-w-6xl mx-auto flex flex-wrap items-center gap-16">
+      <div className="story-layout max-w-6xl mx-auto">
         {/* Bloc Visuel : L'image de marque */}
-        <RevealWrapper className="shrink-0 mx-auto lg:mx-0">
-          <div className="w-72 h-80 md:w-80 md:h-85 rounded-2xl bg-gradient-to-br from-[#0a0a0a] to-[#1c1c1c] border border-[#c9a84c]/20 relative overflow-hidden flex items-center justify-center shadow-2xl">
+        <RevealWrapper className="story-visual">
+          <div className="story-image">
             <Image
               src="/image.jpeg"
               alt="LangListening Authority"
-              width={320}
-              height={340}
-              className="object-cover w-full h-full opacity-90"
+              width={1080}
+              height={1080}
+              sizes="(max-width: 767px) 75vw, 390px"
+              className="object-cover opacity-90"
             />
           </div>
         </RevealWrapper>
 
         {/* Bloc de Contenu : La Preuve par l'Action */}
-        <RevealWrapper className="flex-1 min-w-[280px]">
+        <RevealWrapper className="story-copy">
+          <ScrollAccent />
           <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#c9a84c] mb-4 font-mono">
             {t(
               "Une méthode pensée pour votre travail",
@@ -61,9 +64,9 @@ export default function Authority() {
           <h2
             className="text-black leading-tight mb-6"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "var(--font-dm-sans), sans-serif",
               fontSize: "clamp(2rem, 3.5vw, 2.6rem)",
-              fontWeight: 600,
+              fontWeight: 700,
             }}
           >
             {t(
@@ -87,7 +90,7 @@ export default function Authority() {
           </p>
 
           {/* Grille de statistiques pour asseoir l'autorité */}
-          <div className="grid grid-cols-3 gap-4 border-t border-b border-gray-200/80 py-6 mb-10 text-center sm:text-left">
+          <div className="story-stats border-t border-b border-gray-200/80 py-6 mb-10">
             {STATS.map((stat, i) => (
               <div key={i} className="flex flex-col">
                 <span className="text-2xl md:text-3xl font-serif text-[#9a7a2e] font-bold">
@@ -101,7 +104,7 @@ export default function Authority() {
           </div>
 
           {/* Groupe de Boutons d'Action (Pratique + Groupe de Débat) */}
-          <div className="flex flex-col lg:flex-row items-center gap-4 w-full sm:w-auto justify-start">
+          <div className="story-actions">
             {/* Votre bouton StartFree réutilisable */}
             <StartFreeButton className="w-full sm:w-auto text-center shadow-lg" />
 

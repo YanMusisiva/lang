@@ -4,7 +4,7 @@ import Link from "next/link";
 import { use } from "react";
 import { useLang } from "@/context/LangContext";
 import { useBlog } from "@/context/BlogContext";
-import Nav from "@/components/Navbar";
+import Nav from "@/components/layout/Navbar";
 
 function ArticleContent({ slug }: { slug: string }) {
   const { t, lang } = useLang();
@@ -13,7 +13,7 @@ function ArticleContent({ slug }: { slug: string }) {
 
   if (!article) {
     return (
-      <main className="bg-[#050505] min-h-screen flex items-center justify-center">
+      <main className="interior-page bg-[#050505] min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="text-white/30 font-mono mb-4">
             {t("Article introuvable", "Article not found")}
@@ -75,7 +75,7 @@ function ArticleContent({ slug }: { slug: string }) {
   };
 
   return (
-    <main className="bg-[#050505] min-h-screen">
+    <main className="interior-page bg-[#050505] min-h-screen">
       <Nav />
       <article className="max-w-3xl mx-auto px-6 pt-36 pb-28">
         <Link
@@ -87,7 +87,7 @@ function ArticleContent({ slug }: { slug: string }) {
 
         {/* Meta */}
         <div className="flex items-center gap-4 mb-6">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-[#e8c96a] bg-[#22c55e]/10 border border-[#22c55e]/20 px-2.5 py-1">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-[#e8c96a] bg-[#c9a84c]/10 border border-[#c9a84c]/20 px-2.5 py-1">
             {t(article.category.fr, article.category.en)}
           </span>
           <span className="font-mono text-[10px] text-white/20">
@@ -110,7 +110,7 @@ function ArticleContent({ slug }: { slug: string }) {
         <h1 className="font-display text-4xl md:text-5xl font-black text-white leading-tight mb-6">
           {t(article.title.fr, article.title.en)}
         </h1>
-        <p className="text-white/40 text-base leading-relaxed mb-10 border-l-2 border-[#22c55e]/30 pl-5">
+        <p className="text-white/40 text-base leading-relaxed mb-10 border-l-2 border-[#c9a84c]/30 pl-5">
           {t(article.excerpt.fr, article.excerpt.en)}
         </p>
 
@@ -122,7 +122,7 @@ function ArticleContent({ slug }: { slug: string }) {
 
         {/* Author */}
         <div className="mt-16 border-t border-white/5 pt-8 flex items-center gap-4">
-          <div className="w-10 h-10 bg-[#22c55e]/10 border border-[#22c55e]/20 flex items-center justify-center">
+          <div className="w-10 h-10 bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center">
             <span className="text-[#e8c96a] font-mono text-xs">L</span>
           </div>
           <div>

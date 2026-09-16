@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { BookOpen, Crown, MessageCircle, Mic, TrendingUp } from "lucide-react";
-import SignOutButton from "@/components/SignOutButton";
-import NotificationCenter, { type NotificationItem } from "@/components/NotificationCenter";
+import SignOutButton from "@/components/account/SignOutButton";
+import NotificationCenter, { type NotificationItem } from "@/components/account/NotificationCenter";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
@@ -21,22 +21,22 @@ export default async function DashboardPage() {
     : { data: null };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white px-6 py-12">
+    <main className="interior-page min-h-screen bg-[#0a0a0a] text-white px-6 py-12">
       <div className="mx-auto max-w-6xl">
         <header className="flex items-center justify-between gap-4 border-b border-white/10 pb-6">
           <Link href="/" className="font-serif text-2xl text-[#c9a84c]">LangListening</Link>
           <SignOutButton />
         </header>
-        <section className="py-12">
+        <section className="page-heading py-12 mb-8">
           <p className="text-sm uppercase tracking-widest text-[#c9a84c]">Espace personnel</p>
           <h1 className="mt-3 font-serif text-5xl">Bonjour {profile?.display_name || user.email}</h1>
           <p className="mt-3 text-white/55">Votre apprentissage est maintenant synchronisé avec votre compte.</p>
         </section>
         <div className="grid gap-5 md:grid-cols-4">
-          <div className="rounded-lg border border-white/10 p-6"><TrendingUp className="text-[#c9a84c]" /><p className="mt-5 text-3xl font-semibold">{completed}</p><p className="text-sm text-white/50">modules terminés</p></div>
-          <Link href="/practice" className="rounded-lg border border-white/10 p-6 hover:border-[#c9a84c]/60"><Mic className="text-[#c9a84c]" /><h2 className="mt-5 text-xl">Continuer la pratique</h2><p className="text-sm text-white/50">Exercices oraux et écrits</p></Link>
-          <Link href="/practicepremium" className="rounded-lg border border-[#c9a84c]/35 p-6 hover:border-[#c9a84c]"><Crown className="text-[#c9a84c]" /><h2 className="mt-5 text-xl">Espace premium</h2><p className="text-sm text-white/50">Leçons, IA et accompagnement</p></Link>
-          <Link href="/blog" className="rounded-lg border border-white/10 p-6 hover:border-[#c9a84c]/60"><BookOpen className="text-[#c9a84c]" /><h2 className="mt-5 text-xl">Ressources</h2><p className="text-sm text-white/50">Conseils et méthodes</p></Link>
+          <div className="learning-card rounded-lg border border-white/10 p-6"><TrendingUp className="text-[#c9a84c]" /><p className="mt-5 text-3xl font-semibold">{completed}</p><p className="text-sm text-white/50">modules terminés</p></div>
+          <Link href="/practice" className="learning-card rounded-lg border border-white/10 p-6 hover:border-[#c9a84c]/60"><Mic className="text-[#c9a84c]" /><h2 className="mt-5 text-xl">Continuer la pratique</h2><p className="text-sm text-white/50">Exercices oraux et écrits</p></Link>
+          <Link href="/practicepremium" className="learning-card rounded-lg border border-[#c9a84c]/35 p-6 hover:border-[#c9a84c]"><Crown className="text-[#c9a84c]" /><h2 className="mt-5 text-xl">Espace premium</h2><p className="text-sm text-white/50">Leçons, IA et accompagnement</p></Link>
+          <Link href="/blog" className="learning-card rounded-lg border border-white/10 p-6 hover:border-[#c9a84c]/60"><BookOpen className="text-[#c9a84c]" /><h2 className="mt-5 text-xl">Ressources</h2><p className="text-sm text-white/50">Conseils et méthodes</p></Link>
         </div>
         <div className="mt-6 flex flex-wrap gap-4">
           <Link href="/chat" className="inline-flex items-center gap-2 rounded border border-white/10 px-4 py-2.5 text-sm hover:border-[#c9a84c]/60"><MessageCircle size={17} />Ouvrir ma conversation</Link>

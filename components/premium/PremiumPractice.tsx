@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { BookOpen, CheckCircle2, Headphones, LoaderCircle, MessageCircle, Mic, PenLine, Square, Volume2 } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { useLang } from "@/context/LangContext";
 import { PREMIUM_LESSONS, type PremiumExercise, type PremiumLesson } from "@/data/premium";
 
@@ -158,7 +158,7 @@ export default function PremiumPractice({ track }: { track: string }) {
   const videoUrl = lesson.videoUrl?.replace("youtube.com/watch?v=", "youtube.com/embed/").replace("youtu.be/", "youtube.com/embed/");
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
+    <main className="interior-page min-h-screen bg-[#0a0a0a] text-white">
       <Navbar />
       <div className="mx-auto grid max-w-7xl gap-8 px-6 pb-20 pt-28 lg:grid-cols-[280px_1fr]">
         <aside>

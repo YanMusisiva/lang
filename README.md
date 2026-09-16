@@ -2,6 +2,17 @@
 
 Plateforme bilingue d'apprentissage de l'anglais avec tests de placement, exercices oraux et écrits, progression synchronisée, blog et espace d'administration.
 
+## Structure du projet
+
+- `app/` : pages, routes API et styles globaux Next.js.
+- `components/` : composants regroupés par fonctionnalité ; voir le [guide d'organisation](components/README.md).
+- `context/` : contextes React pour la langue et le blog.
+- `data/` : contenus statiques, parcours, exercices et données de l'accueil.
+- `lib/` : clients Supabase et fonctions de synchronisation.
+- `types/` : types partagés.
+- `public/` : images et fichiers audio.
+- `supabase/migrations/` : migrations de la base de données.
+
 ## Prérequis
 
 - Node.js 20+

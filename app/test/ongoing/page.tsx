@@ -2,7 +2,7 @@
 import { persistProgress } from "@/lib/progress-client";
 
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { useLang } from "@/context/LangContext";
 import { useEffect } from "react";
 
@@ -344,13 +344,13 @@ export default function WritingTest() {
 
   if (!started) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
         <Navbar />
 
         <div className="max-w-3xl text-center pt-20">
           <h1
             className="text-5xl text-white mb-8"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             English Translation Practice
           </h1>
@@ -471,13 +471,13 @@ export default function WritingTest() {
 
   if (!started) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
         <Navbar />
 
         <div className="max-w-3xl text-center pt-20">
           <h1
             className="text-5xl text-white mb-8"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             Test d'Expression Écrite
           </h1>
@@ -502,13 +502,13 @@ export default function WritingTest() {
 
   if (step >= QUESTIONS.length) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
         <Navbar />
 
         <div className="max-w-2xl text-center pt-20">
           <h2
             className="text-5xl text-[#c9a84c] mb-8"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             Test terminé
           </h2>
@@ -523,7 +523,7 @@ export default function WritingTest() {
 
             <h2
               className="text-[#c9a84c] text-7xl font-bold"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
               {score}/{QUESTIONS.length}
             </h2>
@@ -548,7 +548,7 @@ export default function WritingTest() {
   }
 
   return (
-    <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+    <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
       <Navbar />
 
       <div className="max-w-3xl w-full pt-20">
@@ -565,7 +565,7 @@ export default function WritingTest() {
 
           <h2
             className="text-[#c9a84c] text-6xl font-bold"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             {score}/{QUESTIONS.length}
           </h2>
@@ -577,7 +577,7 @@ export default function WritingTest() {
 
         <h2
           className="text-4xl text-white text-center mb-10"
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
         >
           Traduisez :
         </h2>

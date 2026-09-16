@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { Check, Users } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { useLang } from "@/context/LangContext";
 
 const OFFERS = [
@@ -57,7 +57,7 @@ export default function SpecialOffersPage() {
   const { t } = useLang();
 
   return (
-    <main className="min-h-screen bg-[#fafaf8] text-black">
+    <main className="interior-page min-h-screen bg-[#fafaf8] text-black">
       <Navbar />
       <section className="bg-[#0a0a0a] px-6 pb-20 pt-32 text-center text-white">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#e8c96a]">

@@ -1,15 +1,16 @@
 "use client";
 
 import { useLang } from "@/context/LangContext";
-import { Youtube, Facebook, Instagram } from "lucide-react";
+import { Youtube, Facebook, Instagram, ArrowUpRight } from "lucide-react";
 
+import Link from "next/link";
 import { FaTiktok } from "react-icons/fa";
 
 const NAV_LINKS = [
-  { href: "#presentation", fr: "Présentation", en: "About" },
-  { href: "#value", fr: "Avantages", en: "Benefits" },
-  { href: "#proof", fr: "Témoignages", en: "Testimonials" },
-  { href: "#pricing", fr: "Tarifs", en: "Pricing" },
+  { href: "/#story", fr: "Présentation", en: "About" },
+  { href: "/#value", fr: "Avantages", en: "Benefits" },
+  { href: "/#community", fr: "Communauté", en: "Community" },
+  { href: "/#pricing", fr: "Tarifs", en: "Pricing" },
   { href: "/contact", fr: "Contact", en: "Contact" },
 ];
 
@@ -18,6 +19,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0a0a0a] border-t border-[#c9a84c]/20 pt-14 pb-8 px-8">
+      <div className="footer-wordmark"><span>Lang<span>Listening.</span></span><Link href="/contact" className="circle-button" aria-label={t("Contactez-nous", "Contact us")}><ArrowUpRight size={26} /></Link></div>
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
         {/* Brand */}
         <div>
@@ -42,7 +44,7 @@ export default function Footer() {
             }}
           >
             <a
-              href="https://youtube.com/@langlistening?si=M8NS-3TvnEc5MrAd"
+              aria-label="YouTube" href="https://youtube.com/@langlistening?si=M8NS-3TvnEc5MrAd"
               target="_blank"
               rel="noopener noreferrer"
               className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
@@ -54,7 +56,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://www.facebook.com/profile.php?id=61583766185133"
+              aria-label="Facebook" href="https://www.facebook.com/profile.php?id=61583766185133"
               target="_blank"
               rel="noopener noreferrer"
               className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
@@ -66,7 +68,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://www.tiktok.com/@langlistening?_r=1&_t=ZS-96lAFZ7vvbo"
+              aria-label="TikTok" href="https://www.tiktok.com/@langlistening?_r=1&_t=ZS-96lAFZ7vvbo"
               target="_blank"
               rel="noopener noreferrer"
               className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
@@ -78,7 +80,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://www.instagram.com/langlistening?igsh=MXEzeDZ3MjJ5YW1hMQ=="
+              aria-label="Instagram" href="https://www.instagram.com/langlistening?igsh=MXEzeDZ3MjJ5YW1hMQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="group w-14 h-14 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-[#e8c96a] hover:border-[#e8c96a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(232,201,106,0.25)]"
@@ -133,12 +135,12 @@ export default function Footer() {
               </a>
             </li> */}
             <li>
-              <a
-                href="#garantie"
+              <Link
+                href="/#garantie"
                 className="text-white/50 text-sm hover:text-[#e8c96a] transition-colors"
               >
                 {t("Garantie remboursement", "Money-back guarantee")}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

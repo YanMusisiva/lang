@@ -1,8 +1,8 @@
 "use client";
 
 import { useLang } from "@/context/LangContext";
-import { TESTIMONIALS } from "@/app/data";
-import RevealWrapper from "./RevealWrapper";
+import { TESTIMONIALS } from "@/data/home";
+import RevealWrapper from "@/components/motion/RevealWrapper";
 
 const PROOF_NUMBERS = [
   { val: "100+", fr: "Étudiants formés", en: "Students trained" },

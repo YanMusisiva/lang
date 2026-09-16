@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import useRouter from "next/navigation"; // Pour la redirection automatique si besoin
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { PRACTICE } from "@/data/practice";
 import confetti from "canvas-confetti";
 import { persistProgress } from "@/lib/progress-client";

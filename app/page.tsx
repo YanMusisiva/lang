@@ -1,24 +1,24 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import LeadMagnet from "../components/LeadMagnet";
-import ValueSection from "../components/ValueSection";
-// import SocialProof from "../components/SocialProof";
-import Authority from "../components/Authority";
-import Pricing from "../components/Pricing";
-import Guarantee from "../components/Guarantee";
-import VideoSection from "@/components/VideoSection";
-import Footer from "../components/Footer";
-import CommunitySection from "@/components/CommunitySection";
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/home/Hero";
+import LeadMagnet from "@/components/home/LeadMagnet";
+import ValueSection from "@/components/home/ValueSection";
+// import SocialProof from "@/components/home/SocialProof";
+import Authority from "@/components/home/Authority";
+import Pricing from "@/components/home/Pricing";
+import Guarantee from "@/components/home/Guarantee";
+import VideoSection from "@/components/home/VideoSection";
+import Footer from "@/components/layout/Footer";
+import CommunitySection from "@/components/home/CommunitySection";
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="home-page min-h-screen bg-white">
       <Navbar />
-      <div className="pt-16">
+      <div>
         <Hero />
+        <ValueSection />
         <VideoSection />
         <LeadMagnet />
-        <ValueSection />
         {/* <SocialProof /> */}
         <CommunitySection />
         <Authority />
