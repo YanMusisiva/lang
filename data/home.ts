@@ -1,34 +1,6 @@
-import type { Testimonial, Plan, BulletCard } from "@/types/";
+import type { Plan, BulletCard } from "@/types/";
 
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    initials: "M",
-    quote: {
-      fr: "Les audios que vous envoyez sont essentiels pour nous, ils font toute la différence dans notre apprentissage.",
-      en: "The audios you send are crucial for us, they make all the difference in our learning.",
-    },
-    name: "Milka",
-    role: { fr: "Étudiante", en: "Student" },
-  },
-  {
-    initials: "F",
-    quote: {
-      fr: "J’adore votre méthode d’apprentissage ! Elle m’aide vraiment à parler anglais avec confiance.",
-      en: "I love your learning method! It truly helps me speak English with confidence.",
-    },
-    name: "Francis",
-    role: { fr: "Voyageur", en: "Traveler" },
-  },
-  {
-    initials: "A",
-    quote: {
-      fr: "Les audios sont vraiment cools et rendent l’apprentissage super agréable !",
-      en: "The audios are really cool and make learning super fun!",
-    },
-    name: "Ali",
-    role: { fr: "Enseignant", en: "Teacher" },
-  },
-];
+export { TESTIMONIALS } from "@/data/testimonials";
 
 export const PLANS: Plan[] = [
   {

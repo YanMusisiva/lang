@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: "/", fr: "Accueil", en: "Home" },
   { href: "/#story", fr: "Notre histoire", en: "Our story" },
   { href: "/practice", fr: "Pratiquer", en: "Practice" },
+  { href: "/testimony", fr: "Témoignages", en: "Testimonials" },
   { href: "/blog", fr: "Blog", en: "Blog" },
   { href: "/contact", fr: "Contact", en: "Contact" },
 ];

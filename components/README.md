@@ -10,8 +10,10 @@ Les composants sont regroupés par fonctionnalité. Les pages et les routes rest
 | `account/` | Déconnexion et centre de notifications. |
 | `learning/` | Fonctions partagées de l'apprentissage : synchronisation de progression et mini-leçons. |
 | `practice/` | Exercices oraux et écrits, fenêtre de test de placement. |
+| `practice/level-test/` | Test de niveau public, reprise temporaire et résultat. |
 | `premium/` | Interface de pratique premium. |
 | `chat/` | Interface de conversation. |
+| `testimony/` | Page des témoignages, portraits, galerie photo et vidéos YouTube. |
 | `ui/` | Éléments réutilisables : bouton de démarrage et lecteur vidéo. |
 
 ## Ajouter un composant

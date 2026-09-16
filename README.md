@@ -32,6 +32,12 @@ Renseignez les variables de `.env.local`, puis exécutez dans l'ordre `supabase/
 
 ## Premier administrateur
 
+### Test de niveau et statistiques anonymes
+
+Le test `/test` conserve la progression pendant 24 heures sur l’appareil. Pour activer l’enregistrement des scores et la moyenne dans `/admin/tests`, appliquer aussi les migrations `003_chat_notifications.sql` et `004_level_test.sql` après les deux premières. Voir [le fonctionnement du test](docs/level-test.md).
+
+### Créer le compte administrateur
+
 1. Créez un compte depuis `/auth`.
 2. Dans Supabase, ouvrez la table `profiles`.
 3. Passez la colonne `role` du compte de `student` à `admin`.

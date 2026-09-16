@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import RevealWrapper from "@/components/motion/RevealWrapper";
 import { useLang } from "@/context/LangContext";
 
@@ -48,6 +50,7 @@ export default function CommunitySection() {
           </figure></RevealWrapper>)}
         </div>
         <p className="community-note">{t("Ne pratiquez plus un anglais abstrait : utilisez celui de votre vie professionnelle.", "Stop practicing abstract English: use the English of your professional life.")}</p>
+        <div className="mt-8 text-center"><Link href="/testimony" className="pill-button pill-outline">{t("Découvrir leurs témoignages", "Discover their stories")}<ArrowUpRight size={18} /></Link></div>
       </div>
     </section>
   );
