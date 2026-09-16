@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { useLang } from "@/context/LangContext";
 import { PRACTICE } from "@/data/practice";
 import confetti from "canvas-confetti";

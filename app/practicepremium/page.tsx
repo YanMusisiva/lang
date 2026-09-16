@@ -18,7 +18,7 @@ export default async function PremiumPracticePage() {
 
   if (!active && !staff) {
     return (
-      <main className="min-h-screen bg-[#0a0a0a] px-6 py-24 text-white">
+      <main className="interior-page min-h-screen bg-[#0a0a0a] px-6 py-24 text-white">
         <section className="mx-auto max-w-xl rounded-lg border border-[#c9a84c]/30 bg-white/[0.03] p-8 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-[#c9a84c]">Espace premium</p>
           <h1 className="mt-4 font-serif text-4xl">Un programme actif est nécessaire</h1>

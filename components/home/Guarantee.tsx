@@ -1,7 +1,8 @@
 "use client";
 
 import { useLang } from "@/context/LangContext";
-import RevealWrapper from "./RevealWrapper";
+import RevealWrapper from "@/components/motion/RevealWrapper";
+import { ShieldCheck } from "lucide-react";
 
 const PILLS = [
   { fr: "Remboursement 10 jours", en: "10-day refund" },
@@ -19,13 +20,13 @@ export default function Guarantee() {
     >
       <RevealWrapper>
         <div className="max-w-2xl mx-auto text-center">
-          <div className="text-5xl mb-4">🛡️</div>
+          <div className="guarantee-icon"><ShieldCheck size={32} aria-hidden="true" /></div>
           <h2
             className="text-black leading-tight mb-4"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "var(--font-dm-sans), sans-serif",
               fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)",
-              fontWeight: 600,
+              fontWeight: 700,
             }}
           >
             {t(

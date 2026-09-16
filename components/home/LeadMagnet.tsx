@@ -2,6 +2,8 @@
 
 import { useLang } from "@/context/LangContext";
 import Link from "next/link";
+import { Mic } from "lucide-react";
+import RevealWrapper from "@/components/motion/RevealWrapper";
 import StartFreeButton from "@/components/ui/StartFreeButton"; // Ajuste le chemin d'import selon ton projet
 
 export default function LeadMagnet() {
@@ -13,10 +15,10 @@ export default function LeadMagnet() {
       className="bg-[#fdf6e3] border-y border-[#c9a84c]/30 py-16 px-8 relative overflow-hidden"
     >
       {/* Conteneur principal en colonne (flex-col) pour forcer le bouton en dessous partout */}
-      <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-8 relative z-10">
+      <RevealWrapper className="lead-layout max-w-4xl mx-auto flex flex-col items-center text-center gap-8 relative z-10">
         {/* Icone Premium centrée */}
-        <div className="w-20 h-20 bg-[#0a0a0a] border border-[#c9a84c]/30 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
-          🎙️
+        <div className="lead-icon w-20 h-20 bg-[#0a0a0a] border border-[#c9a84c]/30 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+          <Mic size={30} className="text-[#e8c96a]" aria-hidden="true" />
         </div>
 
         {/* Section Textuelle */}
@@ -30,7 +32,7 @@ export default function LeadMagnet() {
 
           <h2
             className="text-[#0a0a0a] text-3xl md:text-4xl font-normal leading-tight mb-4 max-w-2xl mx-auto"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             {t(
               "Entraînez l'anglais dont vous avez besoin au travail",
@@ -46,7 +48,7 @@ export default function LeadMagnet() {
           </p>
 
           {/* Points forts centrés horizontalement */}
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-gray-800 font-medium">
+          <div className="lead-points mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-gray-800 font-medium">
             <div className="flex items-center gap-2">
               <span className="text-[#9a7a2e]">✓</span>
               <span>
@@ -78,7 +80,7 @@ export default function LeadMagnet() {
         </div>
 
         {/* Bloc d'actions positionné en dessous */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center mt-4">
+        <div className="lead-actions flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center mt-4">
           {/* Utilisation de ton bouton réutilisable avec une largeur adaptative */}
           <StartFreeButton className="w-full sm:w-auto text-center" />
 
@@ -90,7 +92,7 @@ export default function LeadMagnet() {
             {t("Rejoindre la communauté", "Join the community")}
           </Link>
         </div>
-      </div>
+      </RevealWrapper>
     </section>
   );
 }

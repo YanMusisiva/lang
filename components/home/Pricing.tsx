@@ -1,8 +1,8 @@
 "use client";
 
 import { useLang } from "@/context/LangContext";
-import { PLANS } from "@/app/data";
-import RevealWrapper from "./RevealWrapper";
+import { PLANS } from "@/data/home";
+import RevealWrapper from "@/components/motion/RevealWrapper";
 import Link from "next/link";
 
 export default function Pricing() {
@@ -16,21 +16,21 @@ export default function Pricing() {
       <h2
         className="text-center text-black mb-16 leading-tight"
         style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "clamp(2rem, 4vw, 3rem)",
-          fontWeight: 600,
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          fontSize: "clamp(2rem, 4vw, 3.7rem)",
+          fontWeight: 700,
         }}
       >
         {t("Votre anglais. Votre métier. Votre coach.", "Your English. Your profession. Your coach.")}
       </h2>
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <div className="pricing-grid max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
         {PLANS.map((plan, i) => (
           <RevealWrapper key={i} delay={i * 100}>
             <div
-              className={`relative rounded-lg p-10 text-center transition-all duration-300 ${
+              className={`pricing-card relative rounded-lg p-10 text-center transition-all duration-300 ${
                 plan.featured
-                  ? "bg-[#0a0a0a] border border-[#c9a84c] scale-[1.04] shadow-2xl"
+                  ? "bg-[#0a0a0a] border border-[#c9a84c]  shadow-2xl"
                   : "bg-[#fafaf8] border border-black/10 hover:border-[#c9a84c]/40 hover:-translate-y-1 hover:shadow-lg"
               }`}
             >
@@ -45,7 +45,7 @@ export default function Pricing() {
                 className={`text-xl font-semibold mb-4 ${
                   plan.featured ? "text-[#e8c96a]" : "text-black"
                 }`}
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
               >
                 {t(plan.name.fr, plan.name.en)}
               </h3>
@@ -56,7 +56,7 @@ export default function Pricing() {
                   plan.featured ? "text-white" : "text-black"
                 }`}
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "var(--font-dm-sans), sans-serif",
                   fontSize: "3.5rem",
                   fontWeight: 700,
                 }}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useLang } from "@/context/LangContext";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 
 export default function ContactPage() {
   const { t } = useLang();
@@ -32,11 +32,11 @@ Nouvelle demande LangListening
   };
 
   return (
-    <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 py-24">
+    <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 pt-36 pb-24">
       <Navbar />
-      <div className="w-full max-w-xl">
+      <div className="contact-layout w-full">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="page-heading text-center mb-12">
           <div className="inline-block border border-[#c9a84c]/50 text-[#e8c96a] px-4 py-1 rounded-full text-xs uppercase tracking-widest mb-6">
             {t("Contact rapide", "Quick Contact")}
           </div>
@@ -44,8 +44,8 @@ Nouvelle demande LangListening
           <h1
             className="text-white mb-4"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(2.5rem,6vw,4rem)",
+              fontFamily: "var(--font-dm-sans), sans-serif",
+              fontSize: "clamp(2.5rem,4.5vw,4rem)",
             }}
           >
             {t("Parlons de votre anglais", "Let's talk about your English")}
@@ -60,7 +60,7 @@ Nouvelle demande LangListening
         </div>
 
         {/* Form */}
-        <div className="space-y-5">
+        <div className="contact-form space-y-5">
           <input
             type="text"
             maxLength={50}

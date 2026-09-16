@@ -3,18 +3,18 @@ import React from "react";
 import Link from "next/link";
 import { useLang } from "@/context/LangContext";
 import { useBlog } from "@/context/BlogContext";
-import Nav from "@/components/Navbar";
+import Nav from "@/components/layout/Navbar";
 
 function BlogContent() {
   const { t, lang } = useLang();
   const { articles } = useBlog();
 
   return (
-    <main className="bg-[#050505] min-h-screen">
+    <main className="interior-page bg-[#050505] min-h-screen">
       <Nav />
       <div className="max-w-7xl mx-auto px-6 pt-36 pb-28">
         {/* Header */}
-        <div className="mb-16">
+        <div className="page-heading mb-16">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#e8c96a] mb-4">
             Blog
           </p>
@@ -40,7 +40,7 @@ function BlogContent() {
                 className="group card-hover bg-[#0a0a0a] border border-white/8 p-7 flex flex-col"
               >
                 <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#e8c96a] bg-[#22c55e]/10 border border-[#22c55e]/20 px-2.5 py-1">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#e8c96a] bg-[#c9a84c]/10 border border-[#c9a84c]/20 px-2.5 py-1">
                     {t(article.category.fr, article.category.en)}
                   </span>
                   {article.readTime && (

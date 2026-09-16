@@ -3,9 +3,9 @@ import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "../context/LangContext";
 import { BlogProvider } from "../context/BlogContext";
-import ProgressSync from "@/components/ProgressSync";
-import MicroLessonPopup from "@/components/MicroLessonPopup";
-import AuthenticatedNavigation from "@/components/AuthenticatedNavigation";
+import ProgressSync from "@/components/learning/ProgressSync";
+import MicroLessonPopup from "@/components/learning/MicroLessonPopup";
+import AuthenticatedNavigation from "@/components/layout/AuthenticatedNavigation";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -17,13 +17,17 @@ const cormorant = Cormorant_Garamond({
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-dm-sans",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "LangListening – Pratiquez l'anglais chaque jour",
+  icons: {
+    icon: { url: "/favicon-circle.png", type: "image/png" },
+    apple: "/favicon-circle.png",
+  },
   description:
     "Progressez en anglais avec des exercices oraux et écrits, un parcours personnalisé et un accompagnement humain.",
 };

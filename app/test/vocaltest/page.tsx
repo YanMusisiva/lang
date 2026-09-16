@@ -2,7 +2,7 @@
 import { persistProgress } from "@/lib/progress-client";
 
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 
 export default function SpeakingExercise() {
   const PHRASES = [
@@ -280,13 +280,13 @@ export default function SpeakingExercise() {
 
   if (!started) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
         <Navbar />
 
         <div className="max-w-3xl text-center pt-20">
           <h1
             className="text-5xl text-white mb-8"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             English Speaking Practice
           </h1>
@@ -366,14 +366,14 @@ export default function SpeakingExercise() {
 
   if (isFinished) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
         {" "}
         <Navbar />
         <div className="max-w-2xl w-full pt-20 pb-24">
           <h1
             className="text-center text-[#c9a84c] text-6xl mb-10"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "var(--font-dm-sans), sans-serif",
             }}
           >
             Exercise Completed
@@ -420,7 +420,7 @@ export default function SpeakingExercise() {
   }
 
   return (
-    <section className="min-h-screen bg-[#0a0a0a] px-6 py-20">
+    <section className="interior-page min-h-screen bg-[#0a0a0a] px-6 py-20">
       {" "}
       <Navbar />
       <div className="max-w-3xl mx-auto pt-10">
@@ -432,7 +432,7 @@ export default function SpeakingExercise() {
           <h1
             className="text-6xl text-[#c9a84c]"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "var(--font-dm-sans), sans-serif",
             }}
           >
             {validatedQuestions.length}/{PHRASES.length}

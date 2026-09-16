@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import PlacementTestModal from "@/components/PlacementTestModal";
+import RevealWrapper from "@/components/motion/RevealWrapper";
+import Navbar from "@/components/layout/Navbar";
+import PlacementTestModal from "@/components/practice/PlacementTestModal";
 import { persistProgress } from "@/lib/progress-client";
 
 const LEVELS = [
@@ -65,18 +66,18 @@ export default function PracticePage() {
     );
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white p-8 relative overflow-hidden">
+    <main className="interior-page min-h-screen bg-[#0a0a0a] text-white p-8 relative overflow-hidden">
       <Navbar />
 
       {/* Lignes dorées fines décoratives d'arrière-plan */}
       <div className="absolute top-0 left-1/4 w-[1px] h-full bg-linear-to-b from-[#c9a84c]/20 via-transparent to-transparent pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 w-[1px] h-full bg-linear-to-b from-transparent via-[#c9a84c]/10 to-transparent pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto pt-16 relative z-10">
-        <div className="text-center mb-16">
+      <div className="max-w-6xl mx-auto pt-24 relative z-10">
+        <div className="page-heading text-center mb-16">
           <h1
             className="text-5xl md:text-6xl text-[#c9a84c] mb-4 tracking-wide font-light"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             Practice Suite
           </h1>
@@ -91,8 +92,7 @@ export default function PracticePage() {
             const isUnlocked = unlockedLevels[level.slug];
 
             return (
-              <Link
-                key={level.slug}
+              <RevealWrapper key={level.slug}><Link
                 href={`/practice/${level.slug}`}
                 onClick={(e) =>
                   handleLevelClick(e, level.slug, level.requiresTest)
@@ -100,7 +100,7 @@ export default function PracticePage() {
               >
                 <div
                   className={`
-                    relative rounded-2xl border bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8
+                    learning-card relative rounded-2xl border bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8
                     hover:scale-[1.02] transition-all duration-300 cursor-pointer flex flex-col justify-between h-56
                     ${
                       isUnlocked
@@ -128,7 +128,7 @@ export default function PracticePage() {
                     </div>
                     <h2
                       className="text-3xl font-normal tracking-wide text-white"
-                      style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                      style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
                     >
                       {level.title}
                     </h2>
@@ -145,7 +145,7 @@ export default function PracticePage() {
                     </span>
                   </div>
                 </div>
-              </Link>
+              </Link></RevealWrapper>
             );
           })}
         </div>

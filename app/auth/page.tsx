@@ -53,8 +53,8 @@ function AuthForm() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-6 py-16">
-      <section className="w-full max-w-md border border-white/10 bg-white/[0.03] p-8 rounded-lg">
+    <main className="interior-page min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-6 py-16">
+      <section className="w-full max-w-md border border-white/10 bg-white/[0.03] p-8 rounded-3xl">
         <Link href="/" className="text-[#c9a84c] text-sm">← LangListening</Link>
         <h1 className="font-serif text-4xl mt-8 mb-2">
           {mode === "login" ? "Bon retour" : "Créer votre compte"}
@@ -95,7 +95,7 @@ function AuthForm() {
 
 export default function AuthPage() {
   return (
-    <Suspense fallback={<main className="min-h-screen bg-[#0a0a0a]" />}>
+    <Suspense fallback={<main className="interior-page min-h-screen bg-[#0a0a0a]" />}>
       <AuthForm />
     </Suspense>
   );

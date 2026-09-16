@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useLang } from "@/context/LangContext";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 
 export default function LanguageTest() {
   const { t } = useLang();
@@ -285,14 +285,14 @@ export default function LanguageTest() {
 
   if (!started) {
     return (
-      <section className="min-h-screen bg-[#0a0a0a] px-6 py-24">
+      <section className="interior-page min-h-screen bg-[#0a0a0a] px-6 py-24">
         <Navbar />
 
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1
               className="text-5xl md:text-6xl text-white mb-4"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
               {t("Test d'anglais", "English Assessment Test")}
             </h1>
@@ -414,13 +414,13 @@ Je souhaiterais recevoir la correction et en savoir plus sur le module recommand
     const whatsappLink = `https://wa.me/243981984788?text=${whatsappMessage}`;
 
     return (
-      <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+      <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
         <Navbar />
 
         <div className="max-w-4xl w-full text-center pt-20">
           <h2
             className="text-4xl text-white mb-6"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             Test Completed
           </h2>
@@ -463,7 +463,7 @@ Je souhaiterais recevoir la correction et en savoir plus sur le module recommand
 
             <h3
               className="text-[#c9a84c] text-3xl mb-4"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
             >
               {recommendedModule.title}
             </h3>
@@ -503,7 +503,7 @@ Je souhaiterais recevoir la correction et en savoir plus sur le module recommand
   const question = QUESTIONS[step];
 
   return (
-    <section className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+    <section className="interior-page min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
       <Navbar />
 
       <div className="max-w-2xl w-full pt-20 pb-12">
@@ -522,7 +522,7 @@ Je souhaiterais recevoir la correction et en savoir plus sur le module recommand
 
         <h2
           className="text-3xl text-white mb-10 text-center"
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
         >
           {question.q}
         </h2>

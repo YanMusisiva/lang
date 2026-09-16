@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { PRACTICE } from "@/data/practice";
 import { useParams } from "next/navigation";
 
@@ -116,7 +116,7 @@ export default function LevelPage() {
           </Link>
           <h1
             className="text-4xl font-bold mt-2 text-[#c9a84c]"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
             {levelData.title}
           </h1>

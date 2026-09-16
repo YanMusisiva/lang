@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/context/LangContext";
 import { useBlog, Article } from "@/context/BlogContext";
-import Nav from "@/components/Navbar";
+import Nav from "@/components/layout/Navbar";
 
 function AdminContent() {
   const { t, lang } = useLang();
@@ -77,17 +77,17 @@ function AdminContent() {
   };
 
   const inputClass =
-    "w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-[#22c55e]/40 transition-colors font-mono";
+    "w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-[#c9a84c]/40 transition-colors font-mono";
   const labelClass =
     "font-mono text-[10px] uppercase tracking-widest text-white/30 block mb-2";
 
   return (
-    <main className="bg-[#050505] min-h-screen">
+    <main className="interior-page bg-[#050505] min-h-screen">
       <Nav />
       <div className="max-w-7xl mx-auto px-6 pt-36 pb-28">
-        <div className="flex items-center justify-between mb-12">
+        <div className="page-heading flex flex-wrap gap-5 items-center justify-between mb-12">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#22c55e] mb-3">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#c9a84c] mb-3">
               Administration
             </p>
             <h1 className="font-display text-4xl font-black text-white">
@@ -275,9 +275,9 @@ function AdminContent() {
             </div>
 
             {success && (
-              <div className="border border-[#22c55e]/30 bg-[#22c55e]/5 px-4 py-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#22c55e]" />
-                <p className="font-mono text-[11px] text-[#22c55e]">
+              <div className="border border-[#c9a84c]/30 bg-[#c9a84c]/5 px-4 py-3 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#c9a84c]" />
+                <p className="font-mono text-[11px] text-[#c9a84c]">
                   {t("admin.success")}
                 </p>
               </div>
@@ -307,7 +307,7 @@ function AdminContent() {
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="font-mono text-[9px] uppercase text-[#22c55e] bg-[#22c55e]/10 px-2 py-0.5">
+                      <span className="font-mono text-[9px] uppercase text-[#c9a84c] bg-[#c9a84c]/10 px-2 py-0.5">
                         {t(article.category.fr, article.category.en)}
                       </span>
                       <span className="font-mono text-[9px] text-white/20">
