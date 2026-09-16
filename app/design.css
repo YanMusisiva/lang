@@ -1,4 +1,27 @@
 /* Shared visual language: black, white and the original LangListening gold. */
+.program-method { max-width: 1280px; margin: 0 auto 32px; padding: 22px 0; border-block: 1px solid #0a0a0a12; color: #0a0a0a; }
+.program-method-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #806322; margin-bottom: 18px; text-align: center; }
+.program-method-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.program-method-item { display: flex; align-items: center; gap: 12px; }
+.program-method-item > span { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border: 1px solid #c9a84c50; border-radius: 50%; color: #806322; }
+.program-method-item h3 { font-size: 12px; font-weight: 600; line-height: 1.5; }
+.program-method-item p { font-size: 11px; color: #666; margin-top: 4px; line-height: 1.5; }
+.commitment-section { position: relative; background: radial-gradient(ellipse at 0 100%,#c9a84c12,transparent 60%),#10110e; color: white; padding: 88px 28px; border-block: 1px solid #c9a84c30; }
+.commitment-layout { max-width: 1180px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; }
+.commitment-intro > .eyebrow { color: #e8c96a; margin-bottom: 26px; }
+.commitment-intro h2 { font-size: clamp(30px,3.6vw,48px); font-weight: 600; line-height: 1.13; letter-spacing: -.045em; }
+.commitment-intro h2 span { display: block; color: #e8c96a; margin-top: 6px; }
+.commitment-intro > p:not(.eyebrow) { color: #ffffffa6; font-size: 14px; line-height: 1.85; margin-top: 22px; max-width: 430px; }
+.commitment-signature { display: flex; align-items: center; gap: 12px; font-size: 11px; line-height: 1.7; color: #ffffff80; margin-top: 30px; }
+.commitment-promises { border-top: 1px solid #c9a84c40; }
+.commitment-promise { display: flex; align-items: flex-start; gap: 24px; padding: 28px 0; border-bottom: 1px solid #c9a84c40; }
+.commitment-seal { display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; width: 76px; height: 76px; border: 1px solid #c9a84c60; border-radius: 50%; color: #e8c96a; font-size: 30px; line-height: 1; background: #c9a84c08; }
+.commitment-seal small { font-size: 10px; margin-top: 5px; }
+.commitment-promise h3 { font-size: 18px; font-weight: 500; letter-spacing: -.02em; margin: 2px 0 10px; }
+.commitment-promise p { font-size: 13px; line-height: 1.8; color: #ffffffa6; }
+@media (max-width: 1000px) { .program-method-grid { grid-template-columns: repeat(2,1fr); } .commitment-layout { gap: 40px; } }
+@media (max-width: 760px) { .commitment-layout { grid-template-columns: 1fr; } .commitment-section { padding: 64px 22px; } .commitment-promise { gap: 18px; } .commitment-seal { width: 60px; height: 60px; } }
+@media (max-width: 380px) { .program-method-grid { grid-template-columns: 1fr; gap: 14px; } }
 :root { --ink: #0a0a0a; --paper: #fafaf8; --line: rgba(201,168,76,.24); }
 html { scroll-padding-top: 100px; }
 body { background: var(--ink); }
@@ -165,7 +188,7 @@ button:not(:disabled), a { touch-action: manipulation; }
 .story-copy .scroll-accent { left: 0; }
 .home-page #story h2 { font-size: clamp(2rem,3.2vw,3.1rem); }
 .home-page #story :is(a,button),.home-page #gratuit :is(a,button),.home-page #pricing :is(a,button) { border-radius: 999px; }
-.home-page #pricing .pricing-card { border-radius: 28px; padding: 44px 36px; }
+.home-page #pricing .pricing-card { border-radius: 28px; padding: 32px 28px; }
 .home-page #pricing .pricing-grid { gap: 32px; }
 .community-section { background: var(--ink); color: white; overflow: hidden; }
 .community-heading { display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; align-items: end; margin-bottom: 50px; }
@@ -269,7 +292,7 @@ button:not(:disabled), a { touch-action: manipulation; }
   .community-gallery { gap: 14px; grid-template-columns: 1fr; max-width: 380px; margin-inline: auto; }
   .community-gallery > :nth-child(2) { padding-top: 0; }
   .community-card figcaption { padding-bottom: 25px; margin-bottom: 24px; }
-  .home-page #pricing .pricing-card { padding: 40px 24px; transform: none; }
+  .home-page #pricing .pricing-card { padding: 32px 24px; transform: none; }
   .footer-wordmark { margin-bottom: 45px; }
   .footer-wordmark .circle-button { width: 44px; height: 44px; }
   .contact-layout { grid-template-columns: 1fr; gap: 10px; }

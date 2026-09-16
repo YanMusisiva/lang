@@ -4,13 +4,25 @@ export { TESTIMONIALS } from "@/data/testimonials";
 
 export const PLANS: Plan[] = [
   {
-    name: { fr: "Coach personnel", en: "Personal Coach" },
+    name: { fr: "Programme en groupe", en: "Group program" },
+    price: { fr: "49", en: "49" },
+    desc: { fr: "Pratiquez ensemble, progressez avec votre formateur.", en: "Practice together, progress with your teacher." },
+    features: [
+      { fr: "Cours d’anglais professionnel", en: "Professional English lessons" },
+      { fr: "Séances de pratique en groupe", en: "Group practice sessions" },
+      { fr: "Speaking, listening et shadowing", en: "Speaking, listening and shadowing" },
+      { fr: "Simulations de situations réelles", en: "Real-world simulations" },
+      { fr: "Accompagnement et corrections du formateur", en: "Teacher support and feedback" },
+    ],
+  },
+  {
+    name: { fr: "Coaching individuel", en: "One-to-one coaching" },
     price: { fr: "149", en: "149" },
     featured: true,
     tag: { fr: "Populaire", en: "Popular" },
     desc: {
-      fr: "Votre anglais, votre métier et un coach dédié pendant un mois.",
-      en: "Your English, your profession, and a dedicated coach for one month.",
+      fr: "Votre coach personnel, un parcours adapté à votre métier.",
+      en: "Your personal coach, a path tailored to your profession.",
     },
     features: [
       {
@@ -33,37 +45,6 @@ export const PLANS: Plan[] = [
       {
         fr: "Suivi de votre progression professionnelle",
         en: "Professional progress tracking",
-      },
-    ],
-  },
-  {
-    name: { fr: "Coach personnel - 3 mois", en: "3-Month Personal Coach" },
-    price: { fr: "350", en: "350" },
-    desc: {
-      fr: "Un accompagnement continu de trois mois avec 97 $ d'économie.",
-      en: "Three months of continuous coaching with $97 in savings.",
-    },
-    features: [
-      {
-        fr: "Trois mois avec votre coach personnel",
-        en: "Three months with your personal coach",
-      },
-      {
-        fr: "Parcours Developer, Business ou Professional English",
-        en: "Developer, Business, or Professional English track",
-      },
-      {
-        fr: "Préparation aux réunions, entretiens et clients",
-        en: "Preparation for meetings, interviews, and clients",
-      },
-      {
-        fr: "Exercices adaptés à vos situations de travail",
-        en: "Exercises tailored to your workplace situations",
-      },
-
-      {
-        fr: "Suivi continu et corrections personnalisées",
-        en: "Ongoing support and personalized feedback",
       },
     ],
   },

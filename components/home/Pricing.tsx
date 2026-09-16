@@ -4,6 +4,8 @@ import { useLang } from "@/context/LangContext";
 import { PLANS } from "@/data/home";
 import RevealWrapper from "@/components/motion/RevealWrapper";
 import Link from "next/link";
+import OfferGuarantee from "@/components/ui/OfferGuarantee";
+import ProgramMethod from "@/components/home/ProgramMethod";
 
 export default function Pricing() {
   const { t } = useLang();
@@ -11,19 +13,20 @@ export default function Pricing() {
   return (
     <section id="pricing" className="py-24 bg-white px-8">
       <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#c9a84c] text-center mb-4">
-        {t("Coaching individuel", "One-to-one coaching")}
+        {t("Nos programmes mensuels", "Our monthly programs")}
       </p>
       <h2
-        className="text-center text-black mb-16 leading-tight"
+        className="text-center text-black mb-8 leading-tight"
         style={{
           fontFamily: "var(--font-dm-sans), sans-serif",
           fontSize: "clamp(2rem, 4vw, 3.7rem)",
           fontWeight: 700,
         }}
       >
-        {t("Votre anglais. Votre métier. Votre coach.", "Your English. Your profession. Your coach.")}
+        {t("En groupe ou avec votre coach personnel.", "In a group or with your personal coach.")}
       </h2>
 
+      <ProgramMethod />
       <div className="pricing-grid max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
         {PLANS.map((plan, i) => (
           <RevealWrapper key={i} delay={i * 100}>
@@ -63,11 +66,12 @@ export default function Pricing() {
               >
                 <span className="text-xl font-normal">$</span>
                 {t(plan.price.fr, plan.price.en)}
+                <span className="ml-2 text-sm font-normal">{t("/ mois", "/ month")}</span>
               </div>
 
               {/* Desc */}
               <p
-                className={`text-sm mb-6 leading-relaxed ${
+                className={`text-sm mb-3 leading-relaxed ${
                   plan.featured ? "text-white/60" : "text-gray-500"
                 }`}
               >
@@ -75,8 +79,8 @@ export default function Pricing() {
               </p>
 
               {/* Features */}
-              <ul className="text-left mb-8 space-y-0">
-                {plan.features.map((f, j) => (
+              <ul className="text-left mb-2 space-y-0">
+                {plan.features.slice(0, 3).map((f, j) => (
                   <li
                     key={j}
                     className={`text-sm py-2 border-b flex items-start gap-2 ${
@@ -92,9 +96,10 @@ export default function Pricing() {
               </ul>
 
               {/* CTA */}
+              <OfferGuarantee months={1} dark={plan.featured} />
               {plan.featured ? (
                 <a
-                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20coaching%20personnel%20d'un%20mois."
+                  href={`https://wa.me/256787531919?text=${encodeURIComponent(t(`Bonjour LangListening, je suis intéressé(e) par ${plan.name.fr} à ${plan.price.fr} $ par mois.`, `Hello LangListening, I am interested in ${plan.name.en} at $${plan.price.en} per month.`))}`}
                   className="block w-full bg-[#c9a84c] text-black font-semibold py-3.5 rounded text-sm tracking-wide hover:bg-[#e8c96a] transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -103,7 +108,7 @@ export default function Pricing() {
                 </a>
               ) : (
                 <a
-                  href="https://wa.me/256787531919?text=Bonjour%20LangListening%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20coaching%20personnel%20de%20trois%20mois."
+                  href={`https://wa.me/256787531919?text=${encodeURIComponent(t(`Bonjour LangListening, je suis intéressé(e) par ${plan.name.fr} à ${plan.price.fr} $ par mois.`, `Hello LangListening, I am interested in ${plan.name.en} at $${plan.price.en} per month.`))}`}
                   className="block w-full border border-black/15 text-black font-semibold py-3.5 rounded text-sm hover:border-[#c9a84c] hover:text-[#9a7a2e] transition-all"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -119,8 +124,8 @@ export default function Pricing() {
       <div className="max-w-2xl mx-auto mt-14 text-center border-t border-black/10 pt-10">
         <p className="text-gray-600 mb-5">
           {t(
-            "Vous préférez apprendre en groupe ou cherchez une formule plus accessible ?",
-            "Would you rather learn in a group or are you looking for a more accessible plan?",
+            "Envie de progresser sur trois mois ? Découvrez nos programmes en groupe, Anglais Business et coaching individuel.",
+            "Ready for three months of progress? Explore our group, Business English and one-to-one coaching programs.",
           )}
         </p>
         <Link

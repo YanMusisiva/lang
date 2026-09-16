@@ -2,64 +2,28 @@
 
 import { useLang } from "@/context/LangContext";
 import RevealWrapper from "@/components/motion/RevealWrapper";
-import { ShieldCheck } from "lucide-react";
-
-const PILLS = [
-  { fr: "Remboursement 10 jours", en: "10-day refund" },
-  { fr: "Garantie satisfaction", en: "Satisfaction guarantee" },
-  { fr: "Annulation facile", en: "Easy cancellation" },
-];
+import { ShieldCheck, Infinity as InfinityIcon } from "lucide-react";
 
 export default function Guarantee() {
   const { t } = useLang();
-
-  return (
-    <section
-      id="garantie"
-      className="py-20 bg-[#fdf6e3] border-y border-[#c9a84c]/30 px-8"
-    >
-      <RevealWrapper>
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="guarantee-icon"><ShieldCheck size={32} aria-hidden="true" /></div>
-          <h2
-            className="text-black leading-tight mb-4"
-            style={{
-              fontFamily: "var(--font-dm-sans), sans-serif",
-              fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)",
-              fontWeight: 700,
-            }}
-          >
-            {t(
-              "Satisfaction garantie ou remboursé",
-              "Satisfaction guaranteed or money back",
-            )}
-          </h2>
-          <p className="text-gray-500 text-sm leading-relaxed mb-2">
-            {t(
-              "Testez pendant 10 jours les exercices et les simulations liés à votre métier. Si le programme ne vous aide pas à mieux communiquer au travail, vous pouvez demander un remboursement.",
-              "Try the exercises and professional simulations for 10 days. If the program does not help you communicate better at work, you can request a refund.",
-            )}
-          </p>
-          <p className="text-gray-500 text-sm mb-8">
-            {t(
-              "Votre confiance est notre priorité.",
-              "Your trust is our priority.",
-            )}
-          </p>
-
-          <div className="flex flex-wrap gap-3 justify-center">
-            {PILLS.map((pill, i) => (
-              <div
-                key={i}
-                className="bg-white border border-[#c9a84c]/40 text-black px-5 py-2.5 rounded-full text-sm font-medium flex items-center gap-2"
-              >
-                <span className="text-[#c9a84c]">✓</span>
-                {t(pill.fr, pill.en)}
-              </div>
-            ))}
-          </div>
+  return <section id="garantie" className="commitment-section">
+    <RevealWrapper className="commitment-layout">
+      <div className="commitment-intro">
+        <p className="eyebrow"><ShieldCheck size={18} aria-hidden="true" />{t("Notre engagement", "Our commitment")}</p>
+        <h2>{t("Un vrai formateur.", "A real teacher.")}<span>{t("Jusqu’à votre objectif.", "All the way to your goal.")}</span></h2>
+        <p>{t("Vous échangez et pratiquez avec un humain. Dès le départ, nous définissons ensemble le niveau d’anglais à atteindre.", "You talk and practice with a real person. From the start, we agree together on the English level you want to reach.")}</p>
+        <span className="commitment-signature"><span className="status-dot" />{t("Un objectif défini ensemble. Un engagement jusqu’au bout.", "A shared goal. A commitment all the way.")}</span>
+      </div>
+      <div className="commitment-promises">
+        <div className="commitment-promise">
+          <span className="commitment-seal" aria-hidden="true">5<small>{t("jours", "days")}</small></span>
+          <div><h3>{t("Le droit de changer d’avis.", "Room to change your mind.")}</h3><p>{t("La formation ne vous convient plus ? Demandez votre remboursement dans les 5 jours suivant son démarrage.", "Training no longer suits you? Request your refund within 5 days of starting.")}</p></div>
         </div>
-      </RevealWrapper>
-    </section>
-  );
+        <div className="commitment-promise">
+          <span className="commitment-seal" aria-hidden="true"><InfinityIcon size={36} /></span>
+          <div><h3>{t("On continue, gratuitement.", "We keep going, free of charge.")}</h3><p>{t("À la fin de votre programme d’un ou de trois mois, si le niveau convenu n’est pas atteint, nous poursuivons votre accompagnement gratuitement jusqu’à ce que vous l’atteigniez.", "If you have not reached the agreed level by the end of your one- or three-month program, we continue supporting you free of charge until you do.")}</p></div>
+        </div>
+      </div>
+    </RevealWrapper>
+  </section>;
 }
