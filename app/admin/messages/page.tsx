@@ -4,7 +4,7 @@ import AdminMessages, { type AdminMessage } from "@/components/admin/AdminMessag
 export default async function AdminMessagesPage() {
   const supabase = await createClient();
   const [{ data: registrations }, { data: contacts }, { data: chatMessages }] = await Promise.all([
-    supabase.from("programme_registrations").select("id,name,email,phone,level,programme,motivation,status,created_at").order("created_at", { ascending: false }).limit(200),
+    supabase.from("programme_registrations").select("id,name,email,phone,level,programme,selected_offer,motivation,status,created_at").order("created_at", { ascending: false }).limit(200),
     supabase.from("contact_submissions").select("id,name,email,phone,level,message,status,created_at").order("created_at", { ascending: false }).limit(200),
     supabase.from("messages").select("id,conversation_id,sender_id,body,lesson_id,context,created_at").order("created_at", { ascending: false }).limit(200),
   ]);
@@ -13,7 +13,7 @@ export default async function AdminMessagesPage() {
     ...(registrations || []).map((item) => ({
       id: item.id, source: "registration" as const, title: item.name, email: item.email, phone: item.phone,
       message: item.motivation, status: item.status, createdAt: item.created_at,
-      details: [item.programme, item.level].filter(Boolean).join(" · "),
+      details: [item.selected_offer === "group" ? "Programme en groupe — 49 $ / mois" : item.selected_offer === "coaching" ? "Coaching individuel — 149 $ / mois" : null, item.programme, item.level].filter(Boolean).join(" · "),
     })),
     ...(contacts || []).map((item) => ({
       id: item.id, source: "contact" as const, title: item.name, email: item.email, phone: item.phone,

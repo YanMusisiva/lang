@@ -95,7 +95,7 @@ export default function TestimonyPage() {
         <p className="eyebrow"><span className="status-dot" />{t("À votre tour", "Your turn")}</p>
         <h2 className="section-title">{t("Et si la prochaine histoire", "What if the next story")}<span>{t("était la vôtre ?", "was yours?")}</span></h2>
         <p>{t("Pas besoin de tout savoir pour commencer. Juste de faire le premier pas.", "You do not need to know everything to begin. Just take the first step.")}</p>
-        <div><Link href="/practice" className="pill-button pill-gold">{t("Commencer gratuitement", "Start for free")}<ArrowUpRight size={18} /></Link><Link href="/contact" className="text-link">{t("Parlons de votre anglais", "Let's talk about your English")}<ArrowUpRight size={16} /></Link></div>
+        <div><Link href="/auth?next=/practice" className="pill-button pill-gold">{t("Se connecter", "Sign in")}<ArrowUpRight size={18} /></Link><Link href="/contact" className="text-link">{t("Parlons de votre anglais", "Let's talk about your English")}<ArrowUpRight size={16} /></Link></div>
       </RevealWrapper></section>
     </main>
   );

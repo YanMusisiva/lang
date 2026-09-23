@@ -6,23 +6,39 @@ import RevealWrapper from "@/components/motion/RevealWrapper";
 import Navbar from "@/components/layout/Navbar";
 import PlacementTestModal from "@/components/practice/PlacementTestModal";
 import { persistProgress } from "@/lib/progress-client";
+import { useLang } from "@/context/LangContext";
+
+type Audience = "general" | "professional" | "entrepreneur" | "developer";
 
 const LEVELS = [
-  { slug: "level1", title: "Foundation", requiresTest: false },
-  { slug: "level2", title: "Beginner", requiresTest: true },
-  { slug: "level3", title: "Intermediate", requiresTest: true },
-  { slug: "level4", title: "Advanced", requiresTest: true },
-  { slug: "level5", title: "Fluent", requiresTest: true },
-  { slug: "business1", title: "Business English 1", requiresTest: false },
-  { slug: "business2", title: "Business English 2", requiresTest: true },
+  { slug: "level1", title: "Foundation", requiresTest: false, audiences: ["general"] },
+  { slug: "level2", title: "Beginner", requiresTest: true, audiences: ["general"] },
+  { slug: "level3", title: "Intermediate", requiresTest: true, audiences: ["general"] },
+  { slug: "level4", title: "Advanced", requiresTest: true, audiences: ["general"] },
+  { slug: "level5", title: "Fluent", requiresTest: true, audiences: ["general"] },
+  { slug: "business1", title: "Business English 1", requiresTest: false, audiences: ["professional", "entrepreneur", "developer"] },
+  { slug: "business2", title: "Business English 2", requiresTest: true, audiences: ["professional", "entrepreneur", "developer"] },
+];
+
+const AUDIENCES: { value: Audience; fr: string; en: string }[] = [
+  { value: "general", fr: "Anglais général", en: "General English" },
+  { value: "professional", fr: "Professionnels", en: "Professionals" },
+  { value: "entrepreneur", fr: "Entrepreneurs", en: "Entrepreneurs" },
+  { value: "developer", fr: "Développeurs", en: "Developers" },
 ];
 
 export default function PracticePage() {
+  const { t } = useLang();
   const [unlockedLevels, setUnlockedLevels] = useState<Record<string, boolean>>(
     {},
   );
   const [activeTestLevel, setActiveTestLevel] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [audience, setAudience] = useState<Audience>("general");
+  const [page, setPage] = useState(1);
+  const filteredLevels = LEVELS.filter((level) => level.audiences.includes(audience));
+  const pageCount = Math.max(1, Math.ceil(filteredLevels.length / 3));
+  const visibleLevels = filteredLevels.slice((page - 1) * 3, page * 3);
 
   useEffect(() => {
     const status: Record<string, boolean> = {};
@@ -79,16 +95,22 @@ export default function PracticePage() {
             className="text-5xl md:text-6xl text-[#c9a84c] mb-4 tracking-wide font-light"
             style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
           >
-            Practice Suite
+            {t("Espace Practice", "Practice Suite")}
           </h1>
           <p className="text-white/60 text-sm md:text-base max-w-md mx-auto uppercase tracking-widest font-light">
-            Sélectionnez votre niveau d'excellence
+            {t("Choisissez votre parcours et votre niveau", "Choose your path and level")}
           </p>
           <div className="w-16 h-[1px] bg-[#c9a84c]/40 mx-auto mt-4" />
         </div>
 
+        <div className="mb-10 flex flex-wrap justify-center gap-2">
+          {AUDIENCES.map((item) => (
+            <button key={item.value} type="button" onClick={() => { setAudience(item.value); setPage(1); }} className={`rounded-full border px-4 py-2 text-sm transition ${audience === item.value ? "border-[#c9a84c] bg-[#c9a84c] font-semibold text-black" : "border-white/15 text-white/60 hover:border-[#c9a84c]"}`}>{t(item.fr, item.en)}</button>
+          ))}
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {LEVELS.map((level) => {
+          {visibleLevels.map((level) => {
             const isUnlocked = unlockedLevels[level.slug];
 
             return (
@@ -118,7 +140,7 @@ export default function PracticePage() {
                           : "border-[#c9a84c]/40 text-[#e8c96a] bg-[#c9a84c]/10 animate-pulse"
                       }`}
                     >
-                      {isUnlocked ? "✓ Débloqué" : "🔒 Test Requis"}
+                      {isUnlocked ? t("✓ Débloqué", "✓ Unlocked") : t("🔒 Test requis", "🔒 Test required")}
                     </div>
                   )}
 
@@ -141,7 +163,7 @@ export default function PracticePage() {
                         : "General"}
                     </span>
                     <span className="text-[#c9a84c] font-semibold tracking-wider uppercase">
-                      {isUnlocked ? "Accéder →" : "Passer le test ➔"}
+                      {isUnlocked ? t("Accéder →", "Open →") : t("Passer le test ➔", "Take the test ➔")}
                     </span>
                   </div>
                 </div>
@@ -149,6 +171,11 @@ export default function PracticePage() {
             );
           })}
         </div>
+        {pageCount > 1 && <nav className="mt-10 flex items-center justify-center gap-2" aria-label={t("Pagination des niveaux", "Level pagination")}>
+          <button type="button" disabled={page === 1} onClick={() => setPage((value) => Math.max(1, value - 1))} className="rounded-full border border-white/15 px-4 py-2 text-sm disabled:opacity-30">{t("Précédent", "Previous")}</button>
+          {Array.from({ length: pageCount }, (_, index) => index + 1).map((number) => <button key={number} type="button" onClick={() => setPage(number)} className={`h-10 w-10 rounded-full border text-sm ${page === number ? "border-[#c9a84c] bg-[#c9a84c] text-black" : "border-white/15"}`}>{number}</button>)}
+          <button type="button" disabled={page === pageCount} onClick={() => setPage((value) => Math.min(pageCount, value + 1))} className="rounded-full border border-white/15 px-4 py-2 text-sm disabled:opacity-30">{t("Suivant", "Next")}</button>
+        </nav>}
       </div>
 
       {/* Modal interactif de test de niveau */}

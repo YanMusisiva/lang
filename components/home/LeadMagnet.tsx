@@ -25,8 +25,8 @@ export default function LeadMagnet() {
         <div className="w-full">
           <p className="text-xs font-bold tracking-[0.15em] uppercase text-[#9a7a2e] mb-3 font-mono">
             {t(
-              "Commencez gratuitement",
-              "Start for free",
+              "Connectez-vous pour pratiquer",
+              "Sign in to practice",
             )}
           </p>
 

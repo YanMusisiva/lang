@@ -20,7 +20,14 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (request.nextUrl.pathname.startsWith("/practice") && !user) {
+    const loginUrl = request.nextUrl.clone();
+    loginUrl.pathname = "/auth";
+    loginUrl.search = "";
+    loginUrl.searchParams.set("next", `${request.nextUrl.pathname}${request.nextUrl.search}`);
+    return NextResponse.redirect(loginUrl);
+  }
   return response;
 }
 

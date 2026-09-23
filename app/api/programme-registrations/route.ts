@@ -9,6 +9,7 @@ const registrationSchema = z.object({
   level: z.enum(["", "beginner", "intermediate", "advanced", "test"]),
   path: z.enum(["general", "professional", "entrepreneur", "developer"]),
   motivation: z.string().trim().min(10).max(600),
+  selectedOffer: z.enum(["", "group", "coaching"]),
   website: z.string().max(0),
   startedAt: z.number().int().positive(),
 });
@@ -43,26 +44,26 @@ export async function POST(request: Request) {
     return Response.json({ error: "Vérifiez les informations du formulaire." }, { status: 400 });
   }
 
-  const { name, email, phone, level, path, motivation } = parsed.data;
+  const { name, email, phone, level, path, motivation, selectedOffer } = parsed.data;
   if (!isSupabaseConfigured()) return Response.json({ error: "Le service d’inscription n’est pas encore configuré." }, { status: 503 });
 
   const supabase = await createClient();
   const { error: databaseError } = await supabase.from("programme_registrations").insert({
-    name, email, phone, level: level || null, programme: path, motivation,
+    name, email, phone, level: level || null, programme: path, selected_offer: selectedOffer || null, motivation,
   });
   if (databaseError) return Response.json({ error: "La demande n’a pas pu être enregistrée." }, { status: 500 });
 
   if (process.env.SMTP_USER && process.env.SMTP_PASS) {
     const transporter = nodemailer.createTransport({ service: "gmail", auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } });
-    const safe = { name: escapeHtml(name), email: escapeHtml(email), phone: escapeHtml(phone), level: escapeHtml(level || "Non précisé"), path: escapeHtml(path), motivation: escapeHtml(motivation).replace(/\n/g, "<br>") };
+    const safe = { name: escapeHtml(name), email: escapeHtml(email), phone: escapeHtml(phone), level: escapeHtml(level || "Non précisé"), path: escapeHtml(path), offer: escapeHtml(selectedOffer || "Aucune offre présélectionnée"), motivation: escapeHtml(motivation).replace(/\n/g, "<br>") };
     try {
       await transporter.sendMail({
         from: `"LangListening Inscriptions" <${process.env.SMTP_USER}>`,
         to: process.env.SMTP_USER,
         replyTo: email,
         subject: `Nouvelle inscription au programme — ${name}`,
-        text: `Nom: ${name}\nEmail: ${email}\nTéléphone: ${phone}\nNiveau: ${level || "Non précisé"}\nParcours: ${path}\n\n${motivation}`,
-        html: `<div style="font-family:sans-serif;color:#222"><h2>Nouvelle inscription au programme</h2><p><b>Nom :</b> ${safe.name}</p><p><b>Email :</b> ${safe.email}</p><p><b>Téléphone :</b> ${safe.phone}</p><p><b>Niveau :</b> ${safe.level}</p><p><b>Parcours :</b> ${safe.path}</p><p><b>Motivation :</b><br>${safe.motivation}</p></div>`,
+        text: `Nom: ${name}\nEmail: ${email}\nTéléphone: ${phone}\nNiveau: ${level || "Non précisé"}\nParcours: ${path}\nOffre choisie: ${selectedOffer || "Aucune"}\n\n${motivation}`,
+        html: `<div style="font-family:sans-serif;color:#222"><h2>Nouvelle inscription au programme</h2><p><b>Nom :</b> ${safe.name}</p><p><b>Email :</b> ${safe.email}</p><p><b>Téléphone :</b> ${safe.phone}</p><p><b>Niveau :</b> ${safe.level}</p><p><b>Parcours :</b> ${safe.path}</p><p><b>Offre choisie :</b> ${safe.offer}</p><p><b>Motivation :</b><br>${safe.motivation}</p></div>`,
       });
     } catch (mailError) {
       console.error("Programme registration email failed", mailError);

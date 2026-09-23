@@ -12,6 +12,7 @@ export default async function DashboardPage() {
   if (!user) redirect("/auth?next=/dashboard");
 
   const { data: profile } = await supabase.from("profiles").select("display_name, role").eq("id", user.id).single();
+  if (profile?.role !== "admin") redirect("/practice");
   const { data: progress } = await supabase.from("progress").select("storage_key, payload, updated_at").order("updated_at", { ascending: false });
   const completed = (progress || []).filter((item) => Boolean((item.payload as { finished?: boolean })?.finished)).length;
   const { data: notifications } = await supabase.from("notifications").select("id, title, body, href, read_at, created_at").order("created_at", { ascending: false }).limit(20);

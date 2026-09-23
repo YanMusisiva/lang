@@ -15,7 +15,7 @@ export default function ValueSection() {
         <div className="value-heading">
           <p className="eyebrow"><span className="section-number">01</span>{t("Un anglais utile au travail", "English you can use at work")}</p>
           <h2 className="section-title">{t("Passez de « je comprends » à « je peux l'utiliser »", "Move from “I understand” to “I can use it”")}</h2>
-          <Link href="/practice" className="pill-button pill-dark">{t("Commencer gratuitement", "Start for free")}<ArrowUpRight size={18} /></Link>
+          <Link href="/auth?next=/practice" className="pill-button pill-dark">{t("Se connecter", "Sign in")}<ArrowUpRight size={18} /></Link>
           <div className="value-circles" aria-hidden="true"><span /><span /><span /></div>
         </div>
         <div className="value-cards">

@@ -4,8 +4,11 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import Navbar from "@/components/layout/Navbar";
+import { useLang } from "@/context/LangContext";
 
 function AuthForm() {
+  const { t } = useLang();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -20,7 +23,7 @@ function AuthForm() {
     event.preventDefault();
     const supabase = createClient();
     if (!supabase) {
-      setError("La plateforme n'est pas encore reliée à Supabase.");
+      setError(t("La plateforme n'est pas encore reliée à Supabase.", "The platform is not connected to Supabase yet."));
       return;
     }
 
@@ -33,7 +36,7 @@ function AuthForm() {
           password,
           options: {
             data: { display_name: displayName },
-            emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+            emailRedirectTo: `${window.location.origin}/auth/callback?next=/practice`,
           },
         });
     setLoading(false);
@@ -44,29 +47,30 @@ function AuthForm() {
     }
 
     if (mode === "signup" && !result.data.session) {
-      setNotice("Compte créé. Consultez votre email pour confirmer votre adresse.");
+      setNotice(t("Compte créé. Consultez votre e-mail pour confirmer votre adresse.", "Account created. Check your email to confirm your address."));
       return;
     }
 
-    router.push(searchParams.get("next") || "/dashboard");
+    router.push(searchParams.get("next") || "/practice");
     router.refresh();
   }
 
   return (
-    <main className="interior-page min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-6 py-16">
+    <main className="interior-page min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-6 pb-16 pt-28">
+      <Navbar />
       <section className="w-full max-w-md border border-white/10 bg-white/[0.03] p-8 rounded-3xl">
         <Link href="/" className="text-[#c9a84c] text-sm">← LangListening</Link>
         <h1 className="font-serif text-4xl mt-8 mb-2">
-          {mode === "login" ? "Bon retour" : "Créer votre compte"}
+          {mode === "login" ? t("Bon retour", "Welcome back") : t("Créer votre compte", "Create your account")}
         </h1>
         <p className="text-white/55 mb-8">
-          Retrouvez votre progression sur tous vos appareils.
+          {t("Retrouvez votre progression sur tous vos appareils.", "Keep your progress synced across all your devices.")}
         </p>
 
         <form onSubmit={submit} className="space-y-5">
           {mode === "signup" && (
             <label className="block text-sm text-white/70">
-              Nom
+              {t("Nom", "Name")}
               <input required minLength={2} value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="mt-2 w-full rounded border border-white/15 bg-black px-4 py-3 outline-none focus:border-[#c9a84c]" />
             </label>
           )}
@@ -75,18 +79,18 @@ function AuthForm() {
             <input required type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-2 w-full rounded border border-white/15 bg-black px-4 py-3 outline-none focus:border-[#c9a84c]" />
           </label>
           <label className="block text-sm text-white/70">
-            Mot de passe
+            {t("Mot de passe", "Password")}
             <input required minLength={8} type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} className="mt-2 w-full rounded border border-white/15 bg-black px-4 py-3 outline-none focus:border-[#c9a84c]" />
           </label>
           {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
           {notice && <p role="status" className="text-sm text-green-400">{notice}</p>}
           <button disabled={loading} className="w-full rounded bg-[#c9a84c] px-5 py-3.5 font-semibold text-black disabled:opacity-50">
-            {loading ? "Veuillez patienter..." : mode === "login" ? "Se connecter" : "Créer le compte"}
+            {loading ? t("Veuillez patienter...", "Please wait...") : mode === "login" ? t("Se connecter", "Sign in") : t("Créer le compte", "Create account")}
           </button>
         </form>
 
         <button onClick={() => { setMode(mode === "login" ? "signup" : "login"); setError(""); }} className="mt-6 w-full text-sm text-white/60 hover:text-white">
-          {mode === "login" ? "Pas encore de compte ? S'inscrire" : "Déjà inscrit ? Se connecter"}
+          {mode === "login" ? t("Pas encore de compte ? S'inscrire", "No account yet? Sign up") : t("Déjà inscrit ? Se connecter", "Already registered? Sign in")}
         </button>
       </section>
     </main>

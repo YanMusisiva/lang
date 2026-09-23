@@ -34,7 +34,7 @@ export default function Hero() {
             {t("Développeur, entrepreneur ou professionnel de bureau : apprenez à présenter votre travail, participer à une réunion, parler à un client, défendre une idée et réussir un entretien en anglais.", "Developer, entrepreneur, or office professional: learn to present your work, join meetings, speak with clients, defend an idea, and succeed in English interviews.")}
           </p>
           <div className="hero-actions hero-enter" style={{ animationDelay: "300ms" }}>
-            <Link href="/practice" className="pill-button pill-gold">{t("Commencer gratuitement", "Start for free")}<ArrowUpRight size={19} /></Link>
+            <Link href="/auth?next=/practice" className="pill-button pill-gold">{t("Se connecter", "Sign in")}<ArrowUpRight size={19} /></Link>
             <Link href="/test" className="pill-button pill-outline">{t("Passer un test", "Start a test")}<span className="small-circle"><ArrowUpRight size={16} /></span></Link>
           </div>
           <div className="hero-socials hero-enter" style={{ animationDelay: "400ms" }}>

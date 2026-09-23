@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, CircleUserRound, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, UserRoundCheck, X } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 import { createClient } from "@/lib/supabase/client";
 import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
@@ -77,7 +77,7 @@ export default function Navbar() {
             {NAV_LINKS.map(link => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} className="nav-link"><span className="nav-dot" />{t(link.fr, link.en)}</Link>)}
           </nav>
           <div className="nav-actions">
-            <Link href={signedIn ? "/dashboard" : "/auth"} className="circle-button nav-account" aria-label={accountLabel} title={accountLabel}><CircleUserRound size={20} /></Link>
+            {signedIn ? <Link href="/dashboard" className="circle-button nav-account" aria-label={accountLabel} title={accountLabel}><UserRoundCheck size={20} /></Link> : <Link href="/auth?next=/practice" className="pill-button pill-outline nav-account">{t("Se connecter", "Sign in")}</Link>}
             <button className="language-button" onClick={toggleLang} aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}>{lang === "fr" ? "EN" : "FR"}</button>
             <Link href="/test" className="pill-button pill-gold nav-cta">{t("Passer un test", "Start a test")}<ArrowUpRight size={16} /></Link>
             <button className="circle-button menu-toggle" onClick={() => setMenuOpen(true)} aria-label={t("Ouvrir le menu", "Open menu")} aria-expanded={menuOpen} aria-controls="mobile-menu"><Menu size={22} /></button>
@@ -88,7 +88,7 @@ export default function Navbar() {
       <dialog id="mobile-menu" ref={dialog} className="mobile-menu" aria-label={t("Navigation principale", "Main navigation")} onCancel={() => setMenuOpen(false)} onClose={() => setMenuOpen(false)}>
         <div className="mobile-menu-top"><span className="eyebrow">LangListening</span><button className="circle-button" onClick={() => setMenuOpen(false)} aria-label={t("Fermer le menu", "Close menu")}><X size={24} /></button></div>
         <nav>{NAV_LINKS.map((link, index) => <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} style={{ animationDelay: `${index * 60}ms` }}><span>0{index + 1}</span>{t(link.fr, link.en)}<ArrowUpRight /></Link>)}</nav>
-        <div className="mobile-menu-bottom"><Link href={signedIn ? "/dashboard" : "/auth"} onClick={() => setMenuOpen(false)} className="pill-button pill-outline"><CircleUserRound size={19} />{accountLabel}</Link><Link href="/test" className="pill-button pill-gold" onClick={() => setMenuOpen(false)}>{t("Passer un test", "Start a test")}<ArrowUpRight size={18} /></Link></div>
+        <div className="mobile-menu-bottom"><Link href={signedIn ? "/dashboard" : "/auth?next=/practice"} onClick={() => setMenuOpen(false)} className="pill-button pill-outline">{signedIn && <UserRoundCheck size={19} />}{accountLabel}</Link><Link href="/test" className="pill-button pill-gold" onClick={() => setMenuOpen(false)}>{t("Passer un test", "Start a test")}<ArrowUpRight size={18} /></Link></div>
       </dialog>
     </>
   );

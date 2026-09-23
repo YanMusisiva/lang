@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { ArrowLeft, LayoutDashboard } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 
@@ -32,7 +32,7 @@ export default function AuthenticatedNavigation() {
       router.back();
       return;
     }
-    router.push("/dashboard");
+    router.push("/practice");
   }
 
   return (
@@ -49,16 +49,16 @@ export default function AuthenticatedNavigation() {
       >
         <ArrowLeft size={19} aria-hidden="true" />
       </button>
-      {pathname !== "/dashboard" && (
+      {pathname !== "/practice" && (
         <button
           type="button"
-          onClick={() => router.push("/dashboard")}
-          title="Mes données"
-          aria-label="Accéder à mes données"
+          onClick={() => router.push("/practice")}
+          title="Practice"
+          aria-label="Accéder aux exercices"
           className="inline-flex h-10 items-center gap-2 rounded px-3 text-sm text-white/70 transition hover:bg-white/10 hover:text-[#e8c96a]"
         >
-          <LayoutDashboard size={18} aria-hidden="true" />
-          <span className="hidden sm:inline">Mes données</span>
+          <BookOpen size={18} aria-hidden="true" />
+          <span className="hidden sm:inline">Practice</span>
         </button>
       )}
     </nav>

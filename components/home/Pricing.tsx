@@ -98,23 +98,19 @@ export default function Pricing() {
               {/* CTA */}
               <OfferGuarantee months={1} dark={plan.featured} />
               {plan.featured ? (
-                <a
-                  href={`https://wa.me/256787531919?text=${encodeURIComponent(t(`Bonjour LangListening, je suis intéressé(e) par ${plan.name.fr} à ${plan.price.fr} $ par mois.`, `Hello LangListening, I am interested in ${plan.name.en} at $${plan.price.en} per month.`))}`}
+                <Link
+                  href={`/programme?offre=${i === 0 ? "group" : "coaching"}`}
                   className="block w-full bg-[#c9a84c] text-black font-semibold py-3.5 rounded text-sm tracking-wide hover:bg-[#e8c96a] transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   {t(`Choisir ${plan.name.fr}`, `Choose ${plan.name.en}`)}
-                </a>
+                </Link>
               ) : (
-                <a
-                  href={`https://wa.me/256787531919?text=${encodeURIComponent(t(`Bonjour LangListening, je suis intéressé(e) par ${plan.name.fr} à ${plan.price.fr} $ par mois.`, `Hello LangListening, I am interested in ${plan.name.en} at $${plan.price.en} per month.`))}`}
+                <Link
+                  href={`/programme?offre=${i === 0 ? "group" : "coaching"}`}
                   className="block w-full border border-black/15 text-black font-semibold py-3.5 rounded text-sm hover:border-[#c9a84c] hover:text-[#9a7a2e] transition-all"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   {t(`Choisir ${plan.name.fr}`, `Choose ${plan.name.en}`)}
-                </a>
+                </Link>
               )}
             </div>
           </RevealWrapper>
