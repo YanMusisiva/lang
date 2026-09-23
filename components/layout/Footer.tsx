@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/#value", fr: "Avantages", en: "Benefits" },
   { href: "/#community", fr: "Communauté", en: "Community" },
   { href: "/testimony", fr: "Témoignages", en: "Testimonials" },
+  { href: "/programme", fr: "Programme", en: "Program" },
   { href: "/#pricing", fr: "Tarifs", en: "Pricing" },
   { href: "/contact", fr: "Contact", en: "Contact" },
 ];

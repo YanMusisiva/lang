@@ -12,6 +12,7 @@ import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 const NAV_LINKS = [
   { href: "/", fr: "Accueil", en: "Home" },
   { href: "/#story", fr: "Notre histoire", en: "Our story" },
+  { href: "/programme", fr: "Programme", en: "Program" },
   { href: "/practice", fr: "Pratiquer", en: "Practice" },
   { href: "/testimony", fr: "Témoignages", en: "Testimonials" },
   { href: "/blog", fr: "Blog", en: "Blog" },

@@ -22,6 +22,26 @@ body {
   font-family: var(--font-cormorant), "Cormorant Garamond", serif;
 }
 
+.programme-input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.875rem 1rem;
+  color: white;
+  outline: none;
+  transition: border-color 160ms, box-shadow 160ms;
+}
+
+.programme-input:focus {
+  border-color: #c9a84c;
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+}
+
+.programme-input option {
+  background: #10110e;
+}
+
 @keyframes lineFade {
   0%,
   100% {

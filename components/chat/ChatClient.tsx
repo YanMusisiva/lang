@@ -5,9 +5,9 @@ import Link from "next/link";
 import { LoaderCircle, Send, UserPlus, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
-type Message = { id: string; sender_id: string; body: string; lesson_id: string | null; created_at: string };
+type Message = { id: string; sender_id: string; body: string; lesson_id: string | null; context?: string | null; created_at: string };
 
-export default function ChatClient({ userId, initialConversationId, canManageParticipants }: { userId: string; initialConversationId: string | null; canManageParticipants: boolean }) {
+export default function ChatClient({ userId, initialConversationId, lessonId, canManageParticipants }: { userId: string; initialConversationId: string | null; lessonId: string | null; canManageParticipants: boolean }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [body, setBody] = useState("");
@@ -59,7 +59,7 @@ export default function ChatClient({ userId, initialConversationId, canManagePar
     setSending(true);
     setError("");
     try {
-      const response = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ body, conversationId: conversationId || undefined }) });
+      const response = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ body, conversationId: conversationId || undefined, lessonId: lessonId || undefined }) });
       const data = await response.json();
       if (!response.ok) {
         setError(data.error || "Impossible d'envoyer le message.");

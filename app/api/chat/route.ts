@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     if (!allowed) conversation = null;
   }
   if (!conversation) return NextResponse.json({ conversation: null, messages: [] });
-  const { data: messages, error } = await supabase.from("messages").select("id, sender_id, body, lesson_id, created_at").eq("conversation_id", conversation.id).order("created_at");
+  const { data: messages, error } = await supabase.from("messages").select("id, sender_id, body, lesson_id, context, created_at").eq("conversation_id", conversation.id).order("created_at");
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ conversation, messages, userId: user.id });
 }
@@ -48,7 +48,14 @@ export async function POST(request: Request) {
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
     conversation = data;
   }
-  const { data: message, error } = await supabase.from("messages").insert({ conversation_id: conversation.id, sender_id: user.id, body: parsed.data.body, lesson_id: null }).select("id, sender_id, body, lesson_id, created_at").single();
+  const lessonIsUuid = parsed.data.lessonId ? z.uuid().safeParse(parsed.data.lessonId).success : false;
+  const { data: message, error } = await supabase.from("messages").insert({
+    conversation_id: conversation.id,
+    sender_id: user.id,
+    body: parsed.data.body,
+    lesson_id: lessonIsUuid ? parsed.data.lessonId : null,
+    context: parsed.data.lessonId ? `lesson:${parsed.data.lessonId}` : null,
+  }).select("id, sender_id, body, lesson_id, context, created_at").single();
   if (error) return NextResponse.json({ error: error.message }, { status: 403 });
   return NextResponse.json({ message, conversationId: conversation.id }, { status: 201 });
 }

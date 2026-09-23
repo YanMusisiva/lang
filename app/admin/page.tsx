@@ -106,6 +106,9 @@ function AdminContent() {
           <Link href="/admin/learning" className="btn-outline px-5 py-2.5 text-xs uppercase tracking-widest">
             Mini-leçons
           </Link>
+          <Link href="/admin/messages" className="btn-outline px-5 py-2.5 text-xs uppercase tracking-widest">
+            Messages
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-2 gap-10">
