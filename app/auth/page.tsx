@@ -31,7 +31,7 @@ function AuthForm() {
     setError("");
     if (mode === "forgot") {
       const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/callback?next=/auth/reset`,
+        redirectTo: `${window.location.origin}/auth/reset`,
       });
       setLoading(false);
       if (resetError) setError(resetError.message);

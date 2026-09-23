@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
@@ -14,6 +14,41 @@ export default function ResetPasswordPage() {
   const [confirmation, setConfirmation] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [checkingLink, setCheckingLink] = useState(true);
+  const [recoveryReady, setRecoveryReady] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    if (!supabase) {
+      setError(t("Le service de connexion n’est pas configuré.", "Authentication is not configured."));
+      setCheckingLink(false);
+      return;
+    }
+
+    let active = true;
+    async function prepareRecovery() {
+      const code = new URLSearchParams(window.location.search).get("code");
+      if (code) {
+        const { error: exchangeError } = await supabase!.auth.exchangeCodeForSession(code);
+        if (exchangeError) {
+          if (active) {
+            setError(t("Ce lien est invalide ou expiré. Demandez un nouveau lien.", "This link is invalid or expired. Request a new link."));
+            setCheckingLink(false);
+          }
+          return;
+        }
+        window.history.replaceState({}, "", "/auth/reset");
+      }
+
+      const { data: { session } } = await supabase!.auth.getSession();
+      if (!active) return;
+      setRecoveryReady(Boolean(session));
+      if (!session) setError(t("Ouvrez cette page depuis le lien reçu par e-mail.", "Open this page from the link received by email."));
+      setCheckingLink(false);
+    }
+    void prepareRecovery();
+    return () => { active = false; };
+  }, [t]);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,7 +84,7 @@ export default function ResetPasswordPage() {
           <label className="block text-sm text-white/70">{t("Nouveau mot de passe", "New password")}<input required minLength={8} type="password" autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} className="mt-2 w-full rounded border border-white/15 bg-black px-4 py-3 outline-none focus:border-[#c9a84c]" /></label>
           <label className="block text-sm text-white/70">{t("Confirmer le mot de passe", "Confirm password")}<input required minLength={8} type="password" autoComplete="new-password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} className="mt-2 w-full rounded border border-white/15 bg-black px-4 py-3 outline-none focus:border-[#c9a84c]" /></label>
           {error && <p role="alert" className="rounded-lg border border-red-400/25 bg-red-400/10 p-3 text-sm text-red-300">{error}</p>}
-          <button disabled={loading} className="w-full rounded bg-[#c9a84c] px-5 py-3.5 font-semibold text-black disabled:opacity-50">{loading ? t("Mise à jour…", "Updating…") : t("Enregistrer le nouveau mot de passe", "Save new password")}</button>
+          <button disabled={loading || checkingLink || !recoveryReady} className="w-full rounded bg-[#c9a84c] px-5 py-3.5 font-semibold text-black disabled:opacity-50">{checkingLink ? t("Vérification du lien…", "Checking link…") : loading ? t("Mise à jour…", "Updating…") : t("Enregistrer le nouveau mot de passe", "Save new password")}</button>
         </form>
       </section>
     </main>
