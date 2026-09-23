@@ -1,3 +1,5 @@
+import { CHOC_DATASETS, CHOC_MODULES } from "@/data/choc-practice";
+
 // ==========================================
 // CONFIGURATION DES MODULES DE PRATIQUE (LEVEL 1)
 // ==========================================
@@ -5,6 +7,7 @@ export const PRACTICE = {
   "level-1": {
     title: "Level 1 - Foundation & Beginners",
     modules: {
+      ...CHOC_MODULES["level-1"],
       // Bloc 1 : Salutations & Épellation (Phrases 1 à 10)
       "module-1": {
         title: "Greetings & Spells - Speaking",
@@ -151,6 +154,7 @@ export const PRACTICE = {
   "level-2": {
     title: "Level 2 - Beginner",
     modules: {
+      ...CHOC_MODULES["level-2"],
       // Bloc 1 : Goûts & Préférences (Phrases 1 à 10)
       "module-1": {
         title: "Likes & Dislikes - Speaking",
@@ -297,6 +301,7 @@ export const PRACTICE = {
   "level-3": {
     title: "Level 3 - Intermediate",
     modules: {
+      ...CHOC_MODULES["level-3"],
       // Bloc 1 : Naissance & Origines du passé (Phrases 1 à 10)
       "module-1": {
         title: "Birth & Childhood - Speaking",
@@ -443,6 +448,7 @@ export const PRACTICE = {
   "level-4": {
     title: "Level 4 - Advanced",
     modules: {
+      ...CHOC_MODULES["level-4"],
       // Bloc 1 : Remise en forme & Sport (Phrases 1 à 10)
       "module-1": {
         title: "Gym & Fitness Plans - Speaking",
@@ -589,6 +595,7 @@ export const PRACTICE = {
   "level-5": {
     title: "Level 5 - Fluent",
     modules: {
+      ...CHOC_MODULES["level-5"],
       // Bloc 1 : Expériences de restauration (Phrases 1 à 10)
       "module-1": {
         title: "Restaurant Experiences - Speaking",
@@ -886,6 +893,7 @@ export const PRACTICE = {
 // DATASETS : LEVEL 1 (100 PHRASES EXACTES)
 // ==========================================
 export const DATASETS = {
+  ...CHOC_DATASETS,
   // Phrases 1 à 10
   l1_greetings: [
     { french: "Bonjour", english: "Hello" },

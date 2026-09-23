@@ -11,7 +11,7 @@ function AuthForm() {
   const { t } = useLang();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +29,16 @@ function AuthForm() {
 
     setLoading(true);
     setError("");
+    if (mode === "forgot") {
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/callback?next=/auth/reset`,
+      });
+      setLoading(false);
+      if (resetError) setError(resetError.message);
+      else setNotice(t("Si cette adresse correspond à un compte, un lien de réinitialisation vient d’être envoyé.", "If this address matches an account, a reset link has been sent."));
+      return;
+    }
+
     const result = mode === "login"
       ? await supabase.auth.signInWithPassword({ email, password })
       : await supabase.auth.signUp({
@@ -61,10 +71,10 @@ function AuthForm() {
       <section className="w-full max-w-md border border-white/10 bg-white/[0.03] p-8 rounded-3xl">
         <Link href="/" className="text-[#c9a84c] text-sm">← LangListening</Link>
         <h1 className="font-serif text-4xl mt-8 mb-2">
-          {mode === "login" ? t("Bon retour", "Welcome back") : t("Créer votre compte", "Create your account")}
+          {mode === "login" ? t("Bon retour", "Welcome back") : mode === "signup" ? t("Créer votre compte", "Create your account") : t("Réinitialiser le mot de passe", "Reset your password")}
         </h1>
         <p className="text-white/55 mb-8">
-          {t("Retrouvez votre progression sur tous vos appareils.", "Keep your progress synced across all your devices.")}
+          {mode === "forgot" ? t("Saisissez votre e-mail pour recevoir un lien sécurisé.", "Enter your email to receive a secure link.") : t("Retrouvez votre progression sur tous vos appareils.", "Keep your progress synced across all your devices.")}
         </p>
 
         <form onSubmit={submit} className="space-y-5">
@@ -78,19 +88,20 @@ function AuthForm() {
             Email
             <input required type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-2 w-full rounded border border-white/15 bg-black px-4 py-3 outline-none focus:border-[#c9a84c]" />
           </label>
-          <label className="block text-sm text-white/70">
+          {mode !== "forgot" && <label className="block text-sm text-white/70">
             {t("Mot de passe", "Password")}
             <input required minLength={8} type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} className="mt-2 w-full rounded border border-white/15 bg-black px-4 py-3 outline-none focus:border-[#c9a84c]" />
-          </label>
+          </label>}
+          {mode === "login" && <button type="button" onClick={() => { setMode("forgot"); setError(""); setNotice(""); }} className="text-sm text-[#e8c96a] hover:underline">{t("Mot de passe oublié ?", "Forgot password?")}</button>}
           {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
           {notice && <p role="status" className="text-sm text-green-400">{notice}</p>}
           <button disabled={loading} className="w-full rounded bg-[#c9a84c] px-5 py-3.5 font-semibold text-black disabled:opacity-50">
-            {loading ? t("Veuillez patienter...", "Please wait...") : mode === "login" ? t("Se connecter", "Sign in") : t("Créer le compte", "Create account")}
+            {loading ? t("Veuillez patienter...", "Please wait...") : mode === "login" ? t("Se connecter", "Sign in") : mode === "signup" ? t("Créer le compte", "Create account") : t("Envoyer le lien", "Send reset link")}
           </button>
         </form>
 
-        <button onClick={() => { setMode(mode === "login" ? "signup" : "login"); setError(""); }} className="mt-6 w-full text-sm text-white/60 hover:text-white">
-          {mode === "login" ? t("Pas encore de compte ? S'inscrire", "No account yet? Sign up") : t("Déjà inscrit ? Se connecter", "Already registered? Sign in")}
+        <button onClick={() => { setMode(mode === "login" ? "signup" : "login"); setError(""); setNotice(""); }} className="mt-6 w-full text-sm text-white/60 hover:text-white">
+          {mode === "login" ? t("Pas encore de compte ? S'inscrire", "No account yet? Sign up") : t("Retour à la connexion", "Back to sign in")}
         </button>
       </section>
     </main>

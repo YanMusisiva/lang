@@ -28,7 +28,9 @@ export default function LevelPage() {
 
   const levelKey = levelInput as keyof typeof PRACTICE;
   const levelData = PRACTICE[levelKey];
-  const moduleEntries = levelData ? Object.entries(levelData.modules) : [];
+  const moduleEntries = levelData
+    ? Object.entries(levelData.modules) as [string, { title: string; type: "speaking" | "writing"; dataset: string; estimatedMinutes: number }][]
+    : [];
   const pageCount = Math.max(1, Math.ceil(moduleEntries.length / MODULES_PER_PAGE));
   const visibleModules = moduleEntries.slice((page - 1) * MODULES_PER_PAGE, page * MODULES_PER_PAGE);
 

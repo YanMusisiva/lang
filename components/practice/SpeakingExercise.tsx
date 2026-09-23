@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import useRouter from "next/navigation"; // Pour la redirection automatique si besoin
 import Navbar from "@/components/layout/Navbar";
 import { PRACTICE } from "@/data/practice";
 import confetti from "canvas-confetti";
@@ -78,6 +77,8 @@ export default function Speaking({
   const [estEnTrainDeLire, setEstEnTrainDeLire] = useState(false);
   const [started, setStarted] = useState(false);
   const [hasProgress, setHasProgress] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState<boolean | null>(null);
+  const [speechError, setSpeechError] = useState("");
 
   // États pour la règle du déblocage séquentiel
   const [isLocked, setIsLocked] = useState(false);
@@ -231,17 +232,25 @@ export default function Speaking({
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition;
 
-    if (!SpeechRecognition) return;
+    if (!SpeechRecognition) {
+      setSpeechSupported(false);
+      setRecognition(null);
+      return;
+    }
+
+    setSpeechSupported(true);
 
     const rec = new SpeechRecognition();
     rec.continuous = false;
     rec.interimResults = false;
     rec.lang = "en-US";
+    rec.maxAlternatives = 3;
 
     rec.onstart = () => {
       setIsListening(true);
       setShowResult(false);
       setSpokenText("");
+      setSpeechError("");
     };
 
     rec.onresult = (event: any) => {
@@ -263,9 +272,28 @@ export default function Speaking({
     };
 
     rec.onend = () => setIsListening(false);
-    rec.onerror = () => setIsListening(false);
+    rec.onnomatch = () => {
+      setSpeechError("Aucune phrase n’a été reconnue. Rapprochez-vous du microphone et réessayez.");
+      setShowResult(true);
+    };
+    rec.onerror = (event: { error?: string }) => {
+      setIsListening(false);
+      const messages: Record<string, string> = {
+        "not-allowed": "L’accès au microphone est refusé. Autorisez-le dans les réglages du navigateur.",
+        "service-not-allowed": "La reconnaissance vocale est bloquée par ce navigateur.",
+        "audio-capture": "Aucun microphone utilisable n’a été détecté.",
+        network: "La reconnaissance vocale nécessite une connexion internet active.",
+        "no-speech": "Aucune voix n’a été détectée. Parlez plus près du microphone.",
+        aborted: "L’écoute a été arrêtée.",
+      };
+      setSpeechError(messages[event.error || ""] || "La reconnaissance vocale a échoué. Vous pouvez utiliser la saisie de secours.");
+      setShowResult(true);
+    };
 
     setRecognition(rec);
+    return () => {
+      try { rec.abort(); } catch { /* Le moteur était déjà arrêté. */ }
+    };
   }, [currentPhrase, englishPhrase, step, validatedQuestions]);
 
   const normalize = (text: string) =>
@@ -336,8 +364,12 @@ export default function Speaking({
     // Retourne un score arrondi borné entre 0 et 100
     return Math.max(0, Math.min(100, Math.round(finalScore)));
   };
-  const startListening = () => {
-    if (!recognition) return;
+  const startListening = async () => {
+    setSpeechError("");
+    if (!recognition) {
+      setSpeechSupported(false);
+      return;
+    }
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
     }
@@ -346,8 +378,30 @@ export default function Speaking({
     if (isListening) {
       recognition.stop();
     } else {
-      recognition.start();
+      try {
+        if (navigator.mediaDevices?.getUserMedia) {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          stream.getTracks().forEach((track) => track.stop());
+        }
+        recognition.start();
+      } catch (reason) {
+        const errorName = reason instanceof DOMException ? reason.name : "";
+        setSpeechError(errorName === "NotAllowedError"
+          ? "Autorisez le microphone dans les réglages de votre navigateur, puis rechargez cette page."
+          : "Le microphone n’a pas pu démarrer. Essayez Chrome sur Android ou Safari sur iPhone.");
+        setIsListening(false);
+      }
     }
+  };
+
+  const checkFallbackText = () => {
+    const percentage = calculateSimilarity(spokenText, englishPhrase);
+    setLastPercentage(percentage);
+    if (percentage >= 80 && !validatedQuestions.includes(step)) {
+      setScore((previous) => previous + 1);
+      setValidatedQuestions((previous) => [...previous, step]);
+    }
+    setShowResult(true);
   };
 
   const lireLaPhrase = (rate = 0.85) => {
@@ -694,6 +748,16 @@ export default function Speaking({
               ? "Recording... Speak now."
               : "Click to record your voice"}
           </p>
+          {speechError && <p role="alert" className="mt-4 max-w-lg rounded-lg border border-amber-400/25 bg-amber-400/10 px-4 py-3 text-center text-sm text-amber-200">{speechError}</p>}
+          {(speechSupported === false || Boolean(speechError)) && (
+            <div className="mt-5 w-full max-w-lg rounded-xl border border-white/10 bg-white/5 p-5">
+              <p className="text-sm text-white/70">La reconnaissance vocale n’est pas disponible dans ce navigateur. Écoutez la phrase, répétez-la à voix haute, puis saisissez ce que vous avez prononcé pour continuer.</p>
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <input value={spokenText} onChange={(event) => setSpokenText(event.target.value)} placeholder="Type what you said…" className="min-w-0 flex-1 rounded-lg border border-white/15 bg-black/35 px-4 py-3 text-white outline-none focus:border-[#c9a84c]" />
+                <button type="button" onClick={checkFallbackText} disabled={!spokenText.trim()} className="rounded-lg bg-[#c9a84c] px-5 py-3 font-semibold text-black disabled:opacity-40">Vérifier</button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Affichage des résultats en temps réel */}
