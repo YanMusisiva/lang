@@ -13,6 +13,7 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
+  Users,
   X,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -20,6 +21,7 @@ import { createClient } from "@/lib/supabase/client";
 const links = [
   { href: "/admin", label: "Vue générale", icon: LayoutDashboard, exact: true },
   { href: "/admin/messages", label: "Messages", icon: Inbox },
+  { href: "/admin/users", label: "Utilisateurs", icon: Users },
   { href: "/admin/articles", label: "Articles", icon: FileText },
   { href: "/admin/learning", label: "Leçons et exercices", icon: BookOpen },
   { href: "/admin/tests", label: "Tests de niveau", icon: BarChart3 },

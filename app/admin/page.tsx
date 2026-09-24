@@ -1,11 +1,14 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, FileText, Inbox, MessageSquareText, UserRoundPlus } from "lucide-react";
+import { ArrowRight, BookOpen, FileText, Inbox, MessageSquareText, UserRoundPlus, Users } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminOverviewPage() {
   const supabase = await createClient();
+  const admin = createAdminClient();
+  const usersResult = admin ? await admin.auth.admin.listUsers({ page: 1, perPage: 1000 }) : null;
   const [registrations, contacts, chats, articles, tests, recentRegistrations, recentContacts] = await Promise.all([
     supabase.from("programme_registrations").select("id", { count: "exact", head: true }),
     supabase.from("contact_submissions").select("id", { count: "exact", head: true }),
@@ -22,8 +25,10 @@ export default async function AdminOverviewPage() {
   const cards = [
     { label: "Messages reçus", value: (registrations.count || 0) + (contacts.count || 0) + (chats.count || 0), icon: Inbox, href: "/admin/messages" },
     { label: "Inscriptions", value: registrations.count || 0, icon: UserRoundPlus, href: "/admin/messages" },
+    { label: "Demandes de contact", value: contacts.count || 0, icon: MessageSquareText, href: "/admin/messages" },
     { label: "Articles", value: articles.count || 0, icon: FileText, href: "/admin/articles" },
     { label: "Tests terminés", value: tests.count || 0, icon: BookOpen, href: "/admin/tests" },
+    { label: "Utilisateurs", value: usersResult?.data.users.length || 0, icon: Users, href: "/admin/users" },
   ];
 
   return (
@@ -33,7 +38,7 @@ export default async function AdminOverviewPage() {
         <h1 className="font-serif text-3xl leading-tight md:text-5xl">Tableau de bord administrateur</h1>
         <p className="mt-3 max-w-2xl text-sm text-black/50">Suivez les demandes, les inscriptions et le contenu LangListening depuis un seul espace.</p>
       </div>
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map(({ label, value, icon: Icon, href }) => (
           <Link key={label} href={href} className="group rounded-2xl border border-black/[0.07] bg-white p-6 shadow-[0_8px_30px_rgba(20,20,10,0.04)] transition hover:-translate-y-0.5 hover:border-[#c9a84c]/55">
             <div className="mb-7 flex items-center justify-between"><span className="text-sm text-black/50">{label}</span><span className="rounded-xl bg-[#f4edd7] p-2.5 text-[#967316]"><Icon size={19} /></span></div>
