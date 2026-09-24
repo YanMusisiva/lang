@@ -1,358 +1,61 @@
-"use client";
-import React, { useState } from "react";
 import Link from "next/link";
-import { useLang } from "@/context/LangContext";
-import { useBlog, Article } from "@/context/BlogContext";
-import Nav from "@/components/layout/Navbar";
+import { ArrowRight, BookOpen, FileText, Inbox, MessageSquareText, UserRoundPlus } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 
-function AdminContent() {
-  const { t, lang } = useLang();
-  const { articles, addArticle, deleteArticle } = useBlog();
+export const dynamic = "force-dynamic";
 
-  const [success, setSuccess] = useState(false);
-  const [form, setForm] = useState({
-    title: "",
-    titleEn: "",
-    slug: "",
-    excerpt: "",
-    excerptEn: "",
-    content: "",
-    contentEn: "",
-    category: "Stratégie",
-    categoryEn: "Strategy",
-    author: "LangListening",
-    authorEn: "LangListening",
-    date: new Date().toISOString().split("T")[0],
-    readTime: "",
-  });
-
-  const handleChange = (k: string, v: string) => {
-    setForm((f) => {
-      const updated = { ...f, [k]: v };
-      // Auto-generate slug from title
-      if (k === "title") {
-        updated.slug = v
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .replace(/[^a-z0-9\s-]/g, "")
-          .trim()
-          .replace(/\s+/g, "-");
-      }
-      return updated;
-    });
-  };
-
-  const handleSubmit = () => {
-    if (!form.title || !form.slug || !form.excerpt || !form.content) return;
-
-    addArticle({
-      title: { fr: form.title, en: form.titleEn || form.title },
-      slug: form.slug,
-      excerpt: { fr: form.excerpt, en: form.excerptEn || form.excerpt },
-      content: { fr: form.content, en: form.contentEn || form.content },
-      category: { fr: form.category, en: form.categoryEn || form.category },
-      author: { fr: form.author, en: form.authorEn || form.author },
-      date: form.date,
-      readTime: form.readTime,
-    });
-
-    setSuccess(true);
-    setForm({
-      title: "",
-      titleEn: "",
-      slug: "",
-      excerpt: "",
-      excerptEn: "",
-      content: "",
-      contentEn: "",
-      category: "Stratégie",
-      categoryEn: "Strategy",
-      author: "LangListening",
-      authorEn: "LangListening",
-      date: new Date().toISOString().split("T")[0],
-      readTime: "",
-    });
-    setTimeout(() => setSuccess(false), 3000);
-  };
-
-  const inputClass =
-    "w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-[#c9a84c]/40 transition-colors font-mono";
-  const labelClass =
-    "font-mono text-[10px] uppercase tracking-widest text-white/30 block mb-2";
+export default async function AdminOverviewPage() {
+  const supabase = await createClient();
+  const [registrations, contacts, chats, articles, tests, recentRegistrations, recentContacts] = await Promise.all([
+    supabase.from("programme_registrations").select("id", { count: "exact", head: true }),
+    supabase.from("contact_submissions").select("id", { count: "exact", head: true }),
+    supabase.from("messages").select("id", { count: "exact", head: true }),
+    supabase.from("articles").select("id", { count: "exact", head: true }),
+    supabase.from("level_test_results").select("attempt_id", { count: "exact", head: true }),
+    supabase.from("programme_registrations").select("id,name,email,motivation,created_at").order("created_at", { ascending: false }).limit(4),
+    supabase.from("contact_submissions").select("id,name,email,message,created_at").order("created_at", { ascending: false }).limit(4),
+  ]);
+  const recent = [
+    ...(recentRegistrations.data || []).map((item) => ({ id: item.id, name: item.name, email: item.email, created_at: item.created_at, kind: "Inscription", preview: item.motivation })),
+    ...(recentContacts.data || []).map((item) => ({ id: item.id, name: item.name, email: item.email, created_at: item.created_at, kind: "Contact", preview: item.message })),
+  ].sort((a, b) => +new Date(b.created_at) - +new Date(a.created_at)).slice(0, 6);
+  const cards = [
+    { label: "Messages reçus", value: (registrations.count || 0) + (contacts.count || 0) + (chats.count || 0), icon: Inbox, href: "/admin/messages" },
+    { label: "Inscriptions", value: registrations.count || 0, icon: UserRoundPlus, href: "/admin/messages" },
+    { label: "Articles", value: articles.count || 0, icon: FileText, href: "/admin/articles" },
+    { label: "Tests terminés", value: tests.count || 0, icon: BookOpen, href: "/admin/tests" },
+  ];
 
   return (
-    <main className="interior-page bg-[#050505] min-h-screen">
-      <Nav />
-      <div className="max-w-7xl mx-auto px-6 pt-36 pb-28">
-        <div className="page-heading flex flex-wrap gap-5 items-center justify-between mb-12">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#c9a84c] mb-3">
-              Administration
-            </p>
-            <h1 className="font-display text-4xl font-black text-white">
-              {t("admin.title")}
-            </h1>
-          </div>
-          <Link
-            href="/blog"
-            className="btn-outline px-5 py-2.5 text-xs uppercase tracking-widest"
-          >
-            ← {t("nav.blog")}
+    <main className="mx-auto max-w-[1500px] px-5 py-8 md:px-9 md:py-10">
+      <div className="mb-9">
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-[#9b7921]">Vue générale</p>
+        <h1 className="font-serif text-3xl leading-tight md:text-5xl">Tableau de bord administrateur</h1>
+        <p className="mt-3 max-w-2xl text-sm text-black/50">Suivez les demandes, les inscriptions et le contenu LangListening depuis un seul espace.</p>
+      </div>
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {cards.map(({ label, value, icon: Icon, href }) => (
+          <Link key={label} href={href} className="group rounded-2xl border border-black/[0.07] bg-white p-6 shadow-[0_8px_30px_rgba(20,20,10,0.04)] transition hover:-translate-y-0.5 hover:border-[#c9a84c]/55">
+            <div className="mb-7 flex items-center justify-between"><span className="text-sm text-black/50">{label}</span><span className="rounded-xl bg-[#f4edd7] p-2.5 text-[#967316]"><Icon size={19} /></span></div>
+            <div className="flex items-end justify-between"><strong className="font-serif text-4xl font-normal">{value}</strong><ArrowRight size={18} className="text-black/20 transition group-hover:translate-x-1 group-hover:text-[#967316]" /></div>
           </Link>
-          <Link href="/admin/tests" className="btn-outline px-5 py-2.5 text-xs uppercase tracking-widest">
-            Statistiques des tests
-          </Link>
-          <Link href="/admin/learning" className="btn-outline px-5 py-2.5 text-xs uppercase tracking-widest">
-            Mini-leçons
-          </Link>
-          <Link href="/admin/messages" className="btn-outline px-5 py-2.5 text-xs uppercase tracking-widest">
-            Messages
-          </Link>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* Form */}
-          <div className="bg-[#0a0a0a] border border-white/8 p-8 space-y-5">
-            <div>
-              <label className={labelClass}>{t("admin.title_field")} *</label>
-              <input
-                type="text"
-                value={form.title}
-                onChange={(e) => handleChange("title", e.target.value)}
-                placeholder="Mon article sur la croissance"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Title (EN)</label>
-              <input
-                type="text"
-                value={form.titleEn}
-                onChange={(e) => handleChange("titleEn", e.target.value)}
-                placeholder="My article about growth"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>{t("admin.slug_field")}</label>
-              <input
-                type="text"
-                value={form.slug}
-                onChange={(e) => handleChange("slug", e.target.value)}
-                placeholder="mon-article-sur-la-croissance"
-                className={inputClass}
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className={labelClass}>{t("admin.category")}</label>
-                <select
-                  value={form.category}
-                  onChange={(e) => handleChange("category", e.target.value)}
-                  className={inputClass + " cursor-pointer"}
-                >
-                  {[
-                    "Stratégie",
-                    "SaaS",
-                    "Marketing",
-                    "Growth",
-                    "Tech",
-                    "Insights",
-                  ].map((c) => (
-                    <option key={c} value={c} className="bg-[#0a0a0a]">
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className={labelClass}>Category (EN)</label>
-                <select
-                  value={form.categoryEn}
-                  onChange={(e) => handleChange("categoryEn", e.target.value)}
-                  className={inputClass + " cursor-pointer"}
-                >
-                  {[
-                    "Strategy",
-                    "SaaS",
-                    "Marketing",
-                    "Growth",
-                    "Tech",
-                    "Insights",
-                  ].map((c) => (
-                    <option key={c} value={c} className="bg-[#0a0a0a]">
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className={labelClass}>{t("admin.author")}</label>
-                <input
-                  type="text"
-                  value={form.author}
-                  onChange={(e) => handleChange("author", e.target.value)}
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className={labelClass}>Author (EN)</label>
-                <input
-                  type="text"
-                  value={form.authorEn}
-                  onChange={(e) => handleChange("authorEn", e.target.value)}
-                  className={inputClass}
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className={labelClass}>{t("admin.date")}</label>
-                <input
-                  type="date"
-                  value={form.date}
-                  onChange={(e) => handleChange("date", e.target.value)}
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className={labelClass}>Temps de lecture</label>
-                <input
-                  type="text"
-                  value={form.readTime}
-                  onChange={(e) => handleChange("readTime", e.target.value)}
-                  placeholder="5 min"
-                  className={inputClass}
-                />
-              </div>
-            </div>
-            <div>
-              <label className={labelClass}>{t("admin.excerpt")} *</label>
-              <textarea
-                value={form.excerpt}
-                onChange={(e) => handleChange("excerpt", e.target.value)}
-                rows={3}
-                placeholder="Un résumé accrocheur de votre article..."
-                className={inputClass + " resize-none"}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Excerpt (EN)</label>
-              <textarea
-                value={form.excerptEn}
-                onChange={(e) => handleChange("excerptEn", e.target.value)}
-                rows={3}
-                placeholder="A catchy summary of your article..."
-                className={inputClass + " resize-none"}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>{t("admin.content")} *</label>
-              <textarea
-                value={form.content}
-                onChange={(e) => handleChange("content", e.target.value)}
-                rows={10}
-                placeholder={
-                  "## Introduction\n\nVotre contenu ici...\n\n## Section\n\nSuite du contenu..."
-                }
-                className={inputClass + " resize-y"}
-              />
-              <p className="font-mono text-[9px] text-white/20 mt-1">
-                Supports: ## Titre, ### Sous-titre, - liste, **gras**
-              </p>
-            </div>
-            <div>
-              <label className={labelClass}>Content (EN)</label>
-              <textarea
-                value={form.contentEn}
-                onChange={(e) => handleChange("contentEn", e.target.value)}
-                rows={10}
-                placeholder={
-                  "## Introduction\n\nYour content here...\n\n## Section\n\nMore content..."
-                }
-                className={inputClass + " resize-y"}
-              />
-              <p className="font-mono text-[9px] text-white/20 mt-1">
-                Supports: ## Title, ### Subtitle, - list, **bold**
-              </p>
-            </div>
-
-            {success && (
-              <div className="border border-[#c9a84c]/30 bg-[#c9a84c]/5 px-4 py-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#c9a84c]" />
-                <p className="font-mono text-[11px] text-[#c9a84c]">
-                  {t("admin.success")}
-                </p>
-              </div>
-            )}
-
-            <button
-              onClick={handleSubmit}
-              disabled={
-                !form.title || !form.slug || !form.excerpt || !form.content
-              }
-              className="w-full btn-primary py-4 text-sm uppercase tracking-widest disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              {t("admin.submit")}
-            </button>
-          </div>
-
-          {/* Existing articles */}
-          <div>
-            <h2 className="font-display text-xl font-bold text-white mb-5">
-              {t("admin.list")}
-            </h2>
-            <div className="space-y-3">
-              {articles.map((article: Article) => (
-                <div
-                  key={article.id}
-                  className="bg-[#0a0a0a] border border-white/8 p-5 flex items-start justify-between gap-4"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className="font-mono text-[9px] uppercase text-[#c9a84c] bg-[#c9a84c]/10 px-2 py-0.5">
-                        {t(article.category.fr, article.category.en)}
-                      </span>
-                      <span className="font-mono text-[9px] text-white/20">
-                        {new Date(article.date).toLocaleDateString(
-                          lang === "fr" ? "fr-FR" : "en-US",
-                        )}
-                      </span>
-                    </div>
-                    <p className="text-white text-sm font-medium truncate">
-                      {t(article.title.fr, article.title.en)}
-                    </p>
-                    <p className="font-mono text-[10px] text-white/25 mt-0.5 truncate">
-                      /{article.slug}
-                    </p>
-                  </div>
-                  <div className="flex gap-2 shrink-0">
-                    <Link
-                      href={`/blog/${article.slug}`}
-                      className="font-mono text-[10px] text-white/30 hover:text-white border border-white/10 px-3 py-1.5 hover:border-white/25 transition-colors"
-                    >
-                      Voir
-                    </Link>
-                    <button
-                      onClick={() => deleteArticle(article.id)}
-                      className="font-mono text-[10px] text-red-400/50 hover:text-red-400 border border-red-400/10 hover:border-red-400/25 px-3 py-1.5 transition-colors"
-                    >
-                      {t("admin.delete")}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        ))}
+      </section>
+      <div className="mt-7 grid gap-7 xl:grid-cols-[1.7fr_1fr]">
+        <section className="rounded-2xl border border-black/[0.07] bg-white p-6 shadow-sm md:p-8">
+          <div className="mb-6 flex items-center justify-between"><div><h2 className="font-serif text-2xl">Demandes récentes</h2><p className="mt-1 text-sm text-black/45">Les derniers formulaires reçus sur le site.</p></div><Link href="/admin/messages" className="text-sm font-semibold text-[#8a6c18] hover:underline">Tout voir</Link></div>
+          {recent.length ? <div className="divide-y divide-black/[0.07]">{recent.map((item) => (
+            <Link href="/admin/messages" key={`${item.kind}-${item.id}`} className="flex gap-4 py-4 first:pt-0 last:pb-0">
+              <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#11120f] text-[#d4b85e]"><MessageSquareText size={16} /></span>
+              <span className="min-w-0 flex-1"><span className="flex flex-wrap items-center justify-between gap-2"><strong className="text-sm">{item.name}</strong><span className="text-xs text-black/35">{new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium" }).format(new Date(item.created_at))}</span></span><span className="mt-0.5 block text-xs text-[#94721b]">{item.kind} · {item.email}</span><span className="mt-1 block truncate text-sm text-black/45">{item.preview}</span></span>
+            </Link>
+          ))}</div> : <p className="rounded-xl bg-[#f7f5ee] p-8 text-center text-sm text-black/45">Aucune demande pour le moment.</p>}
+        </section>
+        <section className="rounded-2xl bg-[#11120f] p-6 text-white shadow-xl md:p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d4b85e]">Accès rapides</p><h2 className="mt-3 font-serif text-2xl">Gérer LangListening</h2>
+          <div className="mt-6 space-y-2">{[["Lire les messages", "/admin/messages"], ["Créer un article", "/admin/articles"], ["Ajouter une leçon", "/admin/learning"], ["Analyser les tests", "/admin/tests"]].map(([label, href]) => <Link key={href} href={href} className="flex items-center justify-between rounded-xl border border-white/10 px-4 py-3 text-sm text-white/75 transition hover:border-[#d4b85e]/50 hover:bg-white/5 hover:text-white">{label}<ArrowRight size={16} className="text-[#d4b85e]" /></Link>)}</div>
+        </section>
       </div>
     </main>
   );
-}
-
-export default function AdminPage() {
-  return <AdminContent />;
 }

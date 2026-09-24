@@ -25,7 +25,7 @@ export default function AuthenticatedNavigation() {
     return () => data.subscription.unsubscribe();
   }, []);
 
-  if (!signedIn || pathname === "/auth") return null;
+  if (!signedIn || pathname === "/auth" || pathname.startsWith("/admin")) return null;
 
   function goBack() {
     if (window.history.length > 1) {

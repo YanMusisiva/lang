@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
 import { createClient } from "@/lib/supabase/server";
 
 type TestStats = { total: number; average: number | null; last30: number; level1: number; level2: number; level3: number; level4: number };
@@ -9,8 +8,7 @@ export default async function TestStatistics() {
   const { data, error } = await supabase.rpc("level_test_stats");
   const stats = data as TestStats | null;
   return <main className="interior-page min-h-screen bg-[#0a0a0a] text-white">
-    <Navbar />
-    <div className="mx-auto max-w-5xl px-6 pb-24 pt-36">
+    <div className="mx-auto max-w-5xl px-6 py-16">
       <Link href="/admin" className="text-link text-white/60">← Administration</Link>
       <p className="eyebrow mt-10 mb-4 text-[#e8c96a]">Test de niveau</p>
       <h1 className="section-title">L’anglais de vos visiteurs.</h1>
