@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import { useLang } from "@/context/LangContext";
@@ -9,7 +8,6 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function ResetPasswordPage() {
   const { t } = useLang();
-  const router = useRouter();
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
   const [error, setError] = useState("");
@@ -27,19 +25,6 @@ export default function ResetPasswordPage() {
 
     let active = true;
     async function prepareRecovery() {
-      const code = new URLSearchParams(window.location.search).get("code");
-      if (code) {
-        const { error: exchangeError } = await supabase!.auth.exchangeCodeForSession(code);
-        if (exchangeError) {
-          if (active) {
-            setError(t("Ce lien est invalide ou expiré. Demandez un nouveau lien.", "This link is invalid or expired. Request a new link."));
-            setCheckingLink(false);
-          }
-          return;
-        }
-        window.history.replaceState({}, "", "/auth/reset");
-      }
-
       const { data: { session } } = await supabase!.auth.getSession();
       if (!active) return;
       setRecoveryReady(Boolean(session));
@@ -69,8 +54,7 @@ export default function ResetPasswordPage() {
       setError(t("Ce lien est invalide ou expiré. Demandez un nouveau lien.", "This link is invalid or expired. Request a new link."));
       return;
     }
-    router.push("/practice");
-    router.refresh();
+    window.location.assign("/practice");
   }
 
   return (

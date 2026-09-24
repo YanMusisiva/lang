@@ -1,15 +1,14 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Navbar from "@/components/layout/Navbar";
 import { useLang } from "@/context/LangContext";
 
 function AuthForm() {
   const { t } = useLang();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [displayName, setDisplayName] = useState("");
@@ -18,6 +17,13 @@ function AuthForm() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(false);
+  const [needsConfirmation, setNeedsConfirmation] = useState(false);
+
+  useEffect(() => {
+    const authError = searchParams.get("error");
+    if (authError === "confirmation") setError(t("Le lien de confirmation est invalide ou expiré. Demandez un nouvel e-mail de confirmation.", "The confirmation link is invalid or expired. Request a new confirmation email."));
+    if (authError === "recovery") setError(t("Le lien de récupération est invalide ou expiré. Recommencez la procédure « Mot de passe oublié ».", "The recovery link is invalid or expired. Start the “Forgot password” process again."));
+  }, [searchParams, t]);
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -29,9 +35,12 @@ function AuthForm() {
 
     setLoading(true);
     setError("");
+    setNotice("");
+    setNeedsConfirmation(false);
+    const normalizedEmail = email.trim().toLowerCase();
     if (mode === "forgot") {
-      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/reset`,
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(normalizedEmail, {
+        redirectTo: `${window.location.origin}/auth/recovery`,
       });
       setLoading(false);
       if (resetError) setError(resetError.message);
@@ -40,9 +49,9 @@ function AuthForm() {
     }
 
     const result = mode === "login"
-      ? await supabase.auth.signInWithPassword({ email, password })
+      ? await supabase.auth.signInWithPassword({ email: normalizedEmail, password })
       : await supabase.auth.signUp({
-          email,
+          email: normalizedEmail,
           password,
           options: {
             data: { display_name: displayName },
@@ -52,17 +61,46 @@ function AuthForm() {
     setLoading(false);
 
     if (result.error) {
-      setError(result.error.message);
+      if (result.error.code === "email_not_confirmed") {
+        setError(t("Votre adresse e-mail n’est pas encore confirmée. Ouvrez l’e-mail envoyé par LangListening ou demandez-en un nouveau ci-dessous.", "Your email address has not been confirmed yet. Open the email sent by LangListening or request a new one below."));
+        setNeedsConfirmation(true);
+      } else if (result.error.code === "invalid_credentials") {
+        setError(t("E-mail ou mot de passe incorrect. Si le compte vient d’être créé, confirmez d’abord votre adresse e-mail.", "Incorrect email or password. If the account was just created, confirm your email address first."));
+        setNeedsConfirmation(true);
+      } else {
+        setError(result.error.message);
+      }
       return;
     }
 
     if (mode === "signup" && !result.data.session) {
+      if (result.data.user?.identities?.length === 0) {
+        setError(t("Cette adresse est déjà associée à un compte. Connectez-vous ou utilisez « Mot de passe oublié ».", "This email address is already linked to an account. Sign in or use “Forgot password”."));
+        return;
+      }
       setNotice(t("Compte créé. Consultez votre e-mail pour confirmer votre adresse.", "Account created. Check your email to confirm your address."));
+      setNeedsConfirmation(true);
       return;
     }
 
-    router.push(searchParams.get("next") || "/practice");
-    router.refresh();
+    const requestedNext = searchParams.get("next");
+    const safeNext = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/practice";
+    window.location.assign(safeNext);
+  }
+
+  async function resendConfirmation() {
+    const supabase = createClient();
+    if (!supabase || !email.trim()) return;
+    setLoading(true);
+    setError("");
+    const { error: resendError } = await supabase.auth.resend({
+      type: "signup",
+      email: email.trim().toLowerCase(),
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/practice` },
+    });
+    setLoading(false);
+    if (resendError) setError(resendError.message);
+    else setNotice(t("Un nouvel e-mail de confirmation a été envoyé. Vérifiez aussi les courriers indésirables.", "A new confirmation email has been sent. Also check your spam folder."));
   }
 
   return (
@@ -95,6 +133,7 @@ function AuthForm() {
           {mode === "login" && <button type="button" onClick={() => { setMode("forgot"); setError(""); setNotice(""); }} className="text-sm text-[#e8c96a] hover:underline">{t("Mot de passe oublié ?", "Forgot password?")}</button>}
           {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
           {notice && <p role="status" className="text-sm text-green-400">{notice}</p>}
+          {needsConfirmation && mode !== "forgot" && <button type="button" disabled={loading} onClick={resendConfirmation} className="w-full rounded border border-[#c9a84c]/40 px-4 py-3 text-sm text-[#e8c96a] hover:bg-[#c9a84c]/10 disabled:opacity-50">{t("Renvoyer l’e-mail de confirmation", "Resend confirmation email")}</button>}
           <button disabled={loading} className="w-full rounded bg-[#c9a84c] px-5 py-3.5 font-semibold text-black disabled:opacity-50">
             {loading ? t("Veuillez patienter...", "Please wait...") : mode === "login" ? t("Se connecter", "Sign in") : mode === "signup" ? t("Créer le compte", "Create account") : t("Envoyer le lien", "Send reset link")}
           </button>
