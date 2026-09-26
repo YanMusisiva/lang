@@ -25,9 +25,14 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "LangListening – Pratiquez l'anglais chaque jour",
+  manifest: "/manifest.webmanifest",
   icons: {
-    icon: { url: "/favicon-circle.png", type: "image/png" },
-    apple: "/favicon-circle.png",
+    icon: [
+      { url: "/favicon-48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: "/favicon-48.png",
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   description:
     "Progressez en anglais avec des exercices oraux et écrits, un parcours personnalisé et un accompagnement humain.",
