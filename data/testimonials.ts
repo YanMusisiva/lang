@@ -5,6 +5,7 @@ export interface StudentStory extends Testimonial {
   /** Local path under public/, e.g. /testimonials/milka.jpg. */
   photo?: string;
   photoPosition?: string;
+  certificate?: string;
 }
 
 export interface StoryPhoto {

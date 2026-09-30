@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, AudioLines, Play, Quote } from "lucide-react";
 import { useLang } from "@/context/LangContext";
-import { TESTIMONIALS, TESTIMONIAL_PHOTOS, TESTIMONIAL_VIDEOS, type StoryVideo } from "@/data/testimonials";
+import { TESTIMONIALS, TESTIMONIAL_PHOTOS, TESTIMONIAL_VIDEOS, type StoryVideo, type StudentStory } from "@/data/testimonials";
+import CertificateViewer from "./CertificateViewer";
 import { METHOD_VIDEOS } from "@/data/videos";
 import RevealWrapper from "@/components/motion/RevealWrapper";
 import ScrollAccent from "@/components/motion/ScrollAccent";
@@ -20,10 +21,10 @@ const methodVideos: StoryVideo[] = METHOD_VIDEOS.map((video, index) => ({
   description: { fr: video.descFr, en: video.descEn },
 }));
 
-export default function TestimonyPage() {
+export default function TestimonyPage({ stories = TESTIMONIALS }: { stories?: StudentStory[] }) {
   const { t } = useLang();
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const featured = TESTIMONIALS.find(story => story.id === "francis") || TESTIMONIALS[0];
+  const featured = stories[0];
   const studentVideos = TESTIMONIAL_VIDEOS.filter(video => getYouTubeId(video.youtubeUrl));
   const hasPhotos = TESTIMONIAL_PHOTOS.length > 0;
 
@@ -39,7 +40,7 @@ export default function TestimonyPage() {
               <a href="#voices" className="pill-button pill-gold">{t("Découvrir leurs témoignages", "Read their stories")}<ArrowDown size={17} /></a>
               <a href="#films" className="testimony-watch"><span className="circle-button"><Play size={15} fill="currentColor" /></span>{t("Le moment vidéo", "Time to watch")}</a>
             </div>
-            {TESTIMONIALS.length > 0 && <div className="testimony-people"><div>{TESTIMONIALS.slice(0, 4).map(story => <a href={`#story-${story.id}`} key={story.id} aria-label={`${t("Lire le témoignage de", "Read the story of")} ${story.name}`}><StudentPortrait story={story} /></a>)}</div><p>{t("Des expériences différentes.", "Different experiences.")}<strong>{t("Une envie commune : progresser.", "One shared goal: progress.")}</strong></p></div>}
+            {stories.length > 0 && <div className="testimony-people"><div>{stories.slice(0, 4).map(story => <a href={`#story-${story.id}`} key={story.id} aria-label={`${t("Lire le témoignage de", "Read the story of")} ${story.name}`}><StudentPortrait story={story} /></a>)}</div><p>{t("Des expériences différentes.", "Different experiences.")}<strong>{t("Une envie commune : progresser.", "One shared goal: progress.")}</strong></p></div>}
           </div>
           {featured && <div className="testimony-feature hero-enter" style={{ animationDelay: "150ms" }}>
             <div className="testimony-feature-orbit" aria-hidden="true"><span /></div>
@@ -69,11 +70,12 @@ export default function TestimonyPage() {
           </div>
           <div className="testimony-quote-list">
             <ScrollAccent />
-            {TESTIMONIALS.map((story, index) => <RevealWrapper key={story.id} delay={index % 3 * 70}>
+            {stories.map((story, index) => <RevealWrapper key={story.id} delay={index % 3 * 70}>
               <figure id={`story-${story.id}`} className="testimony-quote-card">
-                <div className="testimony-quote-top"><StudentPortrait story={story} /><span>{String(index + 1).padStart(2, "0")}<span aria-hidden="true"> / </span>{String(TESTIMONIALS.length).padStart(2, "0")}</span></div>
+                <div className="testimony-quote-top"><StudentPortrait story={story} /><span>{String(index + 1).padStart(2, "0")}<span aria-hidden="true"> / </span>{String(stories.length).padStart(2, "0")}</span></div>
                 <blockquote>“{t(story.quote.fr, story.quote.en)}”</blockquote>
                 <figcaption><span className="status-dot" /><div><strong>{story.name}</strong><span>{t(story.role.fr, story.role.en)}</span></div><Quote size={26} strokeWidth={1} aria-hidden="true" /></figcaption>
+                {story.certificate && <CertificateViewer src={story.certificate} name={story.name} />}
               </figure>
             </RevealWrapper>)}
           </div>

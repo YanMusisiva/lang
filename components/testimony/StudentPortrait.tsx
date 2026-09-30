@@ -7,6 +7,7 @@ export default function StudentPortrait({ story, priority = false }: { story: St
       {story.photo ? (
         <Image
           src={story.photo}
+          unoptimized={story.photo.startsWith("https://")}
           alt={story.name}
           fill
           priority={priority}

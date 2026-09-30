@@ -180,3 +180,11 @@
   .testimony-feature-orbit { animation: none; }
   .testimony-feature-card,.testimony-feature-card:hover { transform: none; }
 }
+.testimony-quote-card blockquote, .testimony-feature-card blockquote { white-space: pre-line; overflow-wrap: anywhere; }
+.testimony-feature-card blockquote { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden; }
+.story-certificate { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; margin-top: 22px; padding: 15px 0 0; border-top: 1px solid #c9a84c35; color: #806322; transition: color .2s; }
+.story-certificate:hover { color: #a48024; }
+.story-certificate-icon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border: 1px solid #c9a84c55; border-radius: 50%; }
+.story-certificate > span:nth-child(2) { flex: 1; }
+.story-certificate strong { display: block; font-size: 12px; font-weight: 600; }
+.story-certificate > span > span { display: block; font-size: 11px; margin-top: 4px; }
