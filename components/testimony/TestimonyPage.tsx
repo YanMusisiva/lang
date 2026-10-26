@@ -46,7 +46,8 @@ export default function TestimonyPage({ stories = TESTIMONIALS }: { stories?: St
             <div className="testimony-feature-orbit" aria-hidden="true"><span /></div>
             <span className="testimony-feature-note"><AudioLines size={18} />{t("La parole aux apprenants", "In our learners’ words")}</span>
             <figure className="testimony-feature-card">
-              <div className="testimony-feature-top"><StudentPortrait story={featured} priority /><Quote size={40} strokeWidth={1} aria-hidden="true" /></div>
+              <StudentPortrait story={featured} priority variant="photo" />
+              <div className="testimony-feature-top"><Quote size={40} strokeWidth={1} aria-hidden="true" /></div>
               <blockquote>“{t(featured.quote.fr, featured.quote.en)}”</blockquote>
               <figcaption><strong>{featured.name}</strong><span>{t(featured.role.fr, featured.role.en)}</span><a href="#voices" className="circle-button" aria-label={t("Découvrir tous les témoignages", "Explore all stories")}><ArrowDown size={19} /></a></figcaption>
             </figure>
@@ -72,7 +73,8 @@ export default function TestimonyPage({ stories = TESTIMONIALS }: { stories?: St
             <ScrollAccent />
             {stories.map((story, index) => <RevealWrapper key={story.id} delay={index % 3 * 70}>
               <figure id={`story-${story.id}`} className="testimony-quote-card">
-                <div className="testimony-quote-top"><StudentPortrait story={story} /><span>{String(index + 1).padStart(2, "0")}<span aria-hidden="true"> / </span>{String(stories.length).padStart(2, "0")}</span></div>
+                <StudentPortrait story={story} variant="photo" />
+                <div className="testimony-quote-top"><Quote size={32} strokeWidth={1} aria-hidden="true" /><span>{String(index + 1).padStart(2, "0")}<span aria-hidden="true"> / </span>{String(stories.length).padStart(2, "0")}</span></div>
                 <blockquote>“{t(story.quote.fr, story.quote.en)}”</blockquote>
                 <figcaption><span className="status-dot" /><div><strong>{story.name}</strong><span>{t(story.role.fr, story.role.en)}</span></div><Quote size={26} strokeWidth={1} aria-hidden="true" /></figcaption>
                 {story.certificate && <CertificateViewer src={story.certificate} name={story.name} />}

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import type { StudentStory } from "@/data/testimonials";
 
-export default function StudentPortrait({ story, priority = false }: { story: StudentStory; priority?: boolean }) {
+export default function StudentPortrait({ story, priority = false, variant = "avatar" }: { story: StudentStory; priority?: boolean; variant?: "avatar" | "photo" }) {
   return (
-    <span className="student-portrait">
+    <span className={`student-portrait${variant === "photo" ? " student-portrait-photo" : ""}`}>
       {story.photo ? (
         <Image
           src={story.photo}
@@ -11,8 +11,8 @@ export default function StudentPortrait({ story, priority = false }: { story: St
           alt={story.name}
           fill
           priority={priority}
-          sizes="(max-width: 767px) 100px, 160px"
-          style={{ objectFit: "cover", objectPosition: story.photoPosition || "center" }}
+          sizes={variant === "photo" ? "(max-width: 767px) 90vw, (max-width: 1023px) 45vw, 400px" : "64px"}
+          style={{ objectFit: variant === "photo" ? "contain" : "cover", objectPosition: variant === "photo" ? "center" : story.photoPosition || "center" }}
         />
       ) : (
         <span aria-hidden="true">{story.initials}</span>
